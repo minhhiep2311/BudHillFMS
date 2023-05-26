@@ -1,0 +1,55 @@
+﻿@model BudHillFMS.Models.Field
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Thông tin nhà kính</h4>
+        <div>
+            @if (@Model.FieldStatus)
+            {
+                <span class="badge badge-pill badge-cyan">
+                    Đang trồng trọt
+                </span>
+
+            }
+            else
+            {
+                <span class="badge badge-pill badge-red">
+                    Đang trống
+                </span>
+            }
+        </div>
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>Id:</td>
+                        <td class="text-dark font-weight-semibold">@Model.FieldId</td>
+                    </tr>
+                    <tr>
+                        <td>Tên nhà kính:</td>
+                        <td>	@Model.FieldName</td>
+                    </tr>
+                    <tr>
+                        <td>Diện tích:</td>
+                        <td>	@Model.FieldArea</td>
+                    </tr>
+                    <tr>
+                        <td>Trang trại:</td>
+                        <td>@Model.Farm.FarmName</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div>
+    <a class="btn btn-tone btn-primary m-r-5" asp-controller="Fields" asp-action="Edit" asp-route-id="@Model.FieldId">Sửa</a>|
+    <a class="btn btn-tone btn-danger m-r-5" asp-controller="Fields" asp-action="Delete" asp-route-id="@Model.FieldId">Xóa</a>|
+    <a asp-action="Index" class="btn btn-tone btn-primary m-r-5">Trở về</a>
+</div>

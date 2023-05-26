@@ -1,0 +1,51 @@
+﻿@model IEnumerable<BudHillFMS.Models.Employee>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Danh sách nhân viên</h1>
+<div class="text-right">
+    <a class="btn btn-tone btn-primary m-r-5" asp-controller="Employees" asp-action="Create"> <i class="anticon anticon-plus-circle m-r-5"></i><span>Nhân viên mới</span></a>
+</div>
+<br />
+<div class="row" id="card-view">
+    @if (Model != null)
+    {
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="m-t-20 text-center">
+                            <div class="avatar avatar-image" style="height: 100px; width: 100px;">
+                                <img src="assets/images/avatars/thumb-1.jpg" alt="">
+                            </div>
+                            <h4 class="m-t-30">@item.EmployeeName</h4>
+                            <p>@item.EmployeeEmail</p>
+                        </div>
+                        <div class="text-center m-t-15">
+                            <button class="m-r-5 btn btn-icon btn-hover btn-rounded">
+                                <i class="anticon anticon-facebook"></i>
+                            </button>
+                            <button class="m-r-5 btn btn-icon btn-hover btn-rounded">
+                                <i class="anticon anticon-twitter"></i>
+                            </button>
+                            <button class="m-r-5 btn btn-icon btn-hover btn-rounded">
+                                <i class="anticon anticon-instagram"></i>
+                            </button>
+                        </div>
+                        <div class="text-center m-t-30">
+                            <a class="btn btn-primary btn-tone" asp-controller="Employees" asp-action="Details" asp-route-id="@item.EmployeeId">
+                                <i class="anticon anticon-mail"></i>
+                                <span class="m-l-5">Liên hệ</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+</div>

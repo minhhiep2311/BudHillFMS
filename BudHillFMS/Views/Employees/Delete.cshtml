@@ -1,0 +1,57 @@
+﻿@model BudHillFMS.Models.Employee
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Xóa nhân viên @Model.EmployeeName </h4>
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>Id:</td>
+                        <td class="text-dark font-weight-semibold">@Model.EmployeeId</td>
+                    </tr>
+                    <tr>
+                        <td>Tên nhân viên:</td>
+                        <td>	@Model.EmployeeName</td>
+                    </tr>
+                    <tr>
+                        <td>Địa chỉ:</td>
+                        <td>@Model.EmployeeAddress</td>
+                    </tr>
+                    <tr>
+                        <td>Số điện thoại:</td>
+                        <td>@Model.EmployeePhone</td>
+                    </tr>
+                    <tr>
+                        <td>Địa chỉ:</td>
+                        <td>@Model.EmployeeAddress</td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td>@Model.EmployeeEmail</td>
+                    </tr>
+                    <tr>
+                        <td>Vị trí:</td>
+                        <td>@Model.Position</td>
+                    </tr>
+                    <tr>
+                        <td>Trang trại:</td>
+                        <td>@Model.Farm.FarmName</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="EmployeeId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a class="btn btn-primary m-r-5" asp-action="Index">Trở về</a>
+    </form>

@@ -1,0 +1,73 @@
+﻿@model BudHillFMS.Models.Product
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Thông tin sản phẩm</h4>
+        <div>
+            @if (@Model.ProductStatus)
+            {
+                <span class="badge badge-pill badge-cyan">
+                    Đang thu hoạch
+                </span>
+
+            }
+            else
+            {
+                <span class="badge badge-pill badge-red">
+                    Đã thu hoạch
+                </span>
+            }
+        </div>
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>ID:</td>
+                        <td class="text-dark font-weight-semibold">@Model.ProductId</td>
+                    </tr>
+                    <tr>
+                        <td>Tên sản phẩm:</td>
+                        <td>	@Model.ProductName</td>
+                    </tr>
+                    <tr>
+                        <td>Giá:</td>
+                        <td>@Model.Price</td>
+                    </tr>
+                    <tr>
+                        <td>Loại:</td>
+                        <td>@Model.Class</td>
+                    </tr>
+                    <tr>
+                        <td>Ngày gieo trồng:</td>
+                        <td>@Model.SowingDate.Value.ToString("dd/MM/yyyy")</td>
+                    </tr>
+                    <tr>
+                        <td>Ngày thu hoạch:</td>
+                        <td>@Model.HarvestDate.Value.ToString("dd/MM/yyyy")</td>
+                    </tr>
+                    <tr>
+                        <td>Nhà kính:</td>
+                        <td>@Model.Field.FieldName</td>
+                    </tr>
+                    <tr>
+                        <td>Trang trại:</td>
+                        <td>@Model.Field.Farm.FarmName</td>
+                    </tr>
+                    
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-tone btn-primary m-r-5" asp-controller="Products" asp-action="Edit" asp-route-id="@Model.ProductId">Sửa</a>|
+    <a class="btn btn-tone btn-danger m-r-5" asp-controller="Products" asp-action="Delete" asp-route-id="@Model.ProductId">Xóa</a>|
+    <a class="btn btn-tone btn-primary m-r-5" asp-action="Index">Trở về</a>
+</div>

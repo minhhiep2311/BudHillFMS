@@ -1,0 +1,56 @@
+﻿@model BudHillFMS.Models.Field
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Xác nhận xóa nhà kính @Model.FieldName </h4>
+        <div>
+            @if (@Model.FieldStatus)
+            {
+                <span class="badge badge-pill badge-cyan">
+                    Đang trồng trọt
+                </span>
+
+            }
+            else
+            {
+                <span class="badge badge-pill badge-red">
+                    Đang trống
+                </span>
+            }
+        </div>
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>Id:</td>
+                        <td class="text-dark font-weight-semibold">@Model.FieldId</td>
+                    </tr>
+                    <tr>
+                        <td>Tên nhà kính:</td>
+                        <td>	@Model.FieldName</td>
+                    </tr>
+                    <tr>
+                        <td>Diện tích:</td>
+                        <td>	@Model.FieldArea</td>
+                    </tr>
+                    <tr>
+                        <td>Trang trại:</td>
+                        <td>@Model.Farm.FarmName</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="FieldId" />
+        <input type="submit" value="Xác nhận xóa" class="btn btn-tone btn-danger" /> |
+    <a class="btn btn-tone btn-primary m-r-5" asp-action="Index">Trở về</a>
+    </form>

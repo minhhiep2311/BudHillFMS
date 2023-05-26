@@ -1,0 +1,102 @@
+﻿@model BudHillFMS.Models.Cost
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <h4 class="card-title">Thông tin chi phí</h4>
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                       
+                            @if (@Model.Coststatus)
+                            {
+                                <span class="badge badge-pill badge-cyan">
+                                    Đã thanh toán
+                                </span>
+
+                            }
+                            else
+                            {
+                                <span class="badge badge-pill badge-red">
+                                    Chưa thanh toán
+                                </span>
+                            }
+                        
+                    </tr>
+                    <tr>
+                        <td>ID:</td>
+                        <td class="text-dark font-weight-semibold">@Model.CostId</td>
+                    </tr>
+                    <tr>
+                        <td>Chi phí:</td>
+                        <td>@Model.CostName</td>
+                    </tr>
+                    <tr>
+                        <td>Loại chi phí:</td>
+                        <td>@Model.Category.CategoryName</td>
+                        
+                    </tr>
+                    <tr>
+                        <td>Tổng tiền:</td>
+                        <td>@string.Format("{0:#,#}", @Model.CostAmount)</td>
+                    </tr>
+                    <tr>
+                        <td>Trang trại:</td>
+                        <td>@Model.Farm.FarmName</td>
+                    </tr>
+                    <tr>
+                        <td>Mô tả:</td>
+                        <td>@Model.CostDescription</td>
+                    </tr>
+                    <tr>
+                        <td>Ngày chi:</td>
+                        <td>@Model.CostDate</td>
+                    </tr>
+                    
+                   
+                    
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.CostId" class="btn btn-tone btn-primary m-r-5">Sửa</a>|
+    <a  class="btn btn-tone btn-danger m-r-5" data-toggle="modal" data-target="#DeleteModal">Xóa</a> |
+    <a asp-action="Index" class="btn btn-tone btn-primary m-r-5">Trở về</a>
+</div>
+
+<!--Delete Modal -->
+<div class="modal fade" id="DeleteModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Xác nhận xóa</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="anticon anticon-close"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                Xác nhận xóa thông tin chi phí
+            </div>
+            <div class="modal-footer">
+                <form asp-action="Delete" asp-route-id="@Model.CostId">
+                    <input type="hidden" asp-for="CostId" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    <input type="submit" value="Xác nhận xóa" class="btn btn-tone btn-danger" />
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

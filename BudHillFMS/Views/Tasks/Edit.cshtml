@@ -1,0 +1,68 @@
+﻿@model BudHillFMS.Models.Task
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Chỉnh sửa công việc</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TaskId" />
+            <div class="form-group">
+                <label asp-for="TaskName" class="control-label">Công việc</label>
+                <input asp-for="TaskName" class="form-control" />
+                <span asp-validation-for="TaskName" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group">
+                <label asp-for="FarmId" class="control-label">Trang trại</label>
+                <select asp-for="FarmId" class="form-control" asp-items="ViewBag.FarmId"></select>
+                <span asp-validation-for="FarmId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FieldId" class="control-label">Nhà kính</label>
+                <select asp-for="FieldId" class="form-control" asp-items="ViewBag.FieldId"></select>
+                <span asp-validation-for="FieldId" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="TaskDate" class="control-label">Ngày giao</label>
+                <input asp-for="TaskDate" class="form-control" />
+                <span asp-validation-for="TaskDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DuaDate" class="control-label">Hạn cuối</label>
+                <input asp-for="DuaDate" class="form-control" />
+                <span asp-validation-for="DuaDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TaskStatus" class="control-label">Tình trạng</label>
+                <input asp-for="TaskStatus" class="form-control" />
+                <span asp-validation-for="TaskStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TaskDescription" class="control-label">Mô tả</label>
+                <textarea asp-for="TaskDescription" class="form-control"></textarea>
+                <span asp-validation-for="TaskDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TaskCheck" class="control-label">Tình trạng</label>
+                <select asp-for="TaskCheck" class="form-control">
+                    <option value="true">Đã hoành thành</option>
+                    <option value="false">Chưa hoàn thành</option>
+                </select>
+                <span asp-validation-for="TaskCheck" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Lưu" class="btn btn-primary" /> |
+                <a class="btn btn-primary m-r-5" asp-action="Index">Trở về</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+

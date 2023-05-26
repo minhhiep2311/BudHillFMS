@@ -1,0 +1,42 @@
+﻿@model BudHillFMS.Models.Seedling
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Thông tin cây giống</h4>
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+
+                    <tr>
+                        <td>ID:</td>
+                        <td>	@Model.SeedlingId</td>
+                    </tr>
+
+                    <tr>
+                        <td>Giống cây:</td>
+                        <td>	@Model.SeedlingName</td>
+                    </tr>
+                    <tr>
+                        <td>Mô tả:</td>
+                        <td>@Model.SeedlingDescription</td>
+                    </tr>
+                    <tr>
+                        <td>Ngày có thể gieo bầu:</td>
+                        <td>@Model.SeedlingStart.Value.ToString("dd/MM/yyyy")</td>
+                    </tr>
+                    
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.SeedlingId" class="btn btn-tone  btn-primary m-r-5">Sửa</a>|
+    <a asp-action="Delete" asp-route-id="@Model.SeedlingId" class="btn btn-tone  btn-danger m-r-5">Xóa</a>|
+    <a asp-action="Index" class="btn btn-tone btn-primary m-r-5">Trở về</a>
+</div>

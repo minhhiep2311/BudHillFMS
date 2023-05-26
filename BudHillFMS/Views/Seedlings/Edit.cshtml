@@ -1,0 +1,39 @@
+﻿@model BudHillFMS.Models.Seedling
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Chỉnh sửa cây giống</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="SeedlingId" />
+            <div class="form-group">
+                <label asp-for="SeedlingName" class="control-label">Giống cây</label>
+                <input asp-for="SeedlingName" class="form-control" />
+                <span asp-validation-for="SeedlingName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SeedlingDescription" class="control-label">Mô tả</label>
+                <input asp-for="SeedlingDescription" class="form-control" />
+                <span asp-validation-for="SeedlingDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SeedlingStart" class="control-label">Ngày có thể gieo bầu</label>
+                <input asp-for="SeedlingStart" class="form-control" />
+                <span asp-validation-for="SeedlingStart" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Lưu" class="btn btn-tone btn-primary" /> |
+                <a asp-action="Index" class="btn btn-tone btn-primary m-r-5">Trở về</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+

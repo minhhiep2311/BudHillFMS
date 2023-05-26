@@ -1,0 +1,56 @@
+﻿@model BudHillFMS.Models.Diary
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Xóa nhật ký</h1>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>ID:</td>
+                        <td class="text-dark font-weight-semibold">@Model.DiaryId</td>
+                    </tr>
+                    <tr>
+                        <td>Chủ đề:</td>
+                        <td>@Model.DiarySubject</td>
+                    </tr>
+                    <tr>
+                        <td>Phân loại:</td>
+                        <td> @Model.DiaryCategory</td>
+                    </tr>
+                    <tr>
+                        <td>Ngày viết:</td>
+                        <td>@Model.EntryDate</td>
+                    </tr>
+                    <tr>
+                        <td>Nhà kính:</td>
+                        <td>Model.Field.FieldName</td>
+                    </tr>
+                    <tr>
+                        <td>Sản phẩm:</td>
+                        <td> @Model.Product.ProductName</td>
+                    </tr>
+                    <tr>
+                        <td>Nội dung:</td>
+                        <td> @Model.Description</td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="DiaryId" />
+        <input type="submit" value="Xóa" class="btn btn-danger" /> |
+        <a asp-action="Index" class="btn btn-primary m-r-5">Trở về</a>
+    </form>
+

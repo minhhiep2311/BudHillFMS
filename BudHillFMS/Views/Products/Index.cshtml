@@ -1,0 +1,91 @@
+﻿@model IEnumerable<BudHillFMS.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h4>Quản lý sản phẩm</h4>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-lg-8">
+                <div class="d-md-flex">
+                    <div class="m-b-10 m-r-15">
+                        <select class="custom-select" id="idrole" name="idrole" style="min-width: 220px;" asp-items="ViewBag.DanhSachNhaKinh">
+                            <option disabled selected>Nhà kính</option>
+                        </select>
+                    </div>
+
+                    <div class="m-b-10">
+                        <select class="custom-select" id="idfarm" name="idfarm" style="min-width: 220px;" asp-items="ViewBag.DanhSachFarm">
+                            <option disabled selected>Trang trại</option>
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 text-right">
+                <button class="btn btn-tone  btn-primary" onclick="location.href='@Url.Action("Create", "Products")'">
+                    <i class="anticon anticon-plus-circle m-r-5"></i>
+                    <span>Sản phẩm mới</span>
+                </button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+                      
+                        <th>Tên sản phẩm</th>
+                        <th>Giá</th>
+                        <th>Loại</th>
+                        <th>Ngày gieo trồng</th>
+                        <th>Ngày thu hoạch</th>
+                        
+                        <th>Trạng thái</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr onclick="location.href='@Url.Action("Details", "Products", new { id = item.ProductId })'">
+
+                               
+                                <td>
+                                    <h6 class="m-b-0 m-l-10">@item.ProductName</h6>
+                                </td>
+                                <td>@string.Format("{0:#,#}", @item.Price) </td>
+                                <td>@item.Class</td>
+                                <td>@item.SowingDate.Value.ToString("dd/MM/yyyy")</td>
+                                <td>@item.HarvestDate.Value.ToString("dd/MM/yyyy")</td>
+                                
+                                <td>
+                                    @if (@item.ProductStatus)
+                                    {
+                                        <span class="badge badge-pill badge-cyan">
+                                            Đang thu hoạch
+                                        </span>
+
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-pill badge-red">
+                                            Đã thu hoạch
+                                        </span>
+                                    }
+                                </td>
+                                
+                            </tr>
+
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

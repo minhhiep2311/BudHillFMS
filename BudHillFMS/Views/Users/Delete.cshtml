@@ -1,0 +1,56 @@
+﻿@model BudHillFMS.Models.User
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Xóa tài khoản</h4>
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>Id:</td>
+                        <td class="text-dark font-weight-semibold">@Model.UserId</td>
+                    </tr>
+                    <tr>
+                        <td>Username:</td>
+                        <td class="text-dark font-weight-semibold">@Model.Username</td>
+                    </tr>
+                    <tr>
+                        <td>Password:</td>
+                        <td>	@Model.Password</td>
+                    </tr>
+                    <tr>
+                        <td>Tên:</td>
+                        <td>@Model.FirstName</td>
+                    </tr>
+                    <tr>
+                        <td>Họ:</td>
+                        <td>@Model.LastName</td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td>@Model.Email</td>
+                    </tr>
+                    <tr>
+                        <td>Quyền truy cập:</td>
+                        <td>@Model.Role.RoleName</td>
+                    </tr>
+                    <tr>
+                        <td>Trang trại:</td>
+                        <td>@Model.Farm.FarmName</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</div>
+<form asp-action="Delete">
+    <input type="hidden" asp-for="UserId" />
+    <input type="submit" value="Delete" class="btn btn-danger" /> |
+    <a class="btn btn-primary m-r-5" asp-action="Index">Trở về</a>
+</form>

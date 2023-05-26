@@ -1,0 +1,87 @@
+﻿@model IEnumerable<BudHillFMS.Models.Cost>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h4>Quản lý chi phí</h4>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-lg-8">
+                <div class="d-md-flex">
+                    <div class="m-b-10 m-r-15">
+                        <select class="custom-select" id="idrole" name="idrole" style="min-width: 220px;" asp-items="ViewBag.DanhSachNhaKinh">
+                            <option disabled selected>Nhà kính</option>
+                        </select>
+                    </div>
+
+                    <div class="m-b-10">
+                        <select class="custom-select" id="idfarm" name="idfarm" style="min-width: 220px;" asp-items="ViewBag.DanhSachFarm">
+                            <option disabled selected>Trang trại</option>
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 text-right">
+                <button class="btn btn-tone btn-primary" onclick="location.href='@Url.Action("Create", "Costs")'">
+                    <i class="anticon anticon-plus-circle m-r-5"></i>
+                    <span>Chi phí mới</span>
+                </button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+                       
+                        <th>Chi phí</th>
+                        <th>Loại chi phí</th>
+                        <th>Tổng tiền</th>
+                        <th>Trang trại</th>
+                        <th>Ngày ghi chi phí</th>
+                        <th>Tình trạng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr onclick="location.href='@Url.Action("Details", "Costs", new { id = item.CostId })'">
+
+                               
+                                <td>
+                                    <h6 class="m-b-0 m-l-10">@item.CostName</h6>
+                                </td>
+                                <td>@item.Category.CategoryName </td>
+                                <td>@string.Format("{0:#,#}", @item.CostAmount)</td>
+                                <td>@item.Farm.FarmName</td>
+                                <td>@item.CostDate</td>
+                                <td>
+                                    @if (@item.Coststatus)
+                                    {
+                                        <span class="badge badge-pill badge-cyan">
+                                            Đã thanh toán
+                                        </span>
+
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-pill badge-red">
+                                            Chưa thanh toán
+                                        </span>
+                                    }
+                                </td>
+
+                            </tr>
+
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

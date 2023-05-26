@@ -1,0 +1,40 @@
+﻿@model BudHillFMS.Models.CostCategory
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Xóa loại chi phí</h4>
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+
+                    <tr>
+                        <td>ID:</td>
+                        <td>	@Model.CategoryId</td>
+                    </tr>
+
+                    <tr>
+                        <td>Loại chi phí:</td>
+                        <td>	@Model.CategoryName</td>
+                    </tr>
+                    <tr>
+                        <td>Mô tả:</td>
+                        <td>@Model.CategoryDescription</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="CategoryId" />
+    <input type="submit" value="Xác nhận xóa" class="btn btn-danger" /> |
+    <a class="btn btn-tone btn-primary m-r-5" asp-action="Index">Trở về</a>
+</form>
+

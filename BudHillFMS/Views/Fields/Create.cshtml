@@ -1,0 +1,44 @@
+﻿@model BudHillFMS.Models.Field
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Thêm nhà kính</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FieldName" class="control-label">Tên nhà kính</label>
+                <input asp-for="FieldName" class="form-control" />
+                <span asp-validation-for="FieldName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FieldArea" class="control-label">Diện tích</label>
+                <input asp-for="FieldArea" class="form-control" />
+                <span asp-validation-for="FieldArea" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FarmId" class="control-label">Trang trại</label>
+                <select asp-for="FarmId" class ="form-control" asp-items="ViewBag.FarmId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="FieldStatus" class="control-label">Tình trạng</label>
+                <select asp-for="FieldStatus" class="form-control">
+                    <option value="true">Đang trồng trọt</option>
+                    <option value="false">Đang trống</option>
+                </select>
+                <span asp-validation-for="FieldStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Thêm nhà kính" class="btn btn-tone btn-primary" /> |
+                <a class="btn btn-tone btn-primary m-r-5" asp-action="Index">Trở về</a>
+            </div>
+        </form>
+    </div>
+</div>
+

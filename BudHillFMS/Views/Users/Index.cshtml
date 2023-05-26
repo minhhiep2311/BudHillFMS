@@ -1,0 +1,79 @@
+﻿@model IEnumerable<BudHillFMS.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Quản lý tài khoản</h1>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-lg-8">
+                <div class="d-md-flex">
+                    <div class="m-b-10 m-r-15">
+                        <select class="custom-select" id="idrole" name="idrole" style="min-width: 220px;" asp-items="ViewBag.QuyenTruyCap">
+                            <option disabled selected>Quyền truy cập</option>                           
+                        </select>
+                    </div>
+
+                    <div class="m-b-10">
+                        <select class="custom-select" id="idfarm" name="idfarm" style="min-width: 220px;" asp-items="ViewBag.DanhSachFarm">
+                            <option disabled selected>Trang trại</option>
+                            
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 text-right">
+                <button class="btn btn-primary" onclick="location.href='@Url.Action("Create", "Users")'">
+                    <i class="anticon anticon-plus-circle m-r-5"></i>
+                    <span>Thêm tài khoản</span>
+                </button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+                        
+                        <th>Tài khoản</th>
+                        <th>Họ và tên</th>
+                        <th>Email</th>
+                        <th>Quyền truy cập</th>
+                        <th>Trang trại</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(Model != null)
+                    {
+                        @foreach(var item in Model)
+                        {
+                            <tr onclick="location.href='@Url.Action("Details", "Users", new { id = item.UserId })'">
+
+                               
+                                <td>
+                                    <h6 class="m-b-0 m-l-10">@item.Username</h6>
+                                </td>
+                                <td>@item.FirstName @item.LastName</td>
+                                <td>@item.Email</td>
+                                <td>@item.Role.RoleName</td>
+                                <td>
+                                    @item.Farm.FarmName
+                                </td>
+                                <td>
+                                   
+                                    <a class="btn btn-tone btn-primary m-r-5" asp-controller="Users" asp-action="Edit" asp-route-id="@item.UserId">Sửa</a>
+                                    <a class="btn btn-tone btn-danger m-r-5" asp-controller="Users" asp-action="Delete" asp-route-id="@item.UserId">Xóa</a>
+                                </td>
+                            </tr>
+
+                        }
+                    }
+                  
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

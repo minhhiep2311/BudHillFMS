@@ -1,0 +1,53 @@
+﻿@model BudHillFMS.Models.Diary
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Thông tin nhật ký</h4>
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>ID:</td>
+                        <td class="text-dark font-weight-semibold">@Model.DiaryId</td>
+                    </tr>
+                    <tr>
+                        <td>Chủ đề:</td>
+                        <td>@Model.DiarySubject</td>
+                    </tr>
+                    <tr>
+                        <td>Phân loại:</td>
+                        <td> @Model.DiaryCategory</td>
+                    </tr>
+                    <tr>
+                        <td>Ngày viết:</td>
+                        <td>@Model.EntryDate</td>
+                    </tr>
+                    <tr>
+                        <td>Nhà kính:</td>
+                        <td>@Model.Field.FieldName</td>
+                    </tr>
+                    <tr>
+                        <td>Sản phẩm:</td>
+                        <td> @Model.Product.ProductName</td>
+                    </tr>
+                    <tr>
+                        <td>Nội dung:</td>
+                        <td> @Model.Description</td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.DiaryId" class="btn btn-primary m-r-5">Sửa</a>|
+    <a asp-action="Delete" asp-route-id="@Model.DiaryId" class="btn btn-danger m-r-5">Xóa</a> |
+    <a asp-action="Index" class="btn btn-primary m-r-5">Trở về</a>
+</div>

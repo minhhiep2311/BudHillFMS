@@ -1,0 +1,83 @@
+﻿@model BudHillFMS.Models.Task
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1 class="card-title">Thông tin công việc</h1>
+<hr />
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        @if (Model.TaskCheck)
+                        {
+                            <span class="badge badge-pill badge-cyan">Đã hoàn thành</span>
+                            
+
+                        }
+                        else
+                        {
+                            <span class="badge badge-pill badge-red">Chưa hoàn thành</span>
+                        }
+                        
+
+                    </tr>
+                    <tr>
+                        <td>ID:</td>
+                        <td class="text-dark font-weight-semibold">@Model.TaskId</td>
+                    </tr>
+                    <tr>
+                        <td>Công việc:</td>
+                        <td>@Model.TaskName</td>
+                    </tr>
+                    <tr>
+                        <td>Trang trại:</td>
+                        <td>@Model.Farm.FarmName</td>
+                    </tr>
+                    <tr>
+                        <td>Nhà kính:</td>
+                        <td>@Model.Field.FieldName</td>
+                    </tr>
+                    <tr>
+                        <td>Ngày giao:</td>
+                        <td>@Model.TaskDate</td>
+                    </tr>
+                    <tr>
+                        <td>Hạn cuối:</td>
+                        <td>@Model.DuaDate</td>
+                    </tr>
+                    <tr>
+                        <td>Tình trạng:</td>
+                        <td >@Model.TaskStatus</td>
+                    </tr>
+                    <tr>
+                        <td>Mô tả:</td>
+                        <td>@Model.TaskDescription</td>
+                    </tr>
+                    <tr>
+                        <td>Danh sách công việc</td>
+                        <td>
+                            @foreach (var subtask in Model.Subtasks)
+                            {
+                                <div>
+                                    <li>@subtask.SubtaskName</li>
+                                </div>
+                            }
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+   
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.TaskId" class="btn btn-primary m-r-5">Sửa</a>|
+    <a asp-action="Delete" asp-route-id="@Model.TaskId" class="btn btn-danger m-r-5">Xóa</a> |
+    <a asp-action="Index" class="btn btn-primary m-r-5">Trở về</a>
+</div>

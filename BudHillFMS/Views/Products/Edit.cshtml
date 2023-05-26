@@ -1,0 +1,62 @@
+﻿@model BudHillFMS.Models.Product
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Chỉnh sửa sản phẩm</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ProductId" />
+            <div class="form-group">
+                <label asp-for="ProductName" class="control-label">Tên sản phẩm</label>
+                <input asp-for="ProductName" class="form-control" />
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="FieldId" class="control-label">Nhà kính</label>
+                <select asp-for="FieldId" class="form-control" asp-items="ViewBag.FieldId"></select>
+                <span asp-validation-for="FieldId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label">Giá</label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Class" class="control-label">Loại</label>
+                <input asp-for="Class" class="form-control" />
+                <span asp-validation-for="Class" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SowingDate" class="control-label">Ngày gieo trồng</label>
+                <input asp-for="SowingDate" class="form-control" />
+                <span asp-validation-for="SowingDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HarvestDate" class="control-label">Ngày thu hoạch</label>
+                <input asp-for="HarvestDate" class="form-control" />
+                <span asp-validation-for="HarvestDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductStatus" class="control-label">Tình trạng</label>
+                <select asp-for="ProductStatus" class="form-control">
+                    <option value="true">Đang thu hoạch</option>
+                    <option value="false">Đã thu hoạch</option>
+                </select>
+                <span asp-validation-for="ProductStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Lưu" class="btn btn-tone  btn-primary" /> |
+                <a class="btn btn-tone  btn-primary m-r-5" asp-action="Index">Trở về</a>
+            </div>
+        </form>
+    </div>
+</div>
+

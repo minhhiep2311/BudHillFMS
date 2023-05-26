@@ -1,0 +1,63 @@
+﻿@model IEnumerable<BudHillFMS.Models.Seedling>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Quản lý cây giống</h1>
+<hr />
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-lg-8">
+            </div>
+            <div class="col-lg-4 text-right">
+                <button class="btn btn-tone btn-primary" onclick="location.href='@Url.Action("Create", "Seedlings")'">
+                    <i class="anticon anticon-plus-circle m-r-5"></i>
+                    <span>Cây giống mới</span>
+                </button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+
+                        <th>Giống cây</th>
+                        <th>Mô tả</th>
+                        <th>Ngày có thể gieo bầu</th>
+
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr onclick="location.href='@Url.Action("Details", "Seedlings", new { id = item.SeedlingId })'">
+
+
+                                <td>
+                                    <h6 class="m-b-0 m-l-10">@item.SeedlingName</h6>
+                                </td>
+                                <td>@item.SeedlingDescription</td>
+                                <td>@item.SeedlingStart.Value.ToString("dd/MM/yyyy")</td>
+                               
+
+                                <td>
+
+                                    <a class="btn btn-tone btn-primary m-r-5" asp-controller="Seedlings" asp-action="Edit" asp-route-id="@item.SeedlingId">Sửa</a>
+                                    <a class="btn btn-tone btn-danger m-r-5" asp-controller="Seedlings" asp-action="Delete" asp-route-id="@item.SeedlingId">Xóa</a>
+                                </td>
+                            </tr>
+
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

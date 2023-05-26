@@ -1,0 +1,60 @@
+﻿@model IEnumerable<BudHillFMS.Models.Timekeeping>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Chấm công</h1>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-lg-8">
+               
+            </div>
+            <div class="col-lg-4 text-right">
+                <button class="btn btn-tone btn-primary">
+                    <i class="anticon anticon-file-excel m-r-5"></i>
+                    <span>Xuất file</span>
+                </button>
+                |
+                <button class="btn btn-tone btn-primary" onclick="location.href='@Url.Action("Create", "Timekeepings")'">
+                    <i class="anticon anticon-plus-circle m-r-5"></i>
+                    <span>Chấm công</span>
+                </button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+                        <th>Nhân viên</th>
+                        <th>Checkin</th>
+                        <th>Checkout</th>
+                        <th>Ngày</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr onclick="location.href='@Url.Action("Details", "Timekeepings", new { id = item.TimekeepingId })'">
+
+
+                                <td>
+                                    <h6 class="m-b-0 m-l-10">@item.Employee.EmployeeName</h6>
+                                </td>
+                                <td>@item.CheckIn.Value.ToString("hh:mm:ss tt") </td>
+                                <td>@item.CheckOut.Value.ToString("hh:mm:ss tt")</td>
+                                <td>@item.TimekeepingDate.Value.Date.ToString("dd/MM/yyyy")</td>
+                            </tr>
+
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

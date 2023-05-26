@@ -1,0 +1,47 @@
+﻿@model IEnumerable<BudHillFMS.Models.Farm>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Quản lý Farm</h1>
+        <div class="text-right">
+                <a class="btn btn-tone btn-primary m-r-5"  asp-controller="Farms" asp-action="Create" > <i class="anticon anticon-plus-circle m-r-5"></i><span>Farm mới</span></a>
+        </div>
+
+
+<div class="table-responsive">
+   
+    
+    <table class="table">
+        <thead>
+            <tr>
+               
+                <th scope="col">Tên Farm</th>
+                <th scope="col">Diện tích (ha)</th>
+                <th scope="col">Diện tích sử dụng (ha)</th>
+                <th scope="col">Địa chỉ</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @if(Model != null)
+            {
+                @foreach(var item in Model)
+                {
+                 <tr onclick="location.href='@Url.Action("Details", "Farms", new { id = item.FarmId })'">
+                   
+                    <td>@item.FarmName</td>
+                    <td>@item.FarmArea</td>
+                    <td>@item.AreaUsed</td>
+                    <td>@item.FarmLocation</td>
+                    
+                   
+                 </tr>
+                }
+            }
+            
+        </tbody>
+    </table>
+</div

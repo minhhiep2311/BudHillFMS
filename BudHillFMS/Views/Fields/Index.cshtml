@@ -1,0 +1,85 @@
+﻿@model IEnumerable<BudHillFMS.Models.Field>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h4>Quản lý nhà kính</h4>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-lg-8">
+                <div class="d-md-flex">
+
+                    <div class="m-b-10">
+                        <select class="custom-select" id="idfarm" name="idfarm" style="min-width: 220px;" asp-items="ViewBag.DanhSachFarm">
+                            <option disabled selected>Trang trại</option>
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 text-right">
+                <button class="btn btn-tone btn-primary" onclick="location.href='@Url.Action("Create", "Fields")'">
+                    <i class="anticon anticon-plus-circle m-r-5"></i>
+                    <span>Nhà kính mới</span>
+                </button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+                      
+                        <th>Tên nhà kính</th>
+                        <th>Diện tích (m2)</th>
+                        <th>Trang trại</th>
+                        
+                        <th>Tình trạng</th>
+                      
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr onclick="location.href='@Url.Action("Details", "Fields", new { id = item.FieldId })'">
+
+                               
+                                <td>
+                                    <h6 class="m-b-0 m-l-10">@item.FieldName</h6>
+                                </td>
+                                <td>
+                                    @item.FieldArea
+                                </td>
+                                
+                                <td>
+                                    @item.Farm.FarmName
+                                </td>
+                                <td>
+                                    @if (@item.FieldStatus)
+                                    {
+                                        <span class="badge badge-pill badge-cyan">
+                                            Đang trồng trọt
+                                        </span>
+
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-pill badge-red">
+                                            Đang trống
+                                        </span>
+                                    }
+                                </td>
+                                
+                            </tr>
+
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

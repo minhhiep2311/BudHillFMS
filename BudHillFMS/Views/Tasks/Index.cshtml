@@ -1,0 +1,107 @@
+﻿@model IEnumerable<BudHillFMS.Models.Task>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header no-gutters">
+    <div class="row align-items-md-center">
+        <div class="col-md-6">
+            <div class="row">
+                <h4>Quản lý công việc</h4>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="text-md-right m-v-10">
+
+                <button class="btn btn-primary" data-toggle="modal" data-target="#create-new-project" onclick="location.href='@Url.Action("Create", "Tasks")'">
+                    <i class="anticon anticon-plus"></i>
+                    <span class="m-l-5">Công việc mới</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div id="card-view" class="">
+        <div class="row">
+            @if (Model != null)
+            {
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-3" onclick="location.href='@Url.Action("Details", "Tasks", new { id = item.TaskId })'">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div class="media">
+                                        <div class="avatar avatar-image rounded">
+                                            <img src="assets/images/others/thumb-1.jpg" alt="">
+                                        </div>
+                                        <div class="m-l-10">
+                                            <h5 class="m-b-0">@item.TaskName</h5>
+                                            <span class="text-muted font-size-13">@item.TaskDate</span>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown dropdown-animated scale-left">
+                                        <a class="text-gray font-size-18" href="javascript:void(0);" data-toggle="dropdown">
+                                            <i class="anticon anticon-ellipsis"></i>
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <button class="dropdown-item" type="button">
+                                                <i class="anticon anticon-eye"></i>
+                                                <span class="m-l-10">Chi tiết</span>
+                                            </button>
+                                            <button class="dropdown-item" type="button">
+                                                <i class="anticon anticon-edit"></i>
+                                                <span class="m-l-10">Sửa</span>
+                                            </button>
+                                            <button class="dropdown-item" type="button">
+                                                <i class="anticon anticon-delete"></i>
+                                                <span class="m-l-10">Xóa</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="m-t-25">@item.Farm.FarmName</p>
+                                <div class="m-t-30">
+                                    @if (@item.TaskCheck)
+                                    {
+                                        <div class="d-flex justify-content-between">
+                                            <span class="font-weight-semibold">Trạng thái</span>
+                                            <span class="font-weight-semibold"></span>
+                                        </div>
+                                        <div class="progress progress-sm m-t-10">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%"></div>
+                                        </div>
+
+                                    }
+                                    else
+                                    {
+                                        <div class="d-flex justify-content-between">
+                                            <span class="font-weight-semibold">Trạng thái</span>
+                                            <span class="font-weight-semibold"></span>
+                                        </div>
+                                        <div class="progress progress-sm m-t-10">
+                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 28%"></div>
+                                        </div>
+                                    }
+
+                                </div>
+
+                                <div class="m-t-20">
+                                    <span class="badge badge-pill badge-blue">
+                                        @item.TaskStatus
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+    </div>
+
+</div>

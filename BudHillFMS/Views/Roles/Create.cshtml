@@ -1,0 +1,33 @@
+﻿@model BudHillFMS.Models.Role
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Thêm mới quyền truy cập</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RoleName" class="control-label"> Quyền truy cập</label>
+                <input asp-for="RoleName" class="form-control" />
+                <span asp-validation-for="RoleName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoleDescription" class="control-label">Mô tả</label>
+                <input asp-for="RoleDescription" class="form-control" />
+                <span asp-validation-for="RoleDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Tạo quyền truy cập" class="btn btn-primary" /> |
+                <a class="btn btn-primary m-r-5" asp-action="Index">Trở về</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

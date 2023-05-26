@@ -1,0 +1,64 @@
+﻿@model IEnumerable<BudHillFMS.Models.CostCategory>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h1>Quản lý loại chi phí</h1>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-lg-8">
+                
+            </div>
+            <div class="col-lg-4 text-right">
+                <button class="btn btn-tone btn-primary" onclick="location.href='@Url.Action("Create", "CostCategories")'">
+                    <i class="anticon anticon-plus-circle m-r-5"></i>
+                    <span>Loại chi phí mới</span>
+                </button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+                       
+                        <th>Loại chi phí</th>
+                        <th>Mô tả</th>
+                       
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr onclick="location.href='@Url.Action("Details", "CostCategories", new { id = item.CategoryId })'">
+
+                              
+                                <td>
+                                    <h6 class="m-b-0 m-l-10">@item.CategoryName</h6>
+                                </td>
+                                <td>@item.CategoryDescription</td>
+                               
+                                <td>
+
+                                    <a class="btn btn-tone btn-primary m-r-5" asp-controller="CostCategories" asp-action="Edit" asp-route-id="@item.CategoryId">Sửa</a>
+                                    <a class="btn btn-tone btn-danger m-r-5" asp-controller="CostCategories" asp-action="Delete" asp-route-id="@item.CategoryId" >Xóa</a>
+                                </td>
+                            </tr>
+
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

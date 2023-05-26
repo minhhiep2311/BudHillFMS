@@ -1,0 +1,76 @@
+﻿@model BudHillFMS.Models.Timekeeping
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <h4 class="card-title">Thông tin chấm công</h4>
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    
+                    <tr>
+                        <td>ID:</td>
+                        <td>@Model.TimekeepingId</td>
+                    </tr>
+                    <tr>
+                        <td>Nhân viên:</td>
+                        <td>@Model.Employee.EmployeeName</td>
+                    </tr>
+                    <tr>
+                        <td>Checkin:</td>
+                        <td>@Model.CheckIn.Value.ToString("hh:mm:ss tt")</td>
+                    </tr>
+                    <tr>
+                        <td>Checkout:</td>
+                        <td>@Model.CheckOut.Value.ToString("hh:mm:ss tt")</td>
+
+                    </tr>
+                
+                    <tr>
+                        <td>Ngày:</td>
+                        <td>@Model.TimekeepingDate.Value.Date.ToString("dd/MM/yyyy")</td>
+                    </tr>
+                 
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.TimekeepingId" class="btn btn-tone btn-primary m-r-5">Sửa</a>|
+    <a  class="btn btn-tone btn-danger m-r-5" data-toggle="modal" data-target="#DeleteModal">Xóa</a>|
+    <a asp-action="Index" class="btn btn-tone btn-primary m-r-5">Trở về</a>
+</div>
+
+<!--Delete Modal -->
+<div class="modal fade" id="DeleteModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Xác nhận xóa</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="anticon anticon-close"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                Xác nhận xóa thông tin chấm công
+            </div>
+            <div class="modal-footer">
+                <form asp-action="Delete" asp-route-id="@Model.TimekeepingId">
+                    <input type="hidden" asp-for="TimekeepingId" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    <input type="submit" value="Xác nhận xóa" class="btn btn-tone btn-danger" /> 
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>

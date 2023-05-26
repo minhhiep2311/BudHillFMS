@@ -1,0 +1,51 @@
+﻿@model BudHillFMS.Models.Timekeeping
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <h4 class="card-title">Xác nhận xóa</h4>
+            <table class="product-info-table m-t-20">
+                <tbody>
+
+                    <tr>
+                        <td>ID:</td>
+                        <td>@Model.TimekeepingId</td>
+                    </tr>
+                    <tr>
+                        <td>Nhân viên:</td>
+                        <td>@Model.Employee.EmployeeName</td>
+                    </tr>
+                    <tr>
+                        <td>Checkin:</td>
+                        <td>@Model.CheckIn.Value.ToString("hh:mm:ss tt")</td>
+                    </tr>
+                    <tr>
+                        <td>Checkout:</td>
+                        <td>@Model.CheckOut.Value.ToString("hh:mm:ss tt")</td>
+
+                    </tr>
+
+                    <tr>
+                        <td>Ngày:</td>
+                        <td>@Model.TimekeepingDate.Value.Date.ToString("dd/MM/yyyy")</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="TimekeepingId" />
+    <input type="submit" value="Xác nhận xóa" class="btn btn-tone btn-danger" /> |
+    <a asp-action="Index" class="btn btn-tone btn-primary m-r-5">Trở về</a>
+</form>

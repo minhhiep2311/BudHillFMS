@@ -1,0 +1,50 @@
+﻿@model BudHillFMS.Models.Equipment
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Chỉnh sửa thông tin về thiết bị</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="EquipmentId" />
+            <div class="form-group">
+                <label asp-for="EquipmentName" class="control-label">Thiết bị</label>
+                <input asp-for="EquipmentName" class="form-control" />
+                <span asp-validation-for="EquipmentName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EquipmentType" class="control-label">Loại thiết bị</label>
+                <input asp-for="EquipmentType" class="form-control" />
+                <span asp-validation-for="EquipmentType" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="EquipmentQuantity" class="control-label">Số lượng</label>
+                <input asp-for="EquipmentQuantity" class="form-control" />
+                <span asp-validation-for="EquipmentQuantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EquipmentUsed" class="control-label">Đang sử dụng</label>
+                <input asp-for="EquipmentUsed" class="form-control" />
+                <span asp-validation-for="EquipmentUsed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FarmId" class="control-label">Trang trại</label>
+                <select asp-for="FarmId" class="form-control" asp-items="ViewBag.FarmId"></select>
+                <span asp-validation-for="FarmId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Lưu</button> |
+                <a class="btn btn-primary m-r-5" asp-action="Index">Trở về</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

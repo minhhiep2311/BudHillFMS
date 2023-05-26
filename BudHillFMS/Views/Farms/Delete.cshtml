@@ -1,0 +1,44 @@
+﻿@model BudHillFMS.Models.Farm
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Xác nhận xóa trang trại @Model.FarmName</h4>
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>Id:</td>
+                        <td >@Model.FarmId</td>
+                    </tr>
+                    <tr>
+                        <td>Tên trang trại:</td>
+                        <td>	@Model.FarmName</td>
+                    </tr>
+                    <tr>
+                        <td>Diện tích:</td>
+                        <td>	@Model.FarmArea (ha)</td>
+                    </tr>
+                    <tr>
+                        <td>Đã sử dụng:</td>
+                        <td>	@Model.AreaUsed (ha)</td>
+                    </tr>
+                    <tr>
+                        <td>Địa chỉ:</td>
+                        <td>@Model.FarmLocation</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="FarmId" />
+    <input type="submit" value="Xác nhận xóa" class="btn btn-tone btn-danger" /> |
+    <a asp-action="Index" class="btn btn-tone btn-primary m-r-5">Trở về</a>
+</form>

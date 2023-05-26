@@ -1,0 +1,265 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-6 col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="m-b-0">Tổng chi</p>
+                        <h2 class="m-b-0">
+                            <span>3.000.000</span>
+                        </h2>
+                    </div>
+                    <div class="avatar avatar-icon avatar-lg avatar-blue">
+                        <i class="anticon anticon-dollar"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="m-b-0">Sản phẩm</p>
+                        <h2 class="m-b-0">
+                            <span>3</span>
+                        </h2>
+                    </div>
+                    <div class="avatar avatar-icon avatar-lg avatar-cyan">
+                        <i class="anticon anticon-bar-chart"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="m-b-0">Công việc</p>
+                        <h2 class="m-b-0">
+                            <span>12</span>
+                        </h2>
+                    </div>
+                    <div class="avatar avatar-icon avatar-lg avatar-red">
+                        <i class="anticon anticon-profile"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="m-b-0">nhân viên</p>
+                        <h2 class="m-b-0">
+                            <span>20</span>
+                        </h2>
+                    </div>
+                    <div class="avatar avatar-icon avatar-lg avatar-gold">
+                        <i class="text-danger anticon anticon-team"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Báo cáo chi phí </h5>
+                    <div class="dropdown dropdown-animated scale-left">
+                        <a class="text-gray font-size-18" href="javascript:void(0);" data-toggle="dropdown">
+                            <i class="anticon anticon-ellipsis"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <button class="dropdown-item" type="button">
+                                <i class="anticon anticon-printer"></i>
+                                <span class="m-l-10">Print</span>
+                            </button>
+                            <button class="dropdown-item" type="button">
+                                <i class="anticon anticon-download"></i>
+                                <span class="m-l-10">Download</span>
+                            </button>
+                            <button class="dropdown-item" type="button">
+                                <i class="anticon anticon-file-excel"></i>
+                                <span class="m-l-10">Export</span>
+                            </button>
+                            <button class="dropdown-item" type="button">
+                                <i class="anticon anticon-reload"></i>
+                                <span class="m-l-10">Refresh</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-t-25">
+                    <div class="row">
+                        <div class="col-md-12 mx-auto">
+                            <canvas id="myChart"></canvas>
+                        </div>
+                    </div>
+
+
+                    <script>
+                        const ctx = document.getElementById('myChart');
+
+                        new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12',],
+                                datasets: [{
+                                    label: 'Chi đầu tư',
+                                    data: [1, 2, 3, 2, 3, 2, 1, 2, 3, 2, 3, 2,],
+                                    borderWidth: 0,
+                                    backgroundColor: "rgb(0, 128, 255)"
+
+                                },
+                                {
+                                    label: 'Chi sản xuất',
+                                    data: [1, 2, 3, 2, 3, 2, 1, 2, 3, 2, 3, 2,],
+                                    borderWidth: 0,
+                                    backgroundColor: "rgb(102, 178, 255)"
+                                },
+                                {
+                                    label: 'Chi bán hàng',
+                                    data: [1, 2, 3, 2, 3, 2, 1, 2, 3, 2, 3, 2,],
+                                    borderWidth: 0,
+                                    backgroundColor: "rgb(204, 224, 255)"
+                                }
+
+                                ]
+                            },
+                            options: {
+                                scales: {
+                                   
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Nhân viên</h5>
+                    <div>
+                        <a asp-controller="Employees" asp-action="index" class="btn btn-default btn-sm">Xem tất cả</a>
+                    </div>
+                </div>
+                <div class="m-t-30">
+                    <div class="avatar-string m-l-5">
+
+                        <a href="javascript:void(0);" data-toggle="tooltip" title="test">
+                            <div class="avatar avatar-image team-member">
+                                <img src="~/assets/images/avatars/thumb-1.jpg" alt="">
+                            </div>
+                        </a>
+                        <a href="javascript:void(0);" data-toggle="tooltip" title="test">
+                            <div class="avatar avatar-image team-member">
+                                <img src="~/assets/images/avatars/thumb-1.jpg" alt="">
+                            </div>
+                        </a>
+                        <a href="javascript:void(0);" data-toggle="tooltip" title="test">
+                            <div class="avatar avatar-image team-member">
+                                <img src="~/assets/images/avatars/thumb-1.jpg" alt="">
+                            </div>
+                        </a>
+                        <a href="javascript:void(0);" data-toggle="tooltip" title="test">
+                            <div class="avatar avatar-image team-member">
+                                <img src="~/assets/images/avatars/thumb-1.jpg" alt="">
+                            </div>
+                        </a>
+                         <a href="javascript:void(0);" data-toggle="tooltip" title="test">
+                            <div class="avatar avatar-image team-member">
+                                <img src="~/assets/images/avatars/thumb-1.jpg" alt="">
+                            </div>
+                        </a>
+                         <a href="javascript:void(0);" data-toggle="tooltip" title="test">
+                            <div class="avatar avatar-image team-member">
+                                <img src="~/assets/images/avatars/thumb-1.jpg" alt="">
+                            </div>
+                        </a>
+                         <a href="javascript:void(0);" data-toggle="tooltip" title="test">
+                            <div class="avatar avatar-image team-member">
+                                <img src="~/assets/images/avatars/thumb-1.jpg" alt="">
+                            </div>
+                        </a>
+                        <a href="javascript:void(0);" data-toggle="tooltip" title="test">
+                            <div class="avatar avatar-image team-member">
+                                <img src="~/assets/images/avatars/thumb-1.jpg" alt="">
+                            </div>
+                        </a>
+
+
+                        <a asp-controller="Employees" asp-action="create" data-toggle="tooltip" title="Thêm nhân viên">
+                            <div class="avatar avatar-icon avatar-blue team-member">
+                                <i class="anticon anticon-plus font-size-22"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Sản phẩm đang thu hoạch</h5>
+                    <div>
+                        <a href="" class="btn btn-default btn-sm">View All</a>
+                    </div>
+                </div>
+                <div class="m-t-30">
+                    <div class="d-flex m-b-20">
+                        <div class="text-center">
+                            
+                        </div>
+                        <div class="m-l-20">
+                            <h5 class="m-b-0">
+                                <a class="text-dark">Dưa lê</a>
+                            </h5>
+                            <p class="m-b-0">Trang trại Thịnh Sơn</p>
+                        </div>
+                    </div>
+                    <div class="d-flex m-b-20">
+                        <div class="text-center">
+                            
+                        </div>
+                        <div class="m-l-20">
+                            <h5 class="m-b-0">
+                                <a class="text-dark">Nho mẫu đơn</a>
+                            </h5>
+                            <p class="m-b-0">Trang trại Thịnh Sơn</p>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="text-center">
+                            
+                        </div>
+                        <div class="m-l-20">
+                            <h5 class="m-b-0">
+                                <a class="text-dark">Dưa lưới</a>
+                            </h5>
+                            <p class="m-b-0">Trang trại Thịnh Sơn</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

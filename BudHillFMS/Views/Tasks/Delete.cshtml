@@ -1,0 +1,59 @@
+﻿@model BudHillFMS.Models.Task
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="card-title">Xóa công việc</h1>
+<hr />
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>ID:</td>
+                        <td class="text-dark font-weight-semibold">@Model.TaskId</td>
+                    </tr>
+                    <tr>
+                        <td>Công việc:</td>
+                        <td>@Model.TaskName</td>
+                    </tr>
+                    <tr>
+                        <td>Trang trại:</td>
+                        <td>@Model.Farm.FarmName</td>
+                    </tr>
+                    <tr>
+                        <td>Nhà kính:</td>
+                        <td>@Model.Field.FieldName</td>
+                    </tr>
+                    <tr>
+                        <td>Ngày giao:</td>
+                        <td>@Model.TaskDate</td>
+                    </tr>
+                    <tr>
+                        <td>Hạn cuối:</td>
+                        <td>@Model.DuaDate</td>
+                    </tr>
+                    <tr>
+                        <td>Tình trạng:</td>
+                        <td >@Model.TaskStatus</td>
+                    </tr>
+                    <tr>
+                        <td>Mô tả:</td>
+                        <td>@Model.TaskDescription</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+<form asp-action="Delete">
+    <input type="hidden" asp-for="TaskId" />
+    <input type="submit" value="Xóa" class="btn btn-danger" />|
+    <a asp-action="Index" class="btn btn-primary m-r-5">Trở về</a>
+</form>
+

@@ -1,0 +1,39 @@
+﻿@model BudHillFMS.Models.Role
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Thông tin quyền truy cập</h4>
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>ID:</td>
+                        <td class="text-dark font-weight-semibold">@Model.RoleId</td>
+                    </tr>
+                    <tr>
+                        <td>Quyền truy cập:</td>
+                        <td>	@Model.RoleName</td>
+                    </tr>
+                    <tr>
+                        <td>Mô tả:</td>
+                        <td>@Model.RoleDescription</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.RoleId" class="btn btn-primary m-r-5">Sửa</a> |
+    <a asp-action="Delete" asp-route-id="@Model.RoleId" class="btn btn-danger m-r-5">Xóa</a> |
+    <a asp-action="Index" class="btn btn-primary m-r-5">Trở về</a>
+</div>

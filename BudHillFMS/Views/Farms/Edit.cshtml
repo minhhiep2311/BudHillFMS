@@ -1,0 +1,43 @@
+﻿@model BudHillFMS.Models.Farm
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Chỉnh sửa thông tin farm</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="FarmId" />
+            <div class="form-group">
+                <label asp-for="FarmName" class="control-label">Tên trang trại</label>
+                <input asp-for="FarmName" class="form-control" />
+                <span asp-validation-for="FarmName" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="FarmArea" class="control-label">Diện tích</label>
+                <input asp-for="FarmArea" class="form-control" />
+                <span asp-validation-for="FarmArea" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AreaUsed" class="control-label">Đã sử dụng</label>
+                <input asp-for="AreaUsed" class="form-control" />
+                <span asp-validation-for="AreaUsed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FarmLocation" class="control-label">Địa chỉ</label>
+                <input asp-for="FarmLocation" class="form-control" />
+                <span asp-validation-for="FarmLocation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Lưu" class="btn btn-tone btn-primary" /> |
+                <a class="btn btn-tone btn-primary m-r-5" asp-action="Index">Trở về</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+

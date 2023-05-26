@@ -1,0 +1,49 @@
+﻿@model BudHillFMS.Models.User
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Thông tin tài khoản</h4>
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>ID:</td>
+                        <td class="text-dark font-weight-semibold">@Model.UserId</td>
+                    </tr>
+                    <tr>
+                        <td>Tài khoản:</td>
+                        <td>	@Model.Username</td>
+                    </tr>
+                    <tr>
+                        <td>Tên:</td>
+                        <td>@Model.FirstName</td>
+                    </tr>
+                    <tr>
+                        <td>Họ:</td>
+                        <td>@Model.LastName</td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td>@Model.Email</td>
+                    </tr>
+                    <tr>
+                        <td>Quyền truy cập:</td>
+                        <td>@Model.Role.RoleName</td>
+                    </tr>
+                    <tr>
+                        <td>Trang trại:</td>
+                        <td>@Model.Farm.FarmName</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<a class="btn btn-primary m-r-5" asp-action="Index">Trở về</a>

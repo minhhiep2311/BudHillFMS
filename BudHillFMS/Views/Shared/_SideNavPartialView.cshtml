@@ -1,0 +1,165 @@
+﻿<div class="side-nav">
+    <div class="side-nav-inner">
+        <ul class="side-nav-menu scrollable">
+            <li class="nav-item dropdown open">
+                <a class="dropdown-toggle" asp-controller="Home" asp-action="index">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-dashboard"></i>
+                    </span>
+                    <span class="title">Dashboard</span>
+                    
+                </a>
+
+            </li>
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-appstore"></i>
+                    </span>
+                    <span class="title">Quản lý chi phí</span>
+                    <span class="arrow">
+                        <i class="arrow-icon"></i>
+                    </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a asp-controller="Costs" asp-action="index">Chi phí</a>
+                    </li>
+                    <li>
+                        <a asp-controller="CostCategories" asp-action="index">Loại chi phí</a>
+                    </li>
+                   
+
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-build"></i>
+                    </span>
+                    <span class="title">Quản lý sản phẩm</span>
+                    <span class="arrow">
+                        <i class="arrow-icon"></i>
+                    </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a asp-controller="Products" asp-action="Index">Hoa quả</a>
+                    </li>
+                   
+                    <li>
+                        <a asp-controller="Seedlings" asp-action="Index">Cây giống</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle" asp-controller="Equipments" asp-action="Index">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-hdd"></i>
+                    </span>
+                    <span class="title">Quản lý thiết bị</span>
+                   
+                </a>
+              
+            </li>
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-form"></i>
+                    </span>
+                    <span class="title">Quản lý công việc</span>
+                    <span class="arrow">
+                        <i class="arrow-icon"></i>
+                    </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a asp-controller="Timekeepings" asp-action="Index">Chấm công</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Tasks" asp-action="Index">Danh sách công việc</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-table"></i>
+                    </span>
+                    <span class="title">Quản lý kho</span>
+                    <span class="arrow">
+                        <i class="arrow-icon"></i>
+                    </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a asp-controller="Warehouses" asp-action="index">nhà kho</a>
+                    </li>
+                    <li>
+                        <a href="data-table.html">Kho hàng</a>
+                    </li>
+                    <li>
+                        <a href="data-table.html">Phân bón</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a asp-controller="Diaries" asp-action="Index" class="dropdown-toggle" >
+                    <span class="icon-holder">
+                        <i class="anticon anticon-pie-chart"></i>
+                    </span>
+                    <span class="title">Nhật ký farm</span>
+                   
+                </a>
+                
+            </li>
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-file"></i>
+                    </span>
+                    <span class="title">Thông tin farm</span>
+                    <span class="arrow">
+                        <i class="arrow-icon"></i>
+                    </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a asp-controller="Farms" asp-action="index">Danh sách farm</a>
+                    </li>
+
+                    <li>
+                        <a asp-controller="Employees" asp-action="index">Danh sách nhân viên</a>
+                    </li>
+
+                    <li>
+                        <a asp-controller="Fields" asp-action="index">Danh sách nhà kính</a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-lock"></i>
+                    </span>
+                    <span class="title">Quản lý hệ thống</span>
+                    <span class="arrow">
+                        <i class="arrow-icon"></i>
+                    </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a asp-controller="Users" asp-action="Index">Quản lý tài khoản</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Roles" asp-action="Index">Quản lý quyền truy cập</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        
+       
+       
+    </div>
+</div>
