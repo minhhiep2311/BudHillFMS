@@ -5,50 +5,50 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<<div class="card">
+<
+<div class="card">
     <div class="card-body">
         <h4 class="card-title">Xóa sản phẩm</h4>
         <div class="table-responsive">
             <table class="product-info-table m-t-20">
                 <tbody>
-                    <tr>
-                        <td>ID:</td>
-                        <td class="text-dark font-weight-semibold">@Model.ProductId</td>
-                    </tr>
-                    <tr>
-                        <td>Tên sản phẩm:</td>
-                        <td>	@Model.ProductName</td>
-                    </tr>
-                    <tr>
-                        <td>Giá:</td>
-                        <td>@Model.Price</td>
-                    </tr>
-                    <tr>
-                        <td>Loại:</td>
-                        <td>@Model.Class</td>
-                    </tr>
-                    <tr>
-                        <td>Ngày gieo trồng:</td>
-                        <td>@Model.SowingDate</td>
-                    </tr>
-                    <tr>
-                        <td>Ngày thu hoạch:</td>
-                        <td>@Model.HarvestDate</td>
-                    </tr>
-                    <tr>
-                        <td>Nhà kính:</td>
-                        <td>@Model.Field.FieldName</td>
-                    </tr>
-                    
+                <tr>
+                    <td>ID:</td>
+                    <td class="text-dark font-weight-semibold">@Model.ProductId</td>
+                </tr>
+                <tr>
+                    <td>Tên sản phẩm:</td>
+                    <td> @Model.ProductName</td>
+                </tr>
+                <tr>
+                    <td>Giá:</td>
+                    <td>@Model.Price</td>
+                </tr>
+                <tr>
+                    <td>Loại:</td>
+                    <td>@Model.Class</td>
+                </tr>
+                <tr>
+                    <td>Ngày gieo trồng:</td>
+                    <td>@Model.SowingDate</td>
+                </tr>
+                <tr>
+                    <td>Ngày thu hoạch:</td>
+                    <td>@Model.HarvestDate</td>
+                </tr>
+                <tr>
+                    <td>Nhà kính:</td>
+                    <td>@Model.Field?.FieldName</td>
+                </tr>
+
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="ProductId" />
-    <input type="submit" value="Xóa" class="btn btn-danger" /> |
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="ProductId"/>
+    <input type="submit" value="Xóa" class="btn btn-danger"/> |
     <a class="btn btn-primary m-r-5" asp-action="Index">Trở về</a>
-    </form>
-</div>
+</form>

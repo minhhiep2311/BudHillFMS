@@ -28,14 +28,14 @@
             {
                 @foreach (var item in Model)
                 {
-                    <tr onclick="location.href='@Url.Action("Details", "Roles", new { id = item.RoleId })'">
-                        <th scope="row">@item.RoleId</th>
-                        <td>@item.RoleName</td>
+                    <tr onclick="location.href='@Url.Action("Details", "Roles", new { id = item.Id })'">
+                        <th scope="row">@item.Id</th>
+                        <td>@item.Name</td>
                         <td>@item.RoleDescription</td>
                         <td>
-                            <a class="btn btn-info m-r-5" asp-controller="Roles" asp-action="Details" asp-route-id="@item.RoleId">Xem</a>
-                            <a class="btn btn-primary m-r-5" asp-controller="Roles" asp-action="Edit" asp-route-id="@item.RoleId">Sửa</a>
-                            <a class="btn btn-danger m-r-5" asp-controller="Roles" asp-action="Delete" asp-route-id="@item.RoleId">Xóa</a>
+                            <a class="btn btn-info m-r-5" asp-controller="Roles" asp-action="Details" asp-route-id="@item.Id">Xem</a>
+                            <a class="btn btn-primary m-r-5" asp-controller="Roles" asp-action="Edit" asp-route-id="@item.Id">Sửa</a>
+                            <a class="btn btn-danger m-r-5" asp-controller="Roles" asp-action="Delete" asp-route-id="@item.Id">Xóa</a>
                         </td>
                     </tr>
                 }

@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace BudHillFMS.Models
 {
-    public partial class FarmManagementSystemContext : DbContext
+    public partial class FarmManagementSystemContext : IdentityUserContext<User, int>
     {
-        public FarmManagementSystemContext()
-        {
-        }
-
         public FarmManagementSystemContext(DbContextOptions<FarmManagementSystemContext> options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public virtual DbSet<Cost> Costs { get; set; } = null!;
         public virtual DbSet<CostCategory> CostCategories { get; set; } = null!;
@@ -38,13 +30,16 @@ namespace BudHillFMS.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=FarmManagementSystem;Trusted_Connection=True;");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https: //go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer(
+                    "Server=.\\SQLEXPRESS;Database=FarmManagementSystem;Trusted_Connection=True;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Cost>(entity =>
             {
                 entity.ToTable("Cost");
@@ -66,27 +61,27 @@ namespace BudHillFMS.Models
                 entity.Property(e => e.FarmId).HasColumnName("FarmID");
 
                 entity.HasOne(d => d.Category)
-                    .WithMany(p => p.Costs)
-                    .HasForeignKey(d => d.CategoryId)
-                    .HasConstraintName("FK_Cost_CostCategory");
+                   .WithMany(p => p.Costs)
+                   .HasForeignKey(d => d.CategoryId)
+                   .HasConstraintName("FK_Cost_CostCategory");
 
                 entity.HasOne(d => d.Farm)
-                    .WithMany(p => p.Costs)
-                    .HasForeignKey(d => d.FarmId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Cost_Farm");
+                   .WithMany(p => p.Costs)
+                   .HasForeignKey(d => d.FarmId)
+                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   .HasConstraintName("FK_Cost_Farm");
             });
 
             modelBuilder.Entity<CostCategory>(entity =>
             {
                 entity.HasKey(e => e.CategoryId)
-                    .HasName("PK__CostCate__19093A2BE15C114C");
+                   .HasName("PK__CostCate__19093A2BE15C114C");
 
                 entity.ToTable("CostCategory");
 
                 entity.Property(e => e.CategoryId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("CategoryID");
+                   .ValueGeneratedNever()
+                   .HasColumnName("CategoryID");
 
                 entity.Property(e => e.CategoryDescription).HasMaxLength(100);
 
@@ -112,16 +107,16 @@ namespace BudHillFMS.Models
                 entity.Property(e => e.ProductId).HasColumnName("ProductID");
 
                 entity.HasOne(d => d.Field)
-                    .WithMany(p => p.Diaries)
-                    .HasForeignKey(d => d.FieldId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Diary_Field");
+                   .WithMany(p => p.Diaries)
+                   .HasForeignKey(d => d.FieldId)
+                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   .HasConstraintName("FK_Diary_Field");
 
                 entity.HasOne(d => d.Product)
-                    .WithMany(p => p.Diaries)
-                    .HasForeignKey(d => d.ProductId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Diary_Product");
+                   .WithMany(p => p.Diaries)
+                   .HasForeignKey(d => d.ProductId)
+                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   .HasConstraintName("FK_Diary_Product");
             });
 
             modelBuilder.Entity<Employee>(entity =>
@@ -141,14 +136,14 @@ namespace BudHillFMS.Models
                 entity.Property(e => e.FarmId).HasColumnName("FarmID");
 
                 entity.Property(e => e.Position)
-                    .HasMaxLength(50)
-                    .HasColumnName("position");
+                   .HasMaxLength(50)
+                   .HasColumnName("position");
 
                 entity.HasOne(d => d.Farm)
-                    .WithMany(p => p.Employees)
-                    .HasForeignKey(d => d.FarmId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Employee_Farm");
+                   .WithMany(p => p.Employees)
+                   .HasForeignKey(d => d.FarmId)
+                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   .HasConstraintName("FK_Employee_Farm");
             });
 
             modelBuilder.Entity<Equipment>(entity =>
@@ -162,10 +157,10 @@ namespace BudHillFMS.Models
                 entity.Property(e => e.FarmId).HasColumnName("FarmID");
 
                 entity.HasOne(d => d.Farm)
-                    .WithMany(p => p.Equipment)
-                    .HasForeignKey(d => d.FarmId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Equipment_Farm");
+                   .WithMany(p => p.Equipment)
+                   .HasForeignKey(d => d.FarmId)
+                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   .HasConstraintName("FK_Equipment_Farm");
             });
 
             modelBuilder.Entity<Farm>(entity =>
@@ -194,10 +189,10 @@ namespace BudHillFMS.Models
                 entity.Property(e => e.WarehouseId).HasColumnName("WarehouseID");
 
                 entity.HasOne(d => d.Warehouse)
-                    .WithMany(p => p.Fertilizers)
-                    .HasForeignKey(d => d.WarehouseId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Fertilizer_Warehouse");
+                   .WithMany(p => p.Fertilizers)
+                   .HasForeignKey(d => d.WarehouseId)
+                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   .HasConstraintName("FK_Fertilizer_Warehouse");
             });
 
             modelBuilder.Entity<Field>(entity =>
@@ -211,10 +206,10 @@ namespace BudHillFMS.Models
                 entity.Property(e => e.FieldName).HasMaxLength(100);
 
                 entity.HasOne(d => d.Farm)
-                    .WithMany(p => p.Fields)
-                    .HasForeignKey(d => d.FarmId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Field_Farm");
+                   .WithMany(p => p.Fields)
+                   .HasForeignKey(d => d.FarmId)
+                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   .HasConstraintName("FK_Field_Farm");
             });
 
             modelBuilder.Entity<Product>(entity =>
@@ -234,10 +229,10 @@ namespace BudHillFMS.Models
                 entity.Property(e => e.SowingDate).HasColumnType("date");
 
                 entity.HasOne(d => d.Field)
-                    .WithMany(p => p.Products)
-                    .HasForeignKey(d => d.FieldId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Product_Field");
+                   .WithMany(p => p.Products)
+                   .HasForeignKey(d => d.FieldId)
+                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   .HasConstraintName("FK_Product_Field");
             });
 
             modelBuilder.Entity<Role>(entity =>
@@ -246,7 +241,7 @@ namespace BudHillFMS.Models
 
                 entity.Property(e => e.RoleDescription).HasMaxLength(50);
 
-                entity.Property(e => e.RoleName).HasMaxLength(50);
+                entity.Property(e => e.Name).HasMaxLength(50);
             });
 
             modelBuilder.Entity<Seedling>(entity =>
@@ -265,15 +260,15 @@ namespace BudHillFMS.Models
                 entity.Property(e => e.SubTaskId).ValueGeneratedNever();
 
                 entity.Property(e => e.SubtaskName)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
+                   .HasMaxLength(255)
+                   .IsUnicode(false);
 
                 entity.Property(e => e.Subtaskstatus).HasColumnName("subtaskstatus");
 
                 entity.HasOne(d => d.Task)
-                    .WithMany(p => p.Subtasks)
-                    .HasForeignKey(d => d.TaskId)
-                    .HasConstraintName("FK__Subtasks__TaskId__625A9A57");
+                   .WithMany(p => p.Subtasks)
+                   .HasForeignKey(d => d.TaskId)
+                   .HasConstraintName("FK__Subtasks__TaskId__625A9A57");
             });
 
             modelBuilder.Entity<Task>(entity =>
@@ -297,16 +292,16 @@ namespace BudHillFMS.Models
                 entity.Property(e => e.TaskStatus).HasMaxLength(50);
 
                 entity.HasOne(d => d.Farm)
-                    .WithMany(p => p.Tasks)
-                    .HasForeignKey(d => d.FarmId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Task_Farm");
+                   .WithMany(p => p.Tasks)
+                   .HasForeignKey(d => d.FarmId)
+                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   .HasConstraintName("FK_Task_Farm");
 
                 entity.HasOne(d => d.Field)
-                    .WithMany(p => p.Tasks)
-                    .HasForeignKey(d => d.FieldId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Task_Field");
+                   .WithMany(p => p.Tasks)
+                   .HasForeignKey(d => d.FieldId)
+                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   .HasConstraintName("FK_Task_Field");
             });
 
             modelBuilder.Entity<Timekeeping>(entity =>
@@ -324,24 +319,24 @@ namespace BudHillFMS.Models
                 entity.Property(e => e.TimekeepingDate).HasColumnType("date");
 
                 entity.HasOne(d => d.Employee)
-                    .WithMany(p => p.Timekeepings)
-                    .HasForeignKey(d => d.EmployeeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Timekeeping_Employee");
+                   .WithMany(p => p.Timekeepings)
+                   .HasForeignKey(d => d.EmployeeId)
+                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   .HasConstraintName("FK_Timekeeping_Employee");
             });
 
             modelBuilder.Entity<User>(entity =>
             {
                 entity.ToTable("User");
 
-                entity.HasIndex(e => e.Username, "UC_User_Username")
-                    .IsUnique();
+                entity.HasIndex(e => e.UserName, "UC_User_Username")
+                   .IsUnique();
 
-                entity.Property(e => e.UserId).HasColumnName("UserID");
+                entity.Property(e => e.Id).HasColumnName("UserID");
 
                 entity.Property(e => e.Email)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
+                   .HasMaxLength(100)
+                   .IsUnicode(false);
 
                 entity.Property(e => e.FarmId).HasColumnName("FarmID");
 
@@ -349,24 +344,20 @@ namespace BudHillFMS.Models
 
                 entity.Property(e => e.LastName).HasMaxLength(50);
 
-                entity.Property(e => e.Password)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Username)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                entity.Property(e => e.UserName)
+                   .HasMaxLength(50)
+                   .IsUnicode(false);
 
                 entity.HasOne(d => d.Farm)
-                    .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.FarmId)
-                    .HasConstraintName("FK_User_Farm");
+                   .WithMany(p => p.Users)
+                   .HasForeignKey(d => d.FarmId)
+                   .HasConstraintName("FK_User_Farm");
 
                 entity.HasOne(d => d.Role)
-                    .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.RoleId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_User_Role");
+                   .WithMany(p => p.Users)
+                   .HasForeignKey(d => d.RoleId)
+                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   .HasConstraintName("FK_User_Role");
             });
 
             modelBuilder.Entity<Warehouse>(entity =>
@@ -382,10 +373,10 @@ namespace BudHillFMS.Models
                 entity.Property(e => e.WarehouseName).HasMaxLength(100);
 
                 entity.HasOne(d => d.Farm)
-                    .WithMany(p => p.Warehouses)
-                    .HasForeignKey(d => d.FarmId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Warehouse_Farm");
+                   .WithMany(p => p.Warehouses)
+                   .HasForeignKey(d => d.FarmId)
+                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   .HasConstraintName("FK_Warehouse_Farm");
             });
 
             modelBuilder.Entity<WarehouseProduct>(entity =>
@@ -399,20 +390,20 @@ namespace BudHillFMS.Models
                 entity.Property(e => e.ProductId).HasColumnName("ProductID");
 
                 entity.Property(e => e.Unit)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                   .HasMaxLength(50)
+                   .IsUnicode(false);
 
                 entity.HasOne(d => d.Product)
-                    .WithMany(p => p.WarehouseProducts)
-                    .HasForeignKey(d => d.ProductId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_WarehouseProduct_Product");
+                   .WithMany(p => p.WarehouseProducts)
+                   .HasForeignKey(d => d.ProductId)
+                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   .HasConstraintName("FK_WarehouseProduct_Product");
 
                 entity.HasOne(d => d.Warehouse)
-                    .WithMany(p => p.WarehouseProducts)
-                    .HasForeignKey(d => d.WarehouseId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_WarehouseProduct_Warehouse");
+                   .WithMany(p => p.WarehouseProducts)
+                   .HasForeignKey(d => d.WarehouseId)
+                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   .HasConstraintName("FK_WarehouseProduct_Warehouse");
             });
 
             OnModelCreatingPartial(modelBuilder);

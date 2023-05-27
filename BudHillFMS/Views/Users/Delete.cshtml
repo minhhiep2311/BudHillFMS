@@ -12,15 +12,11 @@
                 <tbody>
                     <tr>
                         <td>Id:</td>
-                        <td class="text-dark font-weight-semibold">@Model.UserId</td>
+                        <td class="text-dark font-weight-semibold">@Model.Id</td>
                     </tr>
                     <tr>
                         <td>Username:</td>
-                        <td class="text-dark font-weight-semibold">@Model.Username</td>
-                    </tr>
-                    <tr>
-                        <td>Password:</td>
-                        <td>	@Model.Password</td>
+                        <td class="text-dark font-weight-semibold">@Model.UserName</td>
                     </tr>
                     <tr>
                         <td>Tên:</td>
@@ -36,7 +32,7 @@
                     </tr>
                     <tr>
                         <td>Quyền truy cập:</td>
-                        <td>@Model.Role.RoleName</td>
+                        <td>@Model.Role.Name</td>
                     </tr>
                     <tr>
                         <td>Trang trại:</td>
@@ -50,7 +46,7 @@
     
 </div>
 <form asp-action="Delete">
-    <input type="hidden" asp-for="UserId" />
+    <input type="hidden" asp-for="Id" />
     <input type="submit" value="Delete" class="btn btn-danger" /> |
     <a class="btn btn-primary m-r-5" asp-action="Index">Trở về</a>
 </form>

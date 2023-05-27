@@ -13,11 +13,11 @@
                 <tbody>
                     <tr>
                         <td>ID:</td>
-                        <td class="text-dark font-weight-semibold">@Model.RoleId</td>
+                        <td class="text-dark font-weight-semibold">@Model.Id</td>
                     </tr>
                     <tr>
                         <td>Quyền truy cập:</td>
-                        <td>	@Model.RoleName</td>
+                        <td>	@Model.Name</td>
                     </tr>
                     <tr>
                         <td>Mô tả:</td>
@@ -30,8 +30,8 @@
     </div>
 </div>
 
-<form asp-action="Delete" asp-route-id="@Model.RoleId">
-    <input type="hidden" asp-for="RoleId" />
+<form asp-action="Delete" asp-route-id="@Model.Id">
+    <input type="hidden" asp-for="Id" />
     <input type="submit" value="Xóa" class="btn btn-danger" /> |
     <a class="btn btn-primary m-r-5" asp-action="Index">Trở về</a>
 </form>

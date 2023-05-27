@@ -40,7 +40,7 @@ namespace BudHillFMS.Controllers
             var user = await _context.Users
                 .Include(u => u.Farm)
                 .Include(u => u.Role)
-                .FirstOrDefaultAsync(m => m.UserId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
                 return NotFound();
@@ -108,7 +108,7 @@ namespace BudHillFMS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("UserId,Username,Password,FirstName,LastName,Email,RoleId,FarmId")] User user)
         {
-            if (id != user.UserId)
+            if (id != user.Id)
             {
                 return NotFound();
             }
@@ -122,7 +122,7 @@ namespace BudHillFMS.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.UserId))
+                    if (!UserExists(user.Id))
                     {
                         return NotFound();
                     }
@@ -149,7 +149,7 @@ namespace BudHillFMS.Controllers
             var user = await _context.Users
                 .Include(u => u.Farm)
                 .Include(u => u.Role)
-                .FirstOrDefaultAsync(m => m.UserId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
                 return NotFound();
@@ -179,7 +179,7 @@ namespace BudHillFMS.Controllers
 
         private bool UserExists(int id)
         {
-          return (_context.Users?.Any(e => e.UserId == id)).GetValueOrDefault();
+          return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

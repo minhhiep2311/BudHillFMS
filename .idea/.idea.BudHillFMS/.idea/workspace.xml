@@ -7,7 +7,50 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9b53ec41-b11a-42bd-a35a-bafae6b11479" name="Changes" comment="add login" />
+    <list default="true" id="9b53ec41-b11a-42bd-a35a-bafae6b11479" name="Changes" comment="add login">
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/dataSources/0ff12c57-6fe0-4f1a-a509-6ed024e66d0f.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BudHillFMS/Migrations/20230527183331_Initial.Designer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BudHillFMS/Migrations/20230527183331_Initial.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BudHillFMS/Migrations/FarmManagementSystemContextModelSnapshot.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BudHillFMS/Views/Account/AccessDenied.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BudHillFMS/Views/Account/AccessDenied.cshtml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BudHillFMS/Views/Account/Login.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BudHillFMS/Views/Account/Login.cshtml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BudHillFMS/Views/Account/Logout.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BudHillFMS/Views/Account/Logout.cshtml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BudHillFMS/Views/Account/Manage/ChangePassword.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BudHillFMS/Views/Account/Manage/ChangePassword.cshtml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BudHillFMS/Views/Account/Manage/SetPassword.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BudHillFMS/Views/Account/Manage/SetPassword.cshtml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BudHillFMS/Views/Account/Manage/_ViewImports.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BudHillFMS/Views/Account/_ViewImports.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BudHillFMS/Views/Shared/_LoginPartial.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BudHillFMS/Views/Users/Create.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/BudHillFMS.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/BudHillFMS.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Controllers/RolesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Controllers/RolesController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Controllers/UsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Controllers/UsersController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Models/FarmManagementSystemContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Models/FarmManagementSystemContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Models/Role.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Models/Role.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Models/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Models/User.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Farms/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Farms/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Products/Delete.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Products/Delete.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Roles/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Roles/Create.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Roles/Delete.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Roles/Delete.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Roles/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Roles/Details.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Roles/Edit.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Roles/Edit.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Roles/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Roles/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Shared/_Layout.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Users/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Users/Create.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Users/Delete.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Users/Delete.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Users/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Users/Details.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Users/Edit.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Users/Edit.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Users/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Users/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/appsettings.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,6 +64,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9b881f420fdf41a6a9915112ffe0efe538a00/54/b0adfc08/RazorPage`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9b881f420fdf41a6a9915112ffe0efe538a00/5b/545829ed/RazorPageBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ad6e55ed5be14ead9093c89b536594ec21200/29/fd3d98c6/AuthAppBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/bcb41e23bb26495c99fcd84d4a7d60f02cc00/2c/24191508/IdentityServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/bf253232fac147689d6c824a28a13a2441c00/0a/919dd7e5/LabelTagHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/feca79ab07c048bdb9cd37d63011596366800/45/271337d7/Resources.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/feca79ab07c048bdb9cd37d63011596366800/5d/d9d7f83d/IdentityError.cs" root0="SKIP_HIGHLIGHTING" />
@@ -31,21 +75,63 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/29739346ae892eafa5f1022e6e6360d13712b36e4f658622d47dd90879f28/DeletePersonalData.cshtml.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3181a4808c72ee2cbdda27566f1334b27264c858b7d2784257513a1a339c9ec/IdentityUserContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/93bf8ca51564b3532dce6442f8ec6d3856e11622b484427b6e965ca60aba4b1/IdentityDbContext.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Roles/Create.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Farms/Index.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Products/Delete.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Shared/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Create.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Details.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Edit.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "git-widget-placeholder": "an"
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "settings.editor.selected.configurable": "terminal"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlserver"
+    ]
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="BudHillFMS" type="LaunchSettings" factoryName=".NET Launch Settings Profile" temporary="true">
+      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/BudHillFMS/BudHillFMS.csproj" />
+      <option name="LAUNCH_PROFILE_TFM" value="net6.0" />
+      <option name="LAUNCH_PROFILE_NAME" value="BudHillFMS" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
+      <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
+      <option name="SEND_DEBUG_REQUEST" value="1" />
+      <option name="ADDITIONAL_IIS_EXPRESS_ARGUMENTS" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue=".NET Launch Settings Profile.BudHillFMS" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="TaskManager">
     <servers />
   </component>
+  <component name="TerminalProjectNonSharedOptionsProvider">
+    <option name="startingDirectory" value="$PROJECT_DIR$/BudHillFMS" />
+  </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="commit" />
     <MESSAGE value="add login" />
     <option name="LAST_COMMIT_MESSAGE" value="add login" />

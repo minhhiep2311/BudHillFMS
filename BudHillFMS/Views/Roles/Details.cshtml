@@ -14,11 +14,11 @@
                 <tbody>
                     <tr>
                         <td>ID:</td>
-                        <td class="text-dark font-weight-semibold">@Model.RoleId</td>
+                        <td class="text-dark font-weight-semibold">@Model.Id</td>
                     </tr>
                     <tr>
                         <td>Quyền truy cập:</td>
-                        <td>	@Model.RoleName</td>
+                        <td>	@Model.Name</td>
                     </tr>
                     <tr>
                         <td>Mô tả:</td>
@@ -33,7 +33,7 @@
 
 
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.RoleId" class="btn btn-primary m-r-5">Sửa</a> |
-    <a asp-action="Delete" asp-route-id="@Model.RoleId" class="btn btn-danger m-r-5">Xóa</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary m-r-5">Sửa</a> |
+    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger m-r-5">Xóa</a> |
     <a asp-action="Index" class="btn btn-primary m-r-5">Trở về</a>
 </div>

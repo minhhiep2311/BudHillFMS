@@ -37,7 +37,7 @@ namespace BudHillFMS.Controllers
             }
 
             var role = await _context.Roles
-                .FirstOrDefaultAsync(m => m.RoleId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (role == null)
             {
                 return NotFound();
@@ -92,7 +92,7 @@ namespace BudHillFMS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("RoleId,RoleName,RoleDescription")] Role role)
         {
-            if (id != role.RoleId)
+            if (id != role.Id)
             {
                 return NotFound();
             }
@@ -107,7 +107,7 @@ namespace BudHillFMS.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RoleExists(role.RoleId))
+                    if (!RoleExists(role.Id))
                     {
                         _notyfService.Success("Có lỗi xảy ra!");
                         return NotFound();
@@ -131,7 +131,7 @@ namespace BudHillFMS.Controllers
             }
 
             var role = await _context.Roles
-                .FirstOrDefaultAsync(m => m.RoleId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (role == null)
             {
                 return NotFound();
@@ -162,7 +162,7 @@ namespace BudHillFMS.Controllers
 
         private bool RoleExists(int id)
         {
-          return (_context.Roles?.Any(e => e.RoleId == id)).GetValueOrDefault();
+          return (_context.Roles?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

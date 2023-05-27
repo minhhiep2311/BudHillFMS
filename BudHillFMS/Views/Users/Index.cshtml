@@ -50,22 +50,22 @@
                     {
                         @foreach(var item in Model)
                         {
-                            <tr onclick="location.href='@Url.Action("Details", "Users", new { id = item.UserId })'">
+                            <tr onclick="location.href='@Url.Action("Details", "Users", new { id = item.Id })'">
 
                                
                                 <td>
-                                    <h6 class="m-b-0 m-l-10">@item.Username</h6>
+                                    <h6 class="m-b-0 m-l-10">@item.UserName</h6>
                                 </td>
                                 <td>@item.FirstName @item.LastName</td>
                                 <td>@item.Email</td>
-                                <td>@item.Role.RoleName</td>
+                                <td>@item.Role.Name</td>
                                 <td>
                                     @item.Farm.FarmName
                                 </td>
                                 <td>
                                    
-                                    <a class="btn btn-tone btn-primary m-r-5" asp-controller="Users" asp-action="Edit" asp-route-id="@item.UserId">Sửa</a>
-                                    <a class="btn btn-tone btn-danger m-r-5" asp-controller="Users" asp-action="Delete" asp-route-id="@item.UserId">Xóa</a>
+                                    <a class="btn btn-tone btn-primary m-r-5" asp-controller="Users" asp-action="Edit" asp-route-id="@item.Id">Sửa</a>
+                                    <a class="btn btn-tone btn-danger m-r-5" asp-controller="Users" asp-action="Delete" asp-route-id="@item.Id">Xóa</a>
                                 </td>
                             </tr>
 
