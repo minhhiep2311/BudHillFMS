@@ -4,6 +4,7 @@ using BudHillFMS.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BudHillFMS.Migrations
 {
     [DbContext(typeof(FarmManagementSystemContext))]
-    partial class FarmManagementSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20230527190015_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,108 +116,6 @@ namespace BudHillFMS.Migrations
                         .HasFilter("[UserName] IS NOT NULL");
 
                     b.ToTable("User", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "08b6414d-3574-4e17-9d43-3920a572441b",
-                            Email = "thaiminhhiep2311@gmail.com",
-                            EmailConfirmed = false,
-                            FarmId = 1,
-                            FirstName = "Hiệp",
-                            LastName = "Thái Minh",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "THAIMINHHIEP2311@GMAIL.COM",
-                            NormalizedUserName = "MINHHIEP",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJ/8IKcazlipoj+xPfyIaLmw7ETpbgpj0rpWp8df6MqW9w3AmBww0Dvgx2rUd+Bx9A==",
-                            PhoneNumberConfirmed = false,
-                            RoleId = 1,
-                            SecurityStamp = "9cdf497c-a10c-4cbb-8d17-ae86b794bae3",
-                            TwoFactorEnabled = false,
-                            UserName = "minhhiep"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "6c61b3a4-717a-4342-8f7a-c8237cb289c0",
-                            Email = "thaiminhhiep2311@gmail.com",
-                            EmailConfirmed = false,
-                            FarmId = 1,
-                            FirstName = "Minh",
-                            LastName = "Nguyễn Công",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "THAIMINHHIEP2311@GMAIL.COM",
-                            NormalizedUserName = "MINHNCBK",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDADnwSP1lyg56u+G4NixJYqa6nMxRp5Lrbal9f+frx4nVNlSdNB3dLh8hiU+7eKEw==",
-                            PhoneNumberConfirmed = false,
-                            RoleId = 1,
-                            SecurityStamp = "23dec996-b63e-4b7f-806f-9c0b664b4245",
-                            TwoFactorEnabled = false,
-                            UserName = "minhncbk"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "d8856b53-efbc-444a-b25a-782965dcb577",
-                            Email = "tuanthai@gmail.com",
-                            EmailConfirmed = false,
-                            FarmId = 2,
-                            FirstName = "Tuấn",
-                            LastName = "Thái",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "TUANTHAI@GMAIL.COM",
-                            NormalizedUserName = "TUANTHAI",
-                            PasswordHash = "AQAAAAEAACcQAAAAEInpLUyyHWe+0knj/8av+xdHBou1FCecbuItxj+0Wr+Sbz4YeMg4VzKgI3h35aaBIw==",
-                            PhoneNumberConfirmed = false,
-                            RoleId = 3,
-                            SecurityStamp = "97e46a22-abaf-4d31-a606-c413e18261b0",
-                            TwoFactorEnabled = false,
-                            UserName = "tuanthai"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "18b2a136-0ab8-46ff-9bf5-6b1c1632d1bd",
-                            Email = "hoantuan@hacovina.vn",
-                            EmailConfirmed = false,
-                            FarmId = 1,
-                            FirstName = "Tuấn",
-                            LastName = "Hoàng",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "HOANTUAN@HACOVINA.VN",
-                            NormalizedUserName = "HOANGTUAN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGownDZVHY307pDJ0rZUu/e1jmOF6bGkJXTMH5/c3pWhY9mV0X+rFRQWwPwpjrEFlQ==",
-                            PhoneNumberConfirmed = false,
-                            RoleId = 2,
-                            SecurityStamp = "444a6980-bd5d-45ca-ac1a-1b1f300e2db7",
-                            TwoFactorEnabled = false,
-                            UserName = "hoangtuan"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "17ee8392-32fc-42a3-a950-6a2e09d6f424",
-                            Email = "conghaice@gmail.com",
-                            EmailConfirmed = false,
-                            FarmId = 1,
-                            FirstName = "Hải",
-                            LastName = "Nguyễn Công",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "CONGHAICE@GMAIL.COM",
-                            NormalizedUserName = "CONGHAI",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGeNmVUZjqXGwrP4l8Hx4otJLXVwRWvMRCZX1cAt4krvGcQyHHa4IedSrEA3ooLsGg==",
-                            PhoneNumberConfirmed = false,
-                            RoleId = 1,
-                            SecurityStamp = "0e747720-9439-45d3-93b9-66d85fb27eb9",
-                            TwoFactorEnabled = false,
-                            UserName = "conghai"
-                        });
                 });
 
             modelBuilder.Entity("BudHillFMS.Models.Cost", b =>
@@ -426,32 +326,6 @@ namespace BudHillFMS.Migrations
                     b.HasKey("FarmId");
 
                     b.ToTable("Farm", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            FarmId = 1,
-                            AreaUsed = 5,
-                            FarmArea = 10,
-                            FarmLocation = "Quản lý toàn bộ Farm",
-                            FarmName = "Bud Hill Thịnh Sơn"
-                        },
-                        new
-                        {
-                            FarmId = 2,
-                            AreaUsed = 12,
-                            FarmArea = 26,
-                            FarmLocation = "Quản lý Farm Thịnh Sơn",
-                            FarmName = "Bud Hill Farm Văn Sơn"
-                        },
-                        new
-                        {
-                            FarmId = 3,
-                            AreaUsed = 5,
-                            FarmArea = 5,
-                            FarmLocation = "Quản lý Farm  Văn Sơn",
-                            FarmName = "Bud Hill Trù Sơn"
-                        });
                 });
 
             modelBuilder.Entity("BudHillFMS.Models.Fertilizer", b =>
@@ -569,7 +443,6 @@ namespace BudHillFMS.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -577,8 +450,7 @@ namespace BudHillFMS.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RoleDescription")
                         .HasMaxLength(50)
@@ -586,62 +458,7 @@ namespace BudHillFMS.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
                     b.ToTable("Role", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ConcurrencyStamp = "e801967f-0b7b-4367-8411-ee14e64e32aa",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN",
-                            RoleDescription = "Quản lý toàn bộ Farm"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ConcurrencyStamp = "584f77d8-03d1-453a-9e1c-d8c4a10eda7b",
-                            Name = "TS Manager",
-                            NormalizedName = "TS MANAGER",
-                            RoleDescription = "Quản lý Farm Thịnh Sơn"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ConcurrencyStamp = "a6dafebe-744c-4e87-93f3-e2cc5cf327b6",
-                            Name = "VS Manager",
-                            NormalizedName = "VS MANAGER",
-                            RoleDescription = "Quản lý Farm  Văn Sơn"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ConcurrencyStamp = "a7983967-dcc9-4b74-b6d4-916c2a7764b3",
-                            Name = "TS Engineer",
-                            NormalizedName = "TS ENGINEER",
-                            RoleDescription = "Kỹ thuật viên Thịnh Sơn"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            ConcurrencyStamp = "dbfcf54b-475f-46b8-b50a-64c3dfca530b",
-                            Name = "VS Engineer",
-                            NormalizedName = "VS ENGINEER",
-                            RoleDescription = "Kỹ thuật viên Văn Sơn"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            ConcurrencyStamp = "0a3a5f0b-03ee-454e-b94c-ec50cea24697",
-                            Name = "Worker",
-                            NormalizedName = "WORKER",
-                            RoleDescription = "Công nhân farm"
-                        });
                 });
 
             modelBuilder.Entity("BudHillFMS.Models.Seedling", b =>
@@ -822,30 +639,6 @@ namespace BudHillFMS.Migrations
                     b.ToTable("WarehouseProduct", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetRoleClaims", (string)null);
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
                     b.Property<int>("Id")
@@ -889,21 +682,6 @@ namespace BudHillFMS.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserLogins", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
@@ -1105,15 +883,6 @@ namespace BudHillFMS.Migrations
                     b.Navigation("Warehouse");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
-                {
-                    b.HasOne("BudHillFMS.Models.Role", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
                     b.HasOne("BudHillFMS.Areas.Identity.Data.User", null)
@@ -1125,21 +894,6 @@ namespace BudHillFMS.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("BudHillFMS.Areas.Identity.Data.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
-                {
-                    b.HasOne("BudHillFMS.Models.Role", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("BudHillFMS.Areas.Identity.Data.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")

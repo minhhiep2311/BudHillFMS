@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BudHillFMS.Models;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using BudHillFMS.Areas.Identity.Data;
 
 namespace BudHillFMS.Controllers
 {

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using BudHillFMS.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace BudHillFMS.Models;
 
