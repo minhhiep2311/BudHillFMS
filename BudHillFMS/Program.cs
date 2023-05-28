@@ -47,6 +47,8 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
+builder.Services.AddHttpContextAccessor();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -66,8 +68,9 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}")
+   .RequireAuthorization();
 
 app.MapRazorPages();
 
