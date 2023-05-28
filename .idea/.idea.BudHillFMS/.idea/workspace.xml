@@ -8,11 +8,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b53ec41-b11a-42bd-a35a-bafae6b11479" name="Changes" comment="add migrations">
+      <change afterPath="$PROJECT_DIR$/BudHillFMS/Views/Home/Index.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/dataSources/0ff12c57-6fe0-4f1a-a509-6ed024e66d0f.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/dataSources/0ff12c57-6fe0-4f1a-a509-6ed024e66d0f.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BudHillFMS.sln.DotSettings" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS.sln.DotSettings" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Areas/Identity/Pages/Account/Manage/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Areas/Identity/Pages/Account/Manage/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Areas/Identity/Pages/Account/Login.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Areas/Identity/Pages/Account/Login.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Controllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Controllers/HomeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Controllers/UsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Controllers/UsersController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BudHillFMS/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Shared/_Layout.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Home/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Home/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +73,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "ann",
     "settings.editor.selected.configurable": "swagger"
   },
   "keyToStringList": {
@@ -147,5 +151,24 @@
     <MESSAGE value="add login" />
     <MESSAGE value="add migrations" />
     <option name="LAST_COMMIT_MESSAGE" value="add migrations" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/BudHillFMS/Controllers/HomeController.cs</url>
+          <line>59</line>
+          <properties documentPath="$PROJECT_DIR$/BudHillFMS/Controllers/HomeController.cs" initialLine="59" containingFunctionPresentation="Method 'Index'">
+            <startOffsets>
+              <option value="2294" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2342" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

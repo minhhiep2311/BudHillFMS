@@ -17,7 +17,7 @@ namespace BudHillFMS.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
-            ViewData["QuyenTruyCap"] = new SelectList(_context.Roles, "RoleId", "RoleName");
+            ViewData["QuyenTruyCap"] = new SelectList(_context.Roles, "Id", "Name");
             ViewData["DanhSachFarm"] = new SelectList(_context.Farms, "FarmId", "FarmName");
 
             var farmManagementSystemContext = _context.Users.Include(u => u.Farm).Include(u => u.Role);
@@ -48,7 +48,7 @@ namespace BudHillFMS.Controllers
         public IActionResult Create()
         {
             ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName");
-            ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleName");
+            ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "Name");
             return View();
         }
 
@@ -69,7 +69,7 @@ namespace BudHillFMS.Controllers
                     return RedirectToAction(nameof(Index));
                 }
                 ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName", user.FarmId);
-                ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
+                ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "Name", user.RoleId);
                 return View(user);
             }
            
@@ -92,7 +92,7 @@ namespace BudHillFMS.Controllers
                 return NotFound();
             }
             ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName", user.FarmId);
-            ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
+            ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "Name", user.RoleId);
             return View(user);
         }
 
@@ -129,7 +129,7 @@ namespace BudHillFMS.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName", user.FarmId);
-            ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
+            ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "Name", user.RoleId);
             return View(user);
         }
 

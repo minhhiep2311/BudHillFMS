@@ -1,4 +1,7 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model BudHillFMS.Views.Home.HomePageModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -10,7 +13,7 @@
                     <div>
                         <p class="m-b-0">Tổng chi</p>
                         <h2 class="m-b-0">
-                            <span>3.000.000</span>
+                            <span> @Model.Outcome.ToString("N0")</span>
                         </h2>
                     </div>
                     <div class="avatar avatar-icon avatar-lg avatar-blue">
@@ -25,9 +28,9 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <p class="m-b-0">Sản phẩm</p>
+                        <p class="m-b-0">Trang trại</p>
                         <h2 class="m-b-0">
-                            <span>3</span>
+                            <span>@Model.FarmsNumber</span>
                         </h2>
                     </div>
                     <div class="avatar avatar-icon avatar-lg avatar-cyan">
@@ -42,9 +45,9 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <p class="m-b-0">Công việc</p>
+                        <p class="m-b-0">Hạt giống</p>
                         <h2 class="m-b-0">
-                            <span>12</span>
+                            <span>@Model.SeedsNumber</span>
                         </h2>
                     </div>
                     <div class="avatar avatar-icon avatar-lg avatar-red">
@@ -59,9 +62,9 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <p class="m-b-0">nhân viên</p>
+                        <p class="m-b-0">Nhân viên</p>
                         <h2 class="m-b-0">
-                            <span>20</span>
+                            <span>@Model.EmployeeNumber</span>
                         </h2>
                     </div>
                     <div class="avatar avatar-icon avatar-lg avatar-gold">
@@ -116,35 +119,22 @@
                         new Chart(ctx, {
                             type: 'bar',
                             data: {
-                                labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12',],
-                                datasets: [{
-                                    label: 'Chi đầu tư',
-                                    data: [1, 2, 3, 2, 3, 2, 1, 2, 3, 2, 3, 2,],
-                                    borderWidth: 0,
-                                    backgroundColor: "rgb(0, 128, 255)"
-
-                                },
-                                {
-                                    label: 'Chi sản xuất',
-                                    data: [1, 2, 3, 2, 3, 2, 1, 2, 3, 2, 3, 2,],
-                                    borderWidth: 0,
-                                    backgroundColor: "rgb(102, 178, 255)"
-                                },
-                                {
-                                    label: 'Chi bán hàng',
-                                    data: [1, 2, 3, 2, 3, 2, 1, 2, 3, 2, 3, 2,],
-                                    borderWidth: 0,
-                                    backgroundColor: "rgb(204, 224, 255)"
-                                }
-
+                                labels: [@Html.Raw(string.Join(",", Enumerable.Range(1, 12).Select((_, i) => $"'{i + 1}'")))],
+                                datasets: [
+                                    @Html.Raw(
+                                        string.Join(",", Model.OutcomeList.Select(item => $@"
+                                            {{
+                                                label: '{item.Item2}',
+                                                data: [{string.Join(',', item.Item3)}],
+                                                borderWidth: 0,
+                                                backgroundColor: '{item.Item4}'
+                                            }}"))
+                                        )
                                 ]
                             },
                             options: {
                                 scales: {
-                                   
-                                    y: {
-                                        beginAtZero: true
-                                    }
+                                    y: { beginAtZero: true }
                                 }
                             }
                         });
@@ -185,17 +175,17 @@
                                 <img src="~/assets/images/avatars/thumb-1.jpg" alt="">
                             </div>
                         </a>
-                         <a href="javascript:void(0);" data-toggle="tooltip" title="test">
+                        <a href="javascript:void(0);" data-toggle="tooltip" title="test">
                             <div class="avatar avatar-image team-member">
                                 <img src="~/assets/images/avatars/thumb-1.jpg" alt="">
                             </div>
                         </a>
-                         <a href="javascript:void(0);" data-toggle="tooltip" title="test">
+                        <a href="javascript:void(0);" data-toggle="tooltip" title="test">
                             <div class="avatar avatar-image team-member">
                                 <img src="~/assets/images/avatars/thumb-1.jpg" alt="">
                             </div>
                         </a>
-                         <a href="javascript:void(0);" data-toggle="tooltip" title="test">
+                        <a href="javascript:void(0);" data-toggle="tooltip" title="test">
                             <div class="avatar avatar-image team-member">
                                 <img src="~/assets/images/avatars/thumb-1.jpg" alt="">
                             </div>
@@ -227,7 +217,7 @@
                 <div class="m-t-30">
                     <div class="d-flex m-b-20">
                         <div class="text-center">
-                            
+
                         </div>
                         <div class="m-l-20">
                             <h5 class="m-b-0">
@@ -238,7 +228,7 @@
                     </div>
                     <div class="d-flex m-b-20">
                         <div class="text-center">
-                            
+
                         </div>
                         <div class="m-l-20">
                             <h5 class="m-b-0">
@@ -249,7 +239,7 @@
                     </div>
                     <div class="d-flex">
                         <div class="text-center">
-                            
+
                         </div>
                         <div class="m-l-20">
                             <h5 class="m-b-0">

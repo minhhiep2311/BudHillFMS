@@ -1,28 +1,75 @@
 ﻿using BudHillFMS.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using BudHillFMS.Areas.Identity.Data;
+using BudHillFMS.Views.Home;
 
 namespace BudHillFMS.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly FarmManagementSystemContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(FarmManagementSystemContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public async Task<ActionResult> Index()
         {
-           // for(int i = 1; i <= 12; i++){
-              //  ViewData['Sextoy' + i] = costResponse.getQuery().Where(CostDate.Month = i.ToString() && CostDate.year = DateTime.Now.Year);
-//                 var itemsInCart = from o in db.OrderLineItems
-//               where o.OrderId == currentOrder.OrderId
-//               select new { o.WishListItem.Price };
-// var sum = itemsCard.ToList().Select(c=>c.Price).Sum();
-           // }
-            return View();
+            var outcome = _context.Costs.Sum(c => c.CostAmount) ?? 0;
+            var farmsNumber = _context.Farms.Count();
+            var seedsNumber = _context.Seedlings.Count();
+            var employeeNumber = _context.Employees.Count();
+
+            var currentYear = DateTime.Now.Year;
+            var cost = _context.Costs
+               .Select(c => new
+                {
+                    c.CostAmount,
+                    c.CategoryId,
+                    CategoryName = c.Category != null ? c.Category.CategoryName : "",
+                    Month = c.CostDate != null ? c.CostDate.Value.Month : 0,
+                    Year = c.CostDate != null ? c.CostDate.Value.Year : 0,
+                })
+               .Where(c => !string.IsNullOrEmpty(c.CategoryName) && c.Year == currentYear)
+               .GroupBy(c => new { c.CategoryId, c.Month, c.Year })
+               .Select(c => new
+                {
+                    c.First().Month,
+                    c.First().CategoryId,
+                    c.First().CategoryName,
+                    Total = c.Sum(i => i.CostAmount) ?? 0
+                })
+               .ToList();
+
+            var colors = new[] { "rgb(0, 128, 255)", "rgb(102, 178, 255)", "rgb(204, 224, 255)" };
+            var outcomeList = new List<Tuple<int?, string, decimal[], string>>();
+
+            foreach (var c in cost)
+            {
+                var index = outcomeList.FindIndex(x => x.Item1 == c.CategoryId);
+                if (index == -1)
+                {
+                    var colorIndex = outcomeList.Count % 3;
+                    outcomeList.Add(
+                        Tuple.Create(c.CategoryId, c.CategoryName, Enumerable.Repeat(0m, 12).ToArray(), colors[colorIndex]));
+                    index = outcomeList.Count - 1;
+                }
+
+                outcomeList[index].Item3[c.Month - 1] = c.Total;
+            }
+
+            var model = new HomePageModel
+            {
+                FarmsNumber = farmsNumber,
+                SeedsNumber = seedsNumber,
+                EmployeeNumber = employeeNumber,
+                Outcome = outcome,
+                OutcomeList = outcomeList
+            };
+
+            return View(model);
         }
 
         public IActionResult Privacy()
