@@ -1,10 +1,10 @@
-﻿@model IEnumerable<BudHillFMS.Models.Warehouse>
+﻿@model IEnumerable<BudHillFMS.Models.WarehouseProduct>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h4>Quản lý nhà kho</h4>
+<h1>Quản lý kho hàng</h1>
 <div class="card">
     <div class="card-body">
         <div class="row m-b-30">
@@ -12,17 +12,19 @@
                 <div class="d-md-flex">
 
                     <div class="m-b-10">
-                        <select class="custom-select" id="idfarm" name="idfarm" style="min-width: 220px;" asp-items="ViewBag.DanhSachFarm">
-                            <option disabled selected>Trang trại</option>
+                        <!--
+                        <select class="custom-select" id="idwarehouse" name="idwarehouse" style="min-width: 220px;" asp-items="ViewBag.DanhSachKho">
+                            <option disabled selected>Nhà kho</option>
 
                         </select>
+                        -->
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 text-right">
-                <button class="btn btn-tone btn-primary" onclick="location.href='@Url.Action("Create", "Warehouses")'">
+                <button class="btn btn-tone btn-primary" onclick="location.href='@Url.Action("Create", "WarehouseProducts")'">
                     <i class="anticon anticon-plus-circle m-r-5"></i>
-                    <span>Nhà kho mới</span>
+                    <span>Kho hàng mới</span>
                 </button>
             </div>
         </div>
@@ -32,10 +34,10 @@
                     <tr>
 
                         <th>Tên nhà kho</th>
-                        <th>Địa chỉ</th>
-                        <th>Trang trại</th>
+                        <th>Sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Đơn vị</th>
 
-                     
                     </tr>
                 </thead>
                 <tbody>
@@ -43,18 +45,20 @@
                     {
                         @foreach (var item in Model)
                         {
-                            <tr onclick="location.href='@Url.Action("Details", "Warehouses", new { id = item.WarehouseId })'">
+                            <tr onclick="location.href='@Url.Action("Details", "WarehouseProducts", new { id = item.WarehouseId })'">
 
 
                                 <td>
-                                    <h6 class="m-b-0 m-l-10">@item.WarehouseName</h6>
+                                    <h6 class="m-b-0 m-l-10">@item.Warehouse.WarehouseName</h6>
                                 </td>
                                 <td>
-                                    @item.WarehouseLocation
+                                    @item.Product.ProductName
                                 </td>
-
                                 <td>
-                                    @item.Farm.FarmName
+                                    @item.Quantity
+                                </td>
+                                <td>
+                                    @item.Unit
                                 </td>
                             </tr>
 

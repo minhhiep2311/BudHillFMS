@@ -22,7 +22,8 @@ namespace BudHillFMS.Controllers
         // GET: Warehouses
         public async Task<IActionResult> Index()
         {
-            var farmManagementSystemContext = _context.Warehouses.Include(w => w.Farm);
+            ViewData["DanhSachFarm"] = new SelectList(_context.Farms, "FarmId", "FarmName");
+            var farmManagementSystemContext = _context.Warehouses.Include(w => w.Farm).OrderBy(w => w.Farm.FarmName); 
             return View(await farmManagementSystemContext.ToListAsync());
         }
 
