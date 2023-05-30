@@ -7,16 +7,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BudHillFMS.Models;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace BudHillFMS.Controllers
 {
     public class FieldsController : Controller
     {
         private readonly FarmManagementSystemContext _context;
-
-        public FieldsController(FarmManagementSystemContext context)
+        public INotyfService _notyfService;
+        public FieldsController(FarmManagementSystemContext context, INotyfService notyfService)
         {
             _context = context;
+            _notyfService = notyfService;
         }
 
         // GET: Fields
@@ -24,7 +26,9 @@ namespace BudHillFMS.Controllers
         {
             ViewData["DanhSachFarm"] = new SelectList(_context.Farms, "FarmId", "FarmName");
 
-            var farmManagementSystemContext = _context.Fields.Include(e => e.Farm);
+            var farmManagementSystemContext = _context.Fields
+                .Include(e => e.Farm)
+                .OrderBy(t => t.FieldStatus == true);
             return View(await farmManagementSystemContext.ToListAsync());
         }
 
@@ -65,6 +69,7 @@ namespace BudHillFMS.Controllers
             {
                 _context.Add(@field);
                 await _context.SaveChangesAsync();
+                _notyfService.Success("Tạo mới thành công!");
                 return RedirectToAction(nameof(Index));
             }
             ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName", @field.FarmId);
@@ -106,11 +111,13 @@ namespace BudHillFMS.Controllers
                 {
                     _context.Update(@field);
                     await _context.SaveChangesAsync();
+                    _notyfService.Success("Cập nhật thành công!");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!FieldExists(@field.FieldId))
                     {
+                        _notyfService.Success("Có lỗi xảy ra!");
                         return NotFound();
                     }
                     else
@@ -159,6 +166,7 @@ namespace BudHillFMS.Controllers
             }
             
             await _context.SaveChangesAsync();
+            _notyfService.Success("Xóa thành công!");
             return RedirectToAction(nameof(Index));
         }
 

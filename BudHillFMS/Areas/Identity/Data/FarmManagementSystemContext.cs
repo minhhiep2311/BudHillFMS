@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System;
 using Task = BudHillFMS.Models.Task;
 
 namespace BudHillFMS.Areas.Identity.Data;
@@ -412,9 +413,9 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
         // Seeding Fields
         var fields = new[]
         {
-            (name: "Bud Hill Thịnh Sơn", location: "Quản lý toàn bộ Farm", area: 10, used: 5),
-            (name: "Bud Hill Farm Văn Sơn", location: "Quản lý Farm Thịnh Sơn", area: 26, used: 12),
-            (name: "Bud Hill Trù Sơn", location: "Quản lý Farm  Văn Sơn", area: 5, used: 5),
+            (name: "Bud Hill Thịnh Sơn", location: "Thịnh Sơn", area: 10, used: 5),
+            (name: "Bud Hill Farm Văn Sơn", location: "Văn Sơn", area: 26, used: 12),
+            (name: "Bud Hill Trù Sơn", location: "Trù Sơn", area: 5, used: 5),
         };
 
         modelBuilder.Entity<Farm>().HasData(fields.Select((f, i) => new Farm
@@ -429,19 +430,16 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
         // Seeding Roles
         var roles = new[]
         {
-            (name: "Admin", desc: "Quản lý toàn bộ Farm"),
-            (name: "TS Manager", desc: "Quản lý Farm Thịnh Sơn"),
-            (name: "VS Manager", desc: "Quản lý Farm  Văn Sơn"),
-            (name: "TS Engineer", desc: "Kỹ thuật viên Thịnh Sơn"),
-            (name: "VS Engineer", desc: "Kỹ thuật viên Văn Sơn"),
-            (name: "Worker", desc: "Công nhân farm")
+            (name: "Admin", desc: "Quản lý toàn bộ Farm", normalize: "Admin"),
+            (name: "Manager", desc: "Quản lý Farm ",normalize: "Manager"),
+            (name: "Engineer", desc: "Kỹ thuật viên ",normalize: "Engineer")
         };
 
         modelBuilder.Entity<Role>().HasData(roles.Select((r, i) => new Role
         {
             Id = i + 1,
             Name = r.name,
-            NormalizedName = r.name.ToUpper(),
+            NormalizedName = r.normalize,
             RoleDescription = r.desc
         }));
 

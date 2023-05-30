@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BudHillFMS.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BudHillFMS.Controllers
 {
+    [Authorize(Roles = "ADMIN")]
     public class UsersController : Controller
     {
         private readonly FarmManagementSystemContext _context;

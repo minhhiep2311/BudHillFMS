@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using BudHillFMS.Areas.Identity.Data;
 using BudHillFMS.Views.Home;
+using Microsoft.EntityFrameworkCore;
 
 namespace BudHillFMS.Controllers
 {
@@ -19,8 +20,13 @@ namespace BudHillFMS.Controllers
         {
             var outcome = _context.Costs.Sum(c => c.CostAmount) ?? 0;
             var farmsNumber = _context.Farms.Count();
-            var seedsNumber = _context.Seedlings.Count();
+            var seedsNumber = _context.Tasks.Where(t => t.TaskCheck == false).Count();
             var employeeNumber = _context.Employees.Count();
+            var productCheck = _context.Products.Include(p => p.Field)
+                .ThenInclude(f => f.Farm)
+                .Where(p => p.ProductStatus == true) 
+                .Take(3)
+                .ToList();
 
             var currentYear = DateTime.Now.Year;
             var cost = _context.Costs
@@ -66,7 +72,8 @@ namespace BudHillFMS.Controllers
                 SeedsNumber = seedsNumber,
                 EmployeeNumber = employeeNumber,
                 Outcome = outcome,
-                OutcomeList = outcomeList
+                OutcomeList = outcomeList,
+                ListProduct = productCheck
             };
 
             return View(model);

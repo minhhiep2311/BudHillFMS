@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BudHillFMS.Models;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace BudHillFMS.Controllers
 {
     public class EmployeesController : Controller
     {
         private readonly FarmManagementSystemContext _context;
+        public INotyfService _notyfService;
 
-        public EmployeesController(FarmManagementSystemContext context)
+        public EmployeesController(FarmManagementSystemContext context, INotyfService notyfService)
         {
             _context = context;
+            _notyfService = notyfService;
         }
 
         // GET: Employees
@@ -63,6 +66,7 @@ namespace BudHillFMS.Controllers
             {
                 _context.Add(employee);
                 await _context.SaveChangesAsync();
+                _notyfService.Success("Tạo mới thành công!");
                 return RedirectToAction(nameof(Index));
             }
             ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName", employee.FarmId);
@@ -104,11 +108,13 @@ namespace BudHillFMS.Controllers
                 {
                     _context.Update(employee);
                     await _context.SaveChangesAsync();
+                    _notyfService.Success("Cập nhật thành công!");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!EmployeeExists(employee.EmployeeId))
                     {
+                        _notyfService.Success("Có lỗi xảy ra!");
                         return NotFound();
                     }
                     else
@@ -157,6 +163,7 @@ namespace BudHillFMS.Controllers
             }
             
             await _context.SaveChangesAsync();
+            _notyfService.Success("Xóa thành công!");
             return RedirectToAction(nameof(Index));
         }
 

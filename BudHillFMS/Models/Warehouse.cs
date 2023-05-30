@@ -16,7 +16,7 @@ namespace BudHillFMS.Models
         public string? WarehouseLocation { get; set; }
         public int FarmId { get; set; }
 
-        public virtual Farm Farm { get; set; } = null!;
+        public virtual Farm? Farm { get; set; } 
         public virtual ICollection<Fertilizer> Fertilizers { get; set; }
         public virtual ICollection<WarehouseProduct> WarehouseProducts { get; set; }
     }

@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BudHillFMS.Models;
+using AspNetCoreHero.ToastNotification.Abstractions;
+using AspNetCoreHero.ToastNotification.Notyf;
 
 namespace BudHillFMS.Controllers
 {
     public class FarmsController : Controller
     {
         private readonly FarmManagementSystemContext _context;
-
-        public FarmsController(FarmManagementSystemContext context)
+        public INotyfService _notyfService;
+        public FarmsController(FarmManagementSystemContext context, INotyfService notyfService)
         {
             _context = context;
+            _notyfService = notyfService;
         }
 
         // GET: Farms
@@ -62,6 +65,7 @@ namespace BudHillFMS.Controllers
             {
                 _context.Add(farm);
                 await _context.SaveChangesAsync();
+                _notyfService.Success("Tạo mới thành công!");
                 return RedirectToAction(nameof(Index));
             }
             return View(farm);
@@ -101,11 +105,13 @@ namespace BudHillFMS.Controllers
                 {
                     _context.Update(farm);
                     await _context.SaveChangesAsync();
+                    _notyfService.Success("Cập nhật thành công!");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!FarmExists(farm.FarmId))
                     {
+                        _notyfService.Success("Có lỗi xảy ra!");
                         return NotFound();
                     }
                     else
@@ -152,6 +158,7 @@ namespace BudHillFMS.Controllers
             }
             
             await _context.SaveChangesAsync();
+            _notyfService.Success("Xóa thành công!");
             return RedirectToAction(nameof(Index));
         }
 

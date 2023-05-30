@@ -57,7 +57,7 @@
                                 <td>@item.Category.CategoryName </td>
                                 <td>@string.Format("{0:#,#}", @item.CostAmount)</td>
                                 <td>@item.Farm.FarmName</td>
-                                <td>@item.CostDate</td>
+                                <td>@item.CostDate.Value.Date.ToString("dd/MM/yyyy")</td>
                                 <td>
                                     @if (@item.Coststatus)
                                     {

@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BudHillFMS.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace BudHillFMS.Controllers
 {
+    [Authorize(Roles = "ADMIN")]
     public class CostCategoriesController : Controller
     {
         private readonly FarmManagementSystemContext _context;

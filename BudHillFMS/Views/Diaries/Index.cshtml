@@ -37,7 +37,7 @@
             <div class="d-flex align-items-center col-md-3 m-b-10">
                 <div class="input-affix m-r-10">
                     <i class="prefix-icon anticon anticon-search"></i>
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input type="text" class="form-control" placeholder="Tìm kiếm">
                 </div>
                 <button class="btn btn-icon btn-default">
                     <i class="anticon anticon-reload"></i>
@@ -65,7 +65,7 @@
                                         </div>
                                     </td>
                                     <td class="list-date">
-                                        <span>@item.EntryDate</span>
+                                    <span>@item.EntryDate.Date.ToString("dd/MM/yyyy")</span>
                                     </td>
                                 </tr>
                         </table>
@@ -73,7 +73,7 @@
                 }
             }
         </div>
-
+        <!--
         <div class="m-t-20 text-right">
             <ul class="pagination justify-content-end">
                 <li class="page-item"><a class="page-link" href="#">Về trước</a></li>
@@ -83,6 +83,7 @@
                 <li class="page-item"><a class="page-link" href="#">Tiếp theo</a></li>
             </ul>
         </div>
+        -->
     </div>
 </div>
 

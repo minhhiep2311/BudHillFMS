@@ -7,16 +7,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BudHillFMS.Models;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace BudHillFMS.Controllers
 {
     public class DiariesController : Controller
     {
         private readonly FarmManagementSystemContext _context;
-
-        public DiariesController(FarmManagementSystemContext context)
+        public INotyfService _notyfService;
+        public DiariesController(FarmManagementSystemContext context, INotyfService notyfService)
         {
             _context = context;
+            _notyfService = notyfService;
         }
 
         // GET: Diaries
@@ -67,6 +69,7 @@ namespace BudHillFMS.Controllers
             {
                 _context.Add(diary);
                 await _context.SaveChangesAsync();
+                _notyfService.Success("Tạo mới thành công!");
                 return RedirectToAction(nameof(Index));
             }
             ViewData["FieldId"] = new SelectList(_context.Fields, "FieldId", "FieldName", diary.FieldId);
@@ -110,11 +113,13 @@ namespace BudHillFMS.Controllers
                 {
                     _context.Update(diary);
                     await _context.SaveChangesAsync();
+                    _notyfService.Success("Cập nhật thành công!");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!DiaryExists(diary.DiaryId))
                     {
+                        _notyfService.Success("Có lỗi xảy ra!");
                         return NotFound();
                     }
                     else
@@ -165,6 +170,7 @@ namespace BudHillFMS.Controllers
             }
             
             await _context.SaveChangesAsync();
+            _notyfService.Success("Xóa thành công!");
             return RedirectToAction(nameof(Index));
         }
 

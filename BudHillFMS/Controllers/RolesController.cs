@@ -8,9 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using BudHillFMS.Models;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using BudHillFMS.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace BudHillFMS.Controllers
 {
+    
     public class RolesController : Controller
     {
         private readonly FarmManagementSystemContext _context;
@@ -58,7 +61,7 @@ namespace BudHillFMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RoleId,RoleName,RoleDescription")] Role role)
+        public async Task<IActionResult> Create([Bind("RoleId,RoleName,RoleDescription,NormalizedName")] Role role)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +94,7 @@ namespace BudHillFMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RoleId,RoleName,RoleDescription")] Role role)
+        public async Task<IActionResult> Edit(int id, [Bind("RoleId,RoleName,RoleDescription,NormalizedName")] Role role)
         {
             if (id != role.Id)
             {

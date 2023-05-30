@@ -15,6 +15,6 @@ namespace BudHillFMS.Models
         public bool Coststatus { get; set; }
 
         public virtual CostCategory? Category { get; set; }
-        public virtual Farm Farm { get; set; } = null!;
+        public virtual Farm? Farm { get; set; } 
     }
 }

@@ -7,16 +7,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BudHillFMS.Models;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace BudHillFMS.Controllers
 {
     public class WarehousesController : Controller
     {
         private readonly FarmManagementSystemContext _context;
-
-        public WarehousesController(FarmManagementSystemContext context)
+        public INotyfService _notyfService;
+        public WarehousesController(FarmManagementSystemContext context, INotyfService notyfService)
         {
             _context = context;
+            _notyfService = notyfService;
         }
 
         // GET: Warehouses
@@ -49,7 +51,7 @@ namespace BudHillFMS.Controllers
         // GET: Warehouses/Create
         public IActionResult Create()
         {
-            ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmId");
+            ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName");
             return View();
         }
 
@@ -64,9 +66,10 @@ namespace BudHillFMS.Controllers
             {
                 _context.Add(warehouse);
                 await _context.SaveChangesAsync();
+                _notyfService.Success("Tạo mới thành công!");
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmId", warehouse.FarmId);
+            ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName", warehouse.FarmId);
             return View(warehouse);
         }
 
@@ -83,7 +86,7 @@ namespace BudHillFMS.Controllers
             {
                 return NotFound();
             }
-            ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmId", warehouse.FarmId);
+            ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName", warehouse.FarmId);
             return View(warehouse);
         }
 
@@ -105,11 +108,13 @@ namespace BudHillFMS.Controllers
                 {
                     _context.Update(warehouse);
                     await _context.SaveChangesAsync();
+                    _notyfService.Success("Cập nhật thành công!");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!WarehouseExists(warehouse.WarehouseId))
                     {
+                        _notyfService.Success("Có lỗi xảy ra!");
                         return NotFound();
                     }
                     else
@@ -119,7 +124,7 @@ namespace BudHillFMS.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmId", warehouse.FarmId);
+            ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName", warehouse.FarmId);
             return View(warehouse);
         }
 
@@ -158,6 +163,7 @@ namespace BudHillFMS.Controllers
             }
             
             await _context.SaveChangesAsync();
+            _notyfService.Success("Xóa thành công!");
             return RedirectToAction(nameof(Index));
         }
 

@@ -24,15 +24,19 @@ namespace BudHillFMS.Controllers
         // GET: Costs
         public async Task<IActionResult> Index()
         {
-            var farmManagementSystemContext = _context.Costs.Include(c => c.Category).Include(c => c.Farm).OrderBy(t => t.Coststatus); 
+            var farmManagementSystemContext = _context.Costs
+                .Include(c => c.Category)
+                .Include(c => c.Farm)
+                .OrderBy(t => t.Coststatus)
+                .ThenByDescending(t => t.CostDate); 
+
             return View(await farmManagementSystemContext.ToListAsync());
         }
 
         // GET: Costs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            CultureInfo cultureInfo = new CultureInfo("vi-VN");
-            ViewData["CultureInfo"] = cultureInfo;
+            
 
             if (id == null || _context.Costs == null)
             {
