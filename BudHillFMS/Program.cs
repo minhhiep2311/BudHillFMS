@@ -1,5 +1,6 @@
 using AspNetCoreHero.ToastNotification;
 using BudHillFMS.Areas.Identity.Data;
+using BudHillFMS.Domain;
 using BudHillFMS.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
@@ -31,7 +32,8 @@ builder.Services.AddIdentity<User, Role>(options =>
         options.Password.RequireLowercase = false;
     })
    .AddRoles<Role>()
-   .AddEntityFrameworkStores<FarmManagementSystemContext>();
+   .AddEntityFrameworkStores<FarmManagementSystemContext>()
+   .AddErrorDescriber<LocalizedIdentityErrorDescriber>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
    .AddCookie(x => x.LoginPath = "/Identity/Account/Login");
