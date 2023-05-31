@@ -10,7 +10,7 @@ namespace BudHillFMS.Models
         public int Quantity { get; set; }
         public string Unit { get; set; } = null!;
 
-        public virtual Product Product { get; set; } = null!;
-        public virtual Warehouse Warehouse { get; set; } = null!;
+        public virtual Product? Product { get; set; } 
+        public virtual Warehouse? Warehouse { get; set; } 
     }
 }

@@ -1,18 +1,21 @@
+using BudHillFMS.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace BudHillFMS.Domain;
 
 public class LocalizedIdentityErrorDescriber : IdentityErrorDescriber
 {
-    public override IdentityError DefaultError()
+    public override IdentityError DefaultError() => new()
     {
-        return base.DefaultError();
-    }
+        Code = nameof(DefaultError),
+        Description = "Đã xảy ra sự cố không xác định."
+    };
 
-    public override IdentityError ConcurrencyFailure()
+    public override IdentityError ConcurrencyFailure() => new()
     {
-        return base.ConcurrencyFailure();
-    }
+        Code = nameof(ConcurrencyFailure),
+        Description = "Lỗi không đồng bộ, đối tượng đã được sửa đổi."
+    };
 
     public override IdentityError PasswordMismatch() => new()
     {
@@ -20,99 +23,118 @@ public class LocalizedIdentityErrorDescriber : IdentityErrorDescriber
         Description = "Mật khẩu không chính xác"
     };
 
-    public override IdentityError InvalidToken()
+    public override IdentityError InvalidToken() => new()
     {
-        return base.InvalidToken();
-    }
+        Code = nameof(InvalidToken),
+        Description = "Mã không hợp lệ."
+    };
 
-    public override IdentityError RecoveryCodeRedemptionFailed()
+    public override IdentityError RecoveryCodeRedemptionFailed() => new()
     {
-        return base.RecoveryCodeRedemptionFailed();
-    }
+        Code = nameof(RecoveryCodeRedemptionFailed),
+        Description = "Đổi mã khôi phục không thành công."
 
-    public override IdentityError LoginAlreadyAssociated()
+    };
+
+    public override IdentityError LoginAlreadyAssociated() => new()
     {
-        return base.LoginAlreadyAssociated();
-    }
+        Code = nameof(LoginAlreadyAssociated),
+        Description = "Một người dùng với thông tin đăng nhập này đã tồn tại."
+    };
 
     public override IdentityError InvalidUserName(string userName) => new()
     {
-        Code = nameof(PasswordMismatch),
+        Code = nameof(InvalidUserName),
         Description = $"Tên người dùng '{userName}' không hợp lệ, chỉ có thể chứa các chữ cái hoặc chữ số."
     };
 
-    public override IdentityError InvalidEmail(string email)
+    public override IdentityError InvalidEmail(string email) => new()
     {
-        return base.InvalidEmail(email);
-    }
+        Code = nameof(InvalidEmail),
+        Description = $" '{email}' không hợp lệ"
+    };
 
-    public override IdentityError DuplicateUserName(string userName)
+    public override IdentityError DuplicateUserName(string userName) => new()
     {
-        return base.DuplicateUserName(userName);
-    }
+        Code = nameof(DuplicateUserName),
+        Description = $" '{userName}' đã tồn tại"
+    };
 
-    public override IdentityError DuplicateEmail(string email)
+    public override IdentityError DuplicateEmail(string email) => new()
     {
-        return base.DuplicateEmail(email);
-    }
+        Code = nameof(DuplicateEmail),
+        Description = $" '{email}' đã tồn tại"
+    };
 
-    public override IdentityError InvalidRoleName(string role)
+    public override IdentityError InvalidRoleName(string role) => new()
     {
-        return base.InvalidRoleName(role);
-    }
+        Code = nameof(InvalidRoleName),
+        Description = $" '{role}' không hợp lệ"
+    };
 
-    public override IdentityError DuplicateRoleName(string role)
+    public override IdentityError DuplicateRoleName(string role) => new()
     {
-        return base.DuplicateRoleName(role);
-    }
+        Code = nameof(DuplicateRoleName),
+        Description = $" '{role}' đã tồn tại"
+    };
 
-    public override IdentityError UserAlreadyHasPassword()
+    public override IdentityError UserAlreadyHasPassword() => new()
     {
-        return base.UserAlreadyHasPassword();
-    }
+        Code = nameof(UserAlreadyHasPassword),
+        Description = "Người dùng đã đặt mật khẩu."
+    };
 
-    public override IdentityError UserLockoutNotEnabled()
+    public override IdentityError UserLockoutNotEnabled() => new()
     {
-        return base.UserLockoutNotEnabled();
-    }
+        Code = nameof(UserLockoutNotEnabled),
+        Description = "Khóa không được bật cho người dùng này."
+    };
 
-    public override IdentityError UserAlreadyInRole(string role)
+    public override IdentityError UserAlreadyInRole(string role) => new()
     {
-        return base.UserAlreadyInRole(role);
-    }
+        Code = nameof(UserAlreadyInRole),
+        Description = $"Người dùng được phân quyền '{role}' "
+    };
 
-    public override IdentityError UserNotInRole(string role)
+    public override IdentityError UserNotInRole(string role) => new()
     {
-        return base.UserNotInRole(role);
-    }
+        Code = nameof(UserNotInRole),
+        Description = $"Người dùng không được phân quyền '{role}' "
+    };
 
-    public override IdentityError PasswordTooShort(int length)
+    public override IdentityError PasswordTooShort(int length) => new()
     {
-        return base.PasswordTooShort(length);
-    }
+        Code = nameof(PasswordTooShort),
+        Description = $"Mật khẩu phải có ít nhất '{length}' ký tự.  "
+    };
 
-    public override IdentityError PasswordRequiresUniqueChars(int uniqueChars)
+    public override IdentityError PasswordRequiresUniqueChars(int uniqueChars) => new()
     {
-        return base.PasswordRequiresUniqueChars(uniqueChars);
-    }
+        Code = nameof(PasswordRequiresUniqueChars),
+        Description = $"Mật khẩu phải có ít nhất '{uniqueChars}' ký tự khác nhau.  "
+    };
 
-    public override IdentityError PasswordRequiresNonAlphanumeric()
+    public override IdentityError PasswordRequiresNonAlphanumeric() => new()
     {
-        return base.PasswordRequiresNonAlphanumeric();
-    }
+        Code = nameof(PasswordRequiresNonAlphanumeric),
+        Description = "Mật khẩu phải có ít nhất một ký tự không phải chữ và số."
+    };
 
-    public override IdentityError PasswordRequiresDigit()
+    public override IdentityError PasswordRequiresDigit() => new()
     {
-        return base.PasswordRequiresDigit();
-    }
+        Code = nameof(PasswordRequiresDigit),
+        Description = "Mật khẩu phải có ít nhất một chữ số"
+    };
 
-    public override IdentityError PasswordRequiresLower()
+    public override IdentityError PasswordRequiresLower() => new()
     {
-        return base.PasswordRequiresLower();
-    }
+        Code = nameof(PasswordRequiresLower),
+        Description = "Mật khẩu phải có ít nhất một chữ cái viết thường."
+    };
 
-    public override IdentityError PasswordRequiresUpper()
+    public override IdentityError PasswordRequiresUpper() => new()
     {
-        return base.PasswordRequiresUpper();
-    }
+        Code = nameof(PasswordRequiresUpper),
+        Description = "Mật khẩu phải có ít nhất một chữ cái viết hoa."
+    };
 }

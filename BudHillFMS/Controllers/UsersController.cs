@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BudHillFMS.Controllers
 {
-    [Authorize(Roles = "ADMIN")]
+    
     public class UsersController : Controller
     {
         private readonly FarmManagementSystemContext _context;

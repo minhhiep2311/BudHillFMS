@@ -32,12 +32,10 @@
             <table class="table table-hover e-commerce-table">
                 <thead>
                     <tr>
-
-                        <th>Tên nhà kho</th>
                         <th>Sản phẩm</th>
+                        <th>Tên nhà kho</th>
                         <th>Số lượng</th>
                         <th>Đơn vị</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -47,12 +45,11 @@
                         {
                             <tr onclick="location.href='@Url.Action("Details", "WarehouseProducts", new { id = item.WarehouseId })'">
 
-
                                 <td>
-                                    <h6 class="m-b-0 m-l-10">@item.Warehouse.WarehouseName</h6>
+                                    <h6 class="m-b-0 m-l-10">@item.Product.ProductName</h6>
                                 </td>
                                 <td>
-                                    @item.Product.ProductName
+                                    @item.Warehouse.WarehouseName
                                 </td>
                                 <td>
                                     @item.Quantity

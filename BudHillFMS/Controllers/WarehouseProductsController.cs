@@ -22,7 +22,7 @@ namespace BudHillFMS.Controllers
         // GET: WarehouseProducts
         public async Task<IActionResult> Index()
         {
-            ViewData["DanhSachKho"] = new SelectList(_context.Warehouses, "WarehouseID", "WarehouseName");
+           
 
             var farmManagementSystemContext = _context.WarehouseProducts.Include(w => w.Product).Include(w => w.Warehouse);
             return View(await farmManagementSystemContext.ToListAsync());
@@ -51,8 +51,8 @@ namespace BudHillFMS.Controllers
         // GET: WarehouseProducts/Create
         public IActionResult Create()
         {
-            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId");
-            ViewData["WarehouseId"] = new SelectList(_context.Warehouses, "WarehouseId", "WarehouseId");
+            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductName");
+            ViewData["WarehouseId"] = new SelectList(_context.Warehouses, "WarehouseId", "WarehouseName");
             return View();
         }
 
@@ -63,32 +63,50 @@ namespace BudHillFMS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("WarehouseId,ProductId,Quantity,Unit")] WarehouseProduct warehouseProduct)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(warehouseProduct);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    // Check if a record with the same combination of WarehouseId and ProductId already exists
+                    var existingWarehouseProduct = await _context.WarehouseProducts.FindAsync(warehouseProduct.WarehouseId, warehouseProduct.ProductId);
+                    if (existingWarehouseProduct != null)
+                    {
+                        ModelState.AddModelError("", "Đã tồn tại một kho hàng có cùng kho hàng và sản phẩm.");
+                        ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductName", warehouseProduct.ProductId);
+                        ViewData["WarehouseId"] = new SelectList(_context.Warehouses, "WarehouseId", "WarehouseName", warehouseProduct.WarehouseId);
+                        return View(warehouseProduct);
+                    }
+
+                    _context.Add(warehouseProduct);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
-            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", warehouseProduct.ProductId);
-            ViewData["WarehouseId"] = new SelectList(_context.Warehouses, "WarehouseId", "WarehouseId", warehouseProduct.WarehouseId);
+            catch (DbUpdateException ex)
+            {
+                // Log the exception or handle it as needed
+                ModelState.AddModelError("", "Đã xảy ra lỗi khi lưu các thay đổi của thực thể.");
+            }
+            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductName", warehouseProduct.ProductId);
+            ViewData["WarehouseId"] = new SelectList(_context.Warehouses, "WarehouseId", "WarehouseName", warehouseProduct.WarehouseId);
             return View(warehouseProduct);
         }
 
         // GET: WarehouseProducts/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.WarehouseProducts == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var warehouseProduct = await _context.WarehouseProducts.FindAsync(id);
+            var warehouseProduct = await _context.WarehouseProducts.FirstOrDefaultAsync(wp => wp.WarehouseId == id || wp.ProductId == id);
             if (warehouseProduct == null)
             {
                 return NotFound();
             }
-            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", warehouseProduct.ProductId);
-            ViewData["WarehouseId"] = new SelectList(_context.Warehouses, "WarehouseId", "WarehouseId", warehouseProduct.WarehouseId);
+            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductName", warehouseProduct.ProductId);
+            ViewData["WarehouseId"] = new SelectList(_context.Warehouses, "WarehouseId", "WarehouseName", warehouseProduct.WarehouseId);
             return View(warehouseProduct);
         }
 
@@ -124,8 +142,8 @@ namespace BudHillFMS.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", warehouseProduct.ProductId);
-            ViewData["WarehouseId"] = new SelectList(_context.Warehouses, "WarehouseId", "WarehouseId", warehouseProduct.WarehouseId);
+            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductName", warehouseProduct.ProductId);
+            ViewData["WarehouseId"] = new SelectList(_context.Warehouses, "WarehouseId", "WarehouseName", warehouseProduct.WarehouseId);
             return View(warehouseProduct);
         }
 
