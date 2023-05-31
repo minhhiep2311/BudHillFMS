@@ -4,34 +4,63 @@
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Thông tin nhà kho</h4>
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>Id:</td>
+                        <td class="text-dark font-weight-semibold">@Model.WarehouseId</td>
+                    </tr>
+                    <tr>
+                        <td>Tên nhà kho:</td>
+                        <td>	@Model.WarehouseName</td>
+                    </tr>
+                    <tr>
+                        <td>Trang trại:</td>
+                        <td>	@Model.Farm.FarmName </td>
+                    </tr>
+                    <tr>
+                        <td>Địa điểm:</td>
+                        <td>	@Model.WarehouseLocation</td>
+                    </tr>
+                  
 
-<h1>Details</h1>
-
-<div>
-    <h4>Warehouse</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.WarehouseName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.WarehouseName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.WarehouseLocation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.WarehouseLocation)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Farm)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Farm.FarmId)
-        </dd>
-    </dl>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.WarehouseId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.WarehouseId" class="btn btn-tone btn-primary m-r-5">Sửa</a>|
+    <a data-toggle="modal" data-target="#DeleteModal" class="btn btn-tone btn-danger m-r-5">Xóa</a>|
+    <a asp-action="Index" class="btn btn-tone btn-primary m-r-5">Trở về</a>
 </div>
+
+<!--Delete Modal -->
+<div class="modal fade" id="DeleteModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Xác nhận xóa</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="anticon anticon-close"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                Xác nhận xóa thông tin này!
+            </div>
+            <div class="modal-footer">
+                <form asp-action="Delete" asp-route-id="@Model.WarehouseId">
+                    <input type="hidden" asp-for="WarehouseId" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    <input type="submit" value="Xác nhận xóa" class="btn btn-tone btn-danger" />
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 #nullable disable
@@ -60,14 +60,16 @@ public class LoginModel : PageModel
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
-        [Required]
+        
+        [Required(ErrorMessage = "Yêu cầu nhập tài khoản")]
         public string UserName { get; set; }
+
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
-        [Required]
+        [Required(ErrorMessage = "Yêu cầu nhập mật khẩu")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
@@ -75,7 +77,7 @@ public class LoginModel : PageModel
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Ghi nhớ tài khoản?")]
         public bool RememberMe { get; set; }
     }
 
@@ -112,7 +114,7 @@ public class LoginModel : PageModel
                 lockoutOnFailure: false);
             if (result.Succeeded)
             {
-                _logger.LogInformation("User logged in");
+                _logger.LogInformation("Người dùng đã đăng nhập");
                 return LocalRedirect(returnUrl);
             }
 
@@ -124,11 +126,11 @@ public class LoginModel : PageModel
 
             if (result.IsLockedOut)
             {
-                _logger.LogWarning("User account locked out");
+                _logger.LogWarning("Tài khoản người dùng bị khóa");
                 return RedirectToPage("./Lockout");
             }
 
-            ModelState.AddModelError(string.Empty, "Invalid login attempt");
+            ModelState.AddModelError(string.Empty, "Thông tin tài khoản không chính xác");
             return Page();
         }
 
