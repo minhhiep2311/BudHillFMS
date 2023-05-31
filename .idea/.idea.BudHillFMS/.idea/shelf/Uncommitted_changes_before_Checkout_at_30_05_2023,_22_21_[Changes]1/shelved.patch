@@ -1,0 +1,19 @@
+Index: BudHillFMS/appsettings.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\n  \"Logging\": {\n    \"LogLevel\": {\n      \"Default\": \"Information\",\n      \"Microsoft.AspNetCore\": \"Warning\"\n    }\n  },\n  \"AllowedHosts\": \"*\",\n  \"ConnectionStrings\": {\n    \"dbFMS\": \"Server=LAPTOP-UO5E52HJ\\\\SQLEXPRESS;Database=FarmManagementSystem;Trusted_Connection=True;MultipleActiveResultSets=true\"\n  }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/BudHillFMS/appsettings.json b/BudHillFMS/appsettings.json
+--- a/BudHillFMS/appsettings.json	
++++ b/BudHillFMS/appsettings.json	
+@@ -7,6 +7,6 @@
+   },
+   "AllowedHosts": "*",
+   "ConnectionStrings": {
+-    "dbFMS": "Server=LAPTOP-UO5E52HJ\\SQLEXPRESS;Database=FarmManagementSystem;Trusted_Connection=True;MultipleActiveResultSets=true"
++    "dbFMS": "Server=localhost,1433;Database=FarmManagementSystem;User Id=sa;Password=verystrongPwd123"
+   }
+ }
+\ No newline at end of file

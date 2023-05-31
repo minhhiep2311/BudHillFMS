@@ -1,4 +1,9 @@
-﻿@model BudHillFMS.Areas.Identity.Data.User
+﻿@using BudHillFMS.Areas.Identity.Data
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model BudHillFMS.Areas.Identity.Data.User
+@inject UserManager<User> UserManager
+@inject RoleManager<Role> RoleManager
 
 @{
     ViewData["Title"] = "Details";
@@ -17,7 +22,7 @@
                     </tr>
                     <tr>
                         <td>Tài khoản:</td>
-                        <td>	@Model.UserName</td>
+                        <td>@Model.UserName</td>
                     </tr>
                     <tr>
                         <td>Tên:</td>
@@ -33,11 +38,18 @@
                     </tr>
                     <tr>
                         <td>Quyền truy cập:</td>
-                        <td>@Model.Role.Name</td>
+                        <td>
+                            @{
+                                var roleName = (await UserManager.GetRolesAsync(Model))[0];
+                                var role = await RoleManager.FindByNameAsync(roleName);
+
+                                <p class="m-b-0 opacity-07">@role.RoleDescription</p>
+                            }
+                        </td>
                     </tr>
                     <tr>
                         <td>Trang trại:</td>
-                        <td>@Model.Farm.FarmName</td>
+                        <td>@Model.Farm?.FarmName</td>
                     </tr>
                 </tbody>
             </table>

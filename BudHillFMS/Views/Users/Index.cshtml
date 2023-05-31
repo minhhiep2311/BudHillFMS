@@ -1,4 +1,11 @@
-﻿@model IEnumerable<BudHillFMS.Areas.Identity.Data.User>
+﻿@using BudHillFMS.Areas.Identity.Data
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model IEnumerable<BudHillFMS.Areas.Identity.Data.User>
+
+@inject UserManager<User> UserManager
+@inject RoleManager<Role> RoleManager
 
 @{
     ViewData["Title"] = "Index";
@@ -13,14 +20,14 @@
                 <div class="d-md-flex">
                     <div class="m-b-10 m-r-15">
                         <select class="custom-select" id="idrole" name="idrole" style="min-width: 220px;" asp-items="ViewBag.QuyenTruyCap">
-                            <option disabled selected>Quyền truy cập</option>                           
+                            <option disabled selected>Quyền truy cập</option>
                         </select>
                     </div>
 
                     <div class="m-b-10">
                         <select class="custom-select" id="idfarm" name="idfarm" style="min-width: 220px;" asp-items="ViewBag.DanhSachFarm">
                             <option disabled selected>Trang trại</option>
-                            
+
                         </select>
                     </div>
                 </div>
@@ -35,43 +42,45 @@
         <div class="table-responsive">
             <table class="table table-hover e-commerce-table">
                 <thead>
-                    <tr>
-                        
-                        <th>Tài khoản</th>
-                        <th>Họ và tên</th>
-                        <th>Email</th>
-                        <th>Quyền truy cập</th>
-                        <th>Trang trại</th>
-                        <th></th>
-                    </tr>
+                <tr>
+                    <th>Tài khoản</th>
+                    <th>Họ và tên</th>
+                    <th>Email</th>
+                    <th>Quyền truy cập</th>
+                    <th>Trang trại</th>
+                    <th></th>
+                </tr>
                 </thead>
                 <tbody>
-                    @if(Model != null)
-                    {
-                        @foreach(var item in Model)
-                        {
-                            <tr onclick="location.href='@Url.Action("Details", "Users", new { id = item.Id })'">
+                @foreach (var item in Model)
+                {
+                    <tr onclick="location.href='@Url.Action("Details", "Users", new { id = item.Id })'">
 
-                               
-                                <td>
-                                    <h6 class="m-b-0 m-l-10">@item.UserName</h6>
-                                </td>
-                                <td>@item.FirstName @item.LastName</td>
-                                <td>@item.Email</td>
-                                <td>@item.Role.Name</td>
-                                <td>
-                                    @item.Farm.FarmName
-                                </td>
-                                <td>
-                                   
-                                    <a class="btn btn-tone btn-primary m-r-5" asp-controller="Users" asp-action="Edit" asp-route-id="@item.Id">Sửa</a>
-                                    <a class="btn btn-tone btn-danger m-r-5" asp-controller="Users" asp-action="Delete" asp-route-id="@item.Id">Xóa</a>
-                                </td>
-                            </tr>
 
-                        }
-                    }
-                  
+                        <td>
+                            <h6 class="m-b-0 m-l-10">@item.UserName</h6>
+                        </td>
+                        <td>@item.FirstName @item.LastName</td>
+                        <td>@item.Email</td>
+                        <td>
+                            @{
+                                var rolesName = await UserManager.GetRolesAsync(item);
+                                var role = rolesName.Count > 0 ? await RoleManager.FindByNameAsync(rolesName[0]) : null;
+
+                                <p class="m-b-0 opacity-07">@role?.RoleDescription</p>
+                            }
+                        </td>
+                        <td>
+                            @item.Farm?.FarmName
+                        </td>
+                        <td>
+
+                            <a class="btn btn-tone btn-primary m-r-5" asp-controller="Users" asp-action="Edit" asp-route-id="@item.Id">Sửa</a>
+                            <a class="btn btn-tone btn-danger m-r-5" asp-controller="Users" asp-action="Delete" asp-route-id="@item.Id">Xóa</a>
+                        </td>
+                    </tr>
+                }
+
                 </tbody>
             </table>
         </div>

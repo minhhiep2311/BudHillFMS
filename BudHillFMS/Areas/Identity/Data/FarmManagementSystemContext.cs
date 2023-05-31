@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
 using Task = BudHillFMS.Models.Task;
 
 namespace BudHillFMS.Areas.Identity.Data;
@@ -40,11 +39,11 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
         }
     }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder builder)
     {
-        base.OnModelCreating(modelBuilder);
+        base.OnModelCreating(builder);
 
-        modelBuilder.Entity<Cost>(entity =>
+        builder.Entity<Cost>(entity =>
         {
             entity.ToTable("Cost");
 
@@ -76,7 +75,7 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
                .HasConstraintName("FK_Cost_Farm");
         });
 
-        modelBuilder.Entity<CostCategory>(entity =>
+        builder.Entity<CostCategory>(entity =>
         {
             entity.HasKey(e => e.CategoryId)
                .HasName("PK__CostCate__19093A2BE15C114C");
@@ -92,7 +91,7 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
             entity.Property(e => e.CategoryName).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<Diary>(entity =>
+        builder.Entity<Diary>(entity =>
         {
             entity.ToTable("Diary");
 
@@ -123,7 +122,7 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
                .HasConstraintName("FK_Diary_Product");
         });
 
-        modelBuilder.Entity<Employee>(entity =>
+        builder.Entity<Employee>(entity =>
         {
             entity.ToTable("Employee");
 
@@ -150,7 +149,7 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
                .HasConstraintName("FK_Employee_Farm");
         });
 
-        modelBuilder.Entity<Equipment>(entity =>
+        builder.Entity<Equipment>(entity =>
         {
             entity.Property(e => e.EquipmentId).HasColumnName("EquipmentID");
 
@@ -167,7 +166,7 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
                .HasConstraintName("FK_Equipment_Farm");
         });
 
-        modelBuilder.Entity<Farm>(entity =>
+        builder.Entity<Farm>(entity =>
         {
             entity.ToTable("Farm");
 
@@ -178,7 +177,7 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
             entity.Property(e => e.FarmName).HasMaxLength(100);
         });
 
-        modelBuilder.Entity<Fertilizer>(entity =>
+        builder.Entity<Fertilizer>(entity =>
         {
             entity.ToTable("Fertilizer");
 
@@ -199,7 +198,7 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
                .HasConstraintName("FK_Fertilizer_Warehouse");
         });
 
-        modelBuilder.Entity<Field>(entity =>
+        builder.Entity<Field>(entity =>
         {
             entity.ToTable("Field");
 
@@ -216,7 +215,7 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
                .HasConstraintName("FK_Field_Farm");
         });
 
-        modelBuilder.Entity<Product>(entity =>
+        builder.Entity<Product>(entity =>
         {
             entity.ToTable("Product");
 
@@ -239,7 +238,7 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
                .HasConstraintName("FK_Product_Field");
         });
 
-        modelBuilder.Entity<Role>(entity =>
+        builder.Entity<Role>(entity =>
         {
             entity.ToTable("Role");
 
@@ -248,7 +247,7 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
             entity.Property(e => e.Name).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<Seedling>(entity =>
+        builder.Entity<Seedling>(entity =>
         {
             entity.ToTable("Seedling");
 
@@ -259,7 +258,7 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
             entity.Property(e => e.SeedlingStart).HasColumnType("date");
         });
 
-        modelBuilder.Entity<Subtask>(entity =>
+        builder.Entity<Subtask>(entity =>
         {
             entity.Property(e => e.SubTaskId).ValueGeneratedNever();
 
@@ -275,7 +274,7 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
                .HasConstraintName("FK__Subtasks__TaskId__625A9A57");
         });
 
-        modelBuilder.Entity<Task>(entity =>
+        builder.Entity<Task>(entity =>
         {
             entity.ToTable("Task");
 
@@ -308,7 +307,7 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
                .HasConstraintName("FK_Task_Field");
         });
 
-        modelBuilder.Entity<Timekeeping>(entity =>
+        builder.Entity<Timekeeping>(entity =>
         {
             entity.ToTable("Timekeeping");
 
@@ -329,7 +328,7 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
                .HasConstraintName("FK_Timekeeping_Employee");
         });
 
-        modelBuilder.Entity<User>(entity =>
+        builder.Entity<User>(entity =>
         {
             entity.ToTable("User");
 
@@ -356,15 +355,9 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
                .WithMany(p => p.Users)
                .HasForeignKey(d => d.FarmId)
                .HasConstraintName("FK_User_Farm");
-
-            entity.HasOne(d => d.Role)
-               .WithMany(p => p.Users)
-               .HasForeignKey(d => d.RoleId)
-               .OnDelete(DeleteBehavior.ClientSetNull)
-               .HasConstraintName("FK_User_Role");
         });
 
-        modelBuilder.Entity<Warehouse>(entity =>
+        builder.Entity<Warehouse>(entity =>
         {
             entity.ToTable("Warehouse");
 
@@ -383,7 +376,7 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
                .HasConstraintName("FK_Warehouse_Farm");
         });
 
-        modelBuilder.Entity<WarehouseProduct>(entity =>
+        builder.Entity<WarehouseProduct>(entity =>
         {
             entity.HasKey(e => new { e.WarehouseId, e.ProductId });
 
@@ -418,7 +411,7 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
             (name: "Bud Hill Trù Sơn", location: "Trù Sơn", area: 5, used: 5),
         };
 
-        modelBuilder.Entity<Farm>().HasData(fields.Select((f, i) => new Farm
+        builder.Entity<Farm>().HasData(fields.Select((f, i) => new Farm
         {
             FarmId = i + 1,
             FarmName = f.name,
@@ -431,11 +424,11 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
         var roles = new[]
         {
             (name: "Admin", desc: "Quản lý toàn bộ Farm", normalize: "Admin"),
-            (name: "Manager", desc: "Quản lý Farm ",normalize: "Manager"),
-            (name: "Engineer", desc: "Kỹ thuật viên ",normalize: "Engineer")
+            (name: "Manager", desc: "Quản lý Farm ", normalize: "Manager"),
+            (name: "Engineer", desc: "Kỹ thuật viên ", normalize: "Engineer")
         };
 
-        modelBuilder.Entity<Role>().HasData(roles.Select((r, i) => new Role
+        builder.Entity<Role>().HasData(roles.Select((r, i) => new Role
         {
             Id = i + 1,
             Name = r.name,
@@ -458,24 +451,29 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
                 roleId: 1, farmId: 1)
         };
 
-        modelBuilder.Entity<User>().HasData(users.Select((u, i) => new User
-                {
-                    Id = i + 1,
-                    UserName = u.userName,
-                    FirstName = u.firstName,
-                    LastName = u.lastName,
-                    NormalizedUserName = u.userName.ToUpper(),
-                    PasswordHash = new PasswordHasher<User>().HashPassword(null!, "123456"),
-                    Email = u.email,
-                    NormalizedEmail = u.email.ToUpper(),
-                    RoleId = u.roleId,
-                    FarmId = u.farmId,
-                    SecurityStamp = Guid.NewGuid().ToString()
-                }
-            )
-        );
+        builder.Entity<User>().HasData(users.Select((u, i) => new User
+            {
+                Id = i + 1,
+                UserName = u.userName,
+                FirstName = u.firstName,
+                LastName = u.lastName,
+                NormalizedUserName = u.userName.ToUpper(),
+                PasswordHash = new PasswordHasher<User>().HashPassword(null!, "123456"),
+                Email = u.email,
+                NormalizedEmail = u.email.ToUpper(),
+                FarmId = u.farmId,
+                SecurityStamp = Guid.NewGuid().ToString()
+            }
+        ));
 
-        OnModelCreatingPartial(modelBuilder);
+        builder.Entity<IdentityUserRole<int>>().HasData(users.Select((u, i) => new IdentityUserRole<int>
+            {
+                UserId = i + 1,
+                RoleId = u.roleId,
+            }
+        ));
+
+        OnModelCreatingPartial(builder);
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
