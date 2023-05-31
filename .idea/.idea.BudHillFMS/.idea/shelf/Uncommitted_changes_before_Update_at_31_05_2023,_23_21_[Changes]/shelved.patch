@@ -1,0 +1,401 @@
+Index: BudHillFMS/Controllers/UsersController.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using Microsoft.AspNetCore.Mvc;\nusing Microsoft.AspNetCore.Mvc.Rendering;\nusing Microsoft.EntityFrameworkCore;\nusing BudHillFMS.Areas.Identity.Data;\nusing Microsoft.AspNetCore.Authorization;\n\nnamespace BudHillFMS.Controllers;\n\n[Authorize(Roles = \"Admin\")]\npublic class UsersController : Controller\n{\n    private readonly FarmManagementSystemContext _context;\n\n    public UsersController(FarmManagementSystemContext context)\n    {\n        _context = context;\n    }\n\n    // GET: Users\n    public async Task<IActionResult> Index()\n    {\n        ViewData[\"QuyenTruyCap\"] = new SelectList(_context.Roles, \"Id\", \"Name\");\n        ViewData[\"DanhSachFarm\"] = new SelectList(_context.Farms, \"FarmId\", \"FarmName\");\n\n        var farmManagementSystemContext = _context.Users.Include(u => u.Farm);\n        return View(await farmManagementSystemContext.ToListAsync());\n    }\n\n    // GET: Users/Details/5\n    public async Task<IActionResult> Details(int? id)\n    {\n        if (id == null)\n        {\n            return NotFound();\n        }\n\n        var user = await _context.Users\n           .Include(u => u.Farm)\n           .FirstOrDefaultAsync(m => m.Id == id);\n        if (user == null)\n        {\n            return NotFound();\n        }\n\n        return View(user);\n    }\n\n    // GET: Users/Create\n    public IActionResult Create()\n    {\n        ViewData[\"FarmId\"] = new SelectList(_context.Farms, \"FarmId\", \"FarmName\");\n        ViewData[\"RoleId\"] = new SelectList(_context.Roles, \"Id\", \"Name\");\n        return View();\n    }\n\n    // POST: Users/Create\n    // To protect from overposting attacks, enable the specific properties you want to bind to.\n    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.\n    [HttpPost]\n    [ValidateAntiForgeryToken]\n    public async Task<IActionResult> Create(\n        [Bind(\"UserId,Username,Password,FirstName,LastName,Email,RoleId,FarmId\")] User user)\n    {\n        try\n        {\n            if (ModelState.IsValid)\n            {\n                _context.Add(user);\n                await _context.SaveChangesAsync();\n                return RedirectToAction(nameof(Index));\n            }\n\n            ViewData[\"FarmId\"] = new SelectList(_context.Farms, \"FarmId\", \"FarmName\", user.FarmId);\n            // ViewData[\"RoleId\"] = new SelectList(_context.Roles, \"Id\", \"Name\", user.Role);\n            return View(user);\n        }\n        catch (Exception)\n        {\n            return RedirectToAction(\"Error\", \"Home\");\n        }\n    }\n\n    // GET: Users/Edit/5\n    public async Task<IActionResult> Edit(int? id)\n    {\n        if (id == null)\n        {\n            return NotFound();\n        }\n\n        var user = await _context.Users.FindAsync(id);\n        if (user == null)\n        {\n            return NotFound();\n        }\n\n        ViewData[\"FarmId\"] = new SelectList(_context.Farms, \"FarmId\", \"FarmName\", user.FarmId);\n        // ViewData[\"RoleId\"] = new SelectList(_context.Roles, \"Id\", \"Name\", user.RoleId);\n        return View(user);\n    }\n\n    // POST: Users/Edit/5\n    // To protect from overposting attacks, enable the specific properties you want to bind to.\n    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.\n    [HttpPost]\n    [ValidateAntiForgeryToken]\n    public async Task<IActionResult> Edit(int id,\n        [Bind(\"UserId,Username,Password,FirstName,LastName,Email,RoleId,FarmId\")]\n        User user)\n    {\n        if (id != user.Id)\n        {\n            return NotFound();\n        }\n\n        if (ModelState.IsValid)\n        {\n            try\n            {\n                _context.Update(user);\n                await _context.SaveChangesAsync();\n            }\n            catch (DbUpdateConcurrencyException)\n            {\n                if (!UserExists(user.Id))\n                {\n                    return NotFound();\n                }\n                else\n                {\n                    throw;\n                }\n            }\n\n            return RedirectToAction(nameof(Index));\n        }\n\n        ViewData[\"FarmId\"] = new SelectList(_context.Farms, \"FarmId\", \"FarmName\", user.FarmId);\n        // ViewData[\"RoleId\"] = new SelectList(_context.Roles, \"Id\", \"Name\", user.RoleId);\n        return View(user);\n    }\n\n    // GET: Users/Delete/5\n    public async Task<IActionResult> Delete(int? id)\n    {\n        if (id == null)\n        {\n            return NotFound();\n        }\n\n        var user = await _context.Users\n           .Include(u => u.Farm)\n           .FirstOrDefaultAsync(m => m.Id == id);\n        if (user == null)\n        {\n            return NotFound();\n        }\n\n        return View(user);\n    }\n\n    // POST: Users/Delete/5\n    [HttpPost, ActionName(\"Delete\")]\n    [ValidateAntiForgeryToken]\n    public async Task<IActionResult> DeleteConfirmed(int id)\n    {\n        var user = await _context.Users.FindAsync(id);\n        if (user != null)\n        {\n            _context.Users.Remove(user);\n        }\n\n        await _context.SaveChangesAsync();\n        return RedirectToAction(nameof(Index));\n    }\n\n    private bool UserExists(int id)\n    {\n        return _context.Users.Any(e => e.Id == id);\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/BudHillFMS/Controllers/UsersController.cs b/BudHillFMS/Controllers/UsersController.cs
+--- a/BudHillFMS/Controllers/UsersController.cs	(revision 53fd221fe61ed4434bd1ba58899138eb2eb51b31)
++++ b/BudHillFMS/Controllers/UsersController.cs	(date 1685522340249)
+@@ -2,7 +2,9 @@
+ using Microsoft.AspNetCore.Mvc.Rendering;
+ using Microsoft.EntityFrameworkCore;
+ using BudHillFMS.Areas.Identity.Data;
++using BudHillFMS.Models;
+ using Microsoft.AspNetCore.Authorization;
++using Microsoft.AspNetCore.Identity;
+ 
+ namespace BudHillFMS.Controllers;
+ 
+@@ -10,10 +12,16 @@
+ public class UsersController : Controller
+ {
+     private readonly FarmManagementSystemContext _context;
++    private readonly UserManager<User> _userManager;
++    private readonly RoleManager<Role> _roleManager;
+ 
+-    public UsersController(FarmManagementSystemContext context)
++    public UsersController(FarmManagementSystemContext context,
++        UserManager<User> userManager,
++        RoleManager<Role> roleManager)
+     {
+         _context = context;
++        _userManager = userManager;
++        _roleManager = roleManager;
+     }
+ 
+     // GET: Users
+@@ -94,8 +102,11 @@
+             return NotFound();
+         }
+ 
++        var rolesName = await _userManager.GetRolesAsync(user);
++        var role = await _roleManager.FindByNameAsync(rolesName.Count > 0 ? rolesName[0] : null);
++
+         ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName", user.FarmId);
+-        // ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "Name", user.RoleId);
++        ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "Name", role.Id);
+         return View(user);
+     }
+ 
+@@ -105,39 +116,55 @@
+     [HttpPost]
+     [ValidateAntiForgeryToken]
+     public async Task<IActionResult> Edit(int id,
+-        [Bind("UserId,Username,Password,FirstName,LastName,Email,RoleId,FarmId")]
+-        User user)
++        int role,
++        [Bind("Id,UserName,Password,FirstName,LastName,Email,FarmId")]
++        User request)
+     {
+-        if (id != user.Id)
++        if (id != request.Id)
+         {
+             return NotFound();
+         }
+ 
+-        if (ModelState.IsValid)
++        var user = await _userManager.FindByIdAsync(id.ToString());
++        var oldRolesName = await _userManager.GetRolesAsync(user);
++        var oldRole = await _roleManager.FindByNameAsync(oldRolesName.Count > 0 ? oldRolesName[0] : null);
++
++        if (ModelState.IsValid && user != null)
+         {
+             try
+             {
+-                _context.Update(user);
++                _context.Update(request);
++
++                var roleId = request.Id.ToString();
++
++                if (!oldRolesName.Contains(roleId))
++                {
++                    await _userManager.AddToRoleAsync(user, roleId);
++                    if (oldRolesName.Count > 0)
++                    {
++                        await _userManager.RemoveFromRoleAsync(user, oldRolesName[0]);
++                    }
++                }
++
+                 await _context.SaveChangesAsync();
+             }
+             catch (DbUpdateConcurrencyException)
+             {
+-                if (!UserExists(user.Id))
++                if (!UserExists(request.Id))
+                 {
+                     return NotFound();
+                 }
+-                else
+-                {
+-                    throw;
+-                }
++
++                throw;
+             }
+ 
+             return RedirectToAction(nameof(Index));
+         }
+ 
+-        ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName", user.FarmId);
+-        // ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "Name", user.RoleId);
+-        return View(user);
++        ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName", request.FarmId);
++        ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "Name", oldRole.Id);
++
++        return View(request);
+     }
+ 
+     // GET: Users/Delete/5
+Index: BudHillFMS/Views/Users/Edit.cshtml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>@model BudHillFMS.Areas.Identity.Data.User\n\n@{\n    ViewData[\"Title\"] = \"Edit\";\n    Layout = \"~/Views/Shared/_Layout.cshtml\";\n}\n\n\n<h4>Chỉnh sửa tài khoản</h4>\n<hr />\n<div class=\"row card\">\n    <div class=\"col-md-4 card-body\">\n        <form asp-action=\"Edit\" asp-route-id=\"@Model.Id\" method=\"post\">\n            <div asp-validation-summary=\"ModelOnly\" class=\"text-danger\"></div>\n            <input type=\"hidden\" asp-for=\"Id\" />\n\n            <div class=\"form-group\">\n                <label asp-for=\"UserName\" class=\"control-label\"></label>\n                <input asp-for=\"UserName\" class=\"form-control\" />\n                <span asp-validation-for=\"UserName\" class=\"text-danger\"></span>\n            </div>\n            <div class=\"form-group\">\n                <label asp-for=\"FirstName\" class=\"control-label\">Tên</label>\n                <input asp-for=\"FirstName\" class=\"form-control\" />\n                <span asp-validation-for=\"FirstName\" class=\"text-danger\"></span>\n            </div>\n            <div class=\"form-group\">\n                <label asp-for=\"LastName\" class=\"control-label\">Họ</label>\n                <input asp-for=\"LastName\" class=\"form-control\" />\n                <span asp-validation-for=\"LastName\" class=\"text-danger\"></span>\n            </div>\n            <div class=\"form-group\">\n                <label asp-for=\"Email\" class=\"control-label\"></label>\n                <input asp-for=\"Email\" class=\"form-control\" />\n                <span asp-validation-for=\"Email\" class=\"text-danger\"></span>\n            </div>\n            @* <div class=\"form-group\"> *@\n            @*     <label asp-for=\"RoleId\" class=\"control-label\">Quyền truy cập</label> *@\n            @*     <select asp-for=\"RoleId\" class=\"form-control\" asp-items=\"ViewBag.RoleId\"></select> *@\n            @*     <span asp-validation-for=\"RoleId\" class=\"text-danger\"></span> *@\n            @* </div> *@\n            <div class=\"form-group\">\n                <label asp-for=\"FarmId\" class=\"control-label\">Trang trại</label>\n                <select asp-for=\"FarmId\" class=\"form-control\" asp-items=\"ViewBag.FarmId\"></select>\n                <span asp-validation-for=\"FarmId\" class=\"text-danger\"></span>\n            </div>\n            <div class=\"form-group\">\n                <input type=\"submit\" value=\"Lưu\" class=\"btn btn-primary\" /> | \n                <a class=\"btn btn-primary m-r-5\" asp-action=\"Index\">Trở về</a>\n            </div>\n        </form>\n    </div>\n</div>\n\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/BudHillFMS/Views/Users/Edit.cshtml b/BudHillFMS/Views/Users/Edit.cshtml
+--- a/BudHillFMS/Views/Users/Edit.cshtml	(revision 53fd221fe61ed4434bd1ba58899138eb2eb51b31)
++++ b/BudHillFMS/Views/Users/Edit.cshtml	(date 1685522276550)
+@@ -7,50 +7,46 @@
+ 
+ 
+ <h4>Chỉnh sửa tài khoản</h4>
+-<hr />
++<hr/>
+ <div class="row card">
+     <div class="col-md-4 card-body">
+         <form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+-            <input type="hidden" asp-for="Id" />
++            <input type="hidden" asp-for="Id"/>
+ 
+             <div class="form-group">
+                 <label asp-for="UserName" class="control-label"></label>
+-                <input asp-for="UserName" class="form-control" />
++                <input asp-for="UserName" class="form-control"/>
+                 <span asp-validation-for="UserName" class="text-danger"></span>
+             </div>
+             <div class="form-group">
+                 <label asp-for="FirstName" class="control-label">Tên</label>
+-                <input asp-for="FirstName" class="form-control" />
++                <input asp-for="FirstName" class="form-control"/>
+                 <span asp-validation-for="FirstName" class="text-danger"></span>
+             </div>
+             <div class="form-group">
+                 <label asp-for="LastName" class="control-label">Họ</label>
+-                <input asp-for="LastName" class="form-control" />
++                <input asp-for="LastName" class="form-control"/>
+                 <span asp-validation-for="LastName" class="text-danger"></span>
+             </div>
+             <div class="form-group">
+                 <label asp-for="Email" class="control-label"></label>
+-                <input asp-for="Email" class="form-control" />
++                <input asp-for="Email" class="form-control"/>
+                 <span asp-validation-for="Email" class="text-danger"></span>
+             </div>
+-            @* <div class="form-group"> *@
+-            @*     <label asp-for="RoleId" class="control-label">Quyền truy cập</label> *@
+-            @*     <select asp-for="RoleId" class="form-control" asp-items="ViewBag.RoleId"></select> *@
+-            @*     <span asp-validation-for="RoleId" class="text-danger"></span> *@
+-            @* </div> *@
++            <div class="form-group">
++                <label for="role" class="control-label">Quyền truy cập</label>
++                <select name="role" id="role" class="form-control" asp-items="ViewBag.RoleId"></select>
++            </div>
+             <div class="form-group">
+                 <label asp-for="FarmId" class="control-label">Trang trại</label>
+                 <select asp-for="FarmId" class="form-control" asp-items="ViewBag.FarmId"></select>
+                 <span asp-validation-for="FarmId" class="text-danger"></span>
+             </div>
+             <div class="form-group">
+-                <input type="submit" value="Lưu" class="btn btn-primary" /> | 
++                <input type="submit" value="Lưu" class="btn btn-primary"/> |
+                 <a class="btn btn-primary m-r-5" asp-action="Index">Trở về</a>
+             </div>
+         </form>
+     </div>
+-</div>
+-
+-
+-
++</div>
+\ No newline at end of file
+Index: .idea/.idea.BudHillFMS/.idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoGeneratedRunConfigurationManager\">\n    <projectFile profileName=\"BudHillFMS\">BudHillFMS/BudHillFMS.csproj</projectFile>\n  </component>\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"9b53ec41-b11a-42bd-a35a-bafae6b11479\" name=\"Changes\" comment=\"add describer\">\n      <change afterPath=\"$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_05_2023,_22_21_[Changes]/shelved.patch\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_05_2023,_22_21_[Changes]1/shelved.patch\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_05_2023__22_21__Changes_.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_05_2023__22_21__Changes_1.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/BudHillFMS/Migrations/20230531062741_UserCanHaveMultipleRole.Designer.cs\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/BudHillFMS/Migrations/20230531062741_UserCanHaveMultipleRole.cs\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/dataSources/0ff12c57-6fe0-4f1a-a509-6ed024e66d0f.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/dataSources/0ff12c57-6fe0-4f1a-a509-6ed024e66d0f.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/BudHillFMS.sln.DotSettings\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/BudHillFMS.sln.DotSettings\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/BudHillFMS/Areas/Identity/Data/FarmManagementSystemContext.cs\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/BudHillFMS/Areas/Identity/Data/FarmManagementSystemContext.cs\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/BudHillFMS/Areas/Identity/Data/User.cs\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/BudHillFMS/Areas/Identity/Data/User.cs\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/BudHillFMS/Areas/Identity/Pages/Account/AccessDenied.cshtml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/BudHillFMS/Areas/Identity/Pages/Account/AccessDenied.cshtml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/BudHillFMS/Controllers/RolesController.cs\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/BudHillFMS/Controllers/RolesController.cs\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/BudHillFMS/Controllers/UsersController.cs\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/BudHillFMS/Controllers/UsersController.cs\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/BudHillFMS/Migrations/FarmManagementSystemContextModelSnapshot.cs\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/BudHillFMS/Migrations/FarmManagementSystemContextModelSnapshot.cs\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/BudHillFMS/Models/Role.cs\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/BudHillFMS/Models/Role.cs\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/BudHillFMS/Views/Roles/Edit.cshtml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/BudHillFMS/Views/Roles/Edit.cshtml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/BudHillFMS/Views/Shared/_Layout.cshtml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/BudHillFMS/Views/Shared/_Layout.cshtml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/BudHillFMS/Views/Users/Create.cshtml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/BudHillFMS/Views/Users/Create.cshtml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/BudHillFMS/Views/Users/Delete.cshtml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/BudHillFMS/Views/Users/Delete.cshtml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/BudHillFMS/Views/Users/Details.cshtml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/BudHillFMS/Views/Users/Details.cshtml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/BudHillFMS/Views/Users/Edit.cshtml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/BudHillFMS/Views/Users/Edit.cshtml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/BudHillFMS/Views/Users/Index.cshtml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/BudHillFMS/Views/Users/Index.cshtml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/BudHillFMS/appsettings.json\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/BudHillFMS/appsettings.json\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"ChangesViewManager\">\n    <option name=\"groupingKeys\">\n      <option value=\"directory\" />\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"master\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"HighlightingSettingsPerFile\">\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0295806b81f04aca81a6937cf6a7570810000/16/d01c3749/IdentityUser`1.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0295806b81f04aca81a6937cf6a7570810000/a4/b5e2cb65/IdentityRole`1.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/32e791995fd6477396efe30b16d4435714600/fc/655ac931/ClaimsPrincipal.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/48a0f0bd121d46d3b229182aafe1f6c91cc600/12/9cb8b9a9/DefaultModelBindingMessageProvider.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63191fcb28ec472e80211171577200106e200/4d/d6a1247c/Enumerable.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63ab9752a43e42cb8e459cc319d4b5195800/b3/f9a310c2/MvcServiceCollectionExtensions.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/67893c6c188a4329b4e44796e0329a2a2fa00/9c/0fbaae0b/ModelStateDictionary.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/99889e6c797c42438df30c26fe1cecae2be00/8d/48fd3381/CallSiteFactory.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9acd228ec5bf4bc2ab79c61452021ebf950400/a3/0a767b63/Task`1.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9b881f420fdf41a6a9915112ffe0efe538a00/54/b0adfc08/RazorPage`1.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9b881f420fdf41a6a9915112ffe0efe538a00/5b/545829ed/RazorPageBase.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ad6e55ed5be14ead9093c89b536594ec21200/29/fd3d98c6/AuthAppBuilderExtensions.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ad998dcebf944c4da55176f4c011c26e12c00/4c/dd1c11c0/AuthorizeAttribute.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/bcb41e23bb26495c99fcd84d4a7d60f02cc00/2c/24191508/IdentityServiceCollectionExtensions.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/bf253232fac147689d6c824a28a13a2441c00/0a/919dd7e5/LabelTagHelper.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/feca79ab07c048bdb9cd37d63011596366800/45/271337d7/Resources.cs\" root0=\"FORCE_HIGHLIGHTING\" />\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/feca79ab07c048bdb9cd37d63011596366800/5d/d9d7f83d/IdentityError.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/feca79ab07c048bdb9cd37d63011596366800/b9/f35b4fbb/IUserStore`1.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/feca79ab07c048bdb9cd37d63011596366800/ba/c9fd6e8d/IdentityErrorDescriber.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/feca79ab07c048bdb9cd37d63011596366800/fb/189802f4/UserManager`1.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/17a25bf4cd58852e31b6bc798fef1d6289441360eea1912bf89a9b4fd337a3/SingleQueryingEnumerable.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/29739346ae892eafa5f1022e6e6360d13712b36e4f658622d47dd90879f28/DeletePersonalData.cshtml.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3181a4808c72ee2cbdda27566f1334b27264c858b7d2784257513a1a339c9ec/IdentityUserContext.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/93bf8ca51564b3532dce6442f8ec6d3856e11622b484427b6e965ca60aba4b1/IdentityDbContext.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Areas/Identity/Data/FarmManagementSystemContext.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Areas/Identity/Data/User.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Areas/Identity/Pages/Account/AccessDenied.cshtml\" root0=\"FORCE_HIGHLIGHTING\" root1=\"FORCE_HIGHLIGHTING\" root2=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Areas/Identity/Pages/Account/AccessDenied.cshtml\" root0=\"FORCE_HIGHLIGHTING\" root1=\"FORCE_HIGHLIGHTING\" root2=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"file://$PROJECT_DIR$/BudHillFMS/Areas/Identity/Pages/Account/Login.cshtml\" root0=\"FORCE_HIGHLIGHTING\" root1=\"FORCE_HIGHLIGHTING\" root2=\"FORCE_HIGHLIGHTING\" />\n    <setting file=\"mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Areas/Identity/Pages/Account/Login.cshtml.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/UsersController.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Migrations/FarmManagementSystemContextModelSnapshot.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Models/Role.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Models/Role.cs\" root0=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Shared/_Layout.cshtml\" root0=\"FORCE_HIGHLIGHTING\" root1=\"FORCE_HIGHLIGHTING\" root2=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Shared/_Layout.cshtml\" root0=\"FORCE_HIGHLIGHTING\" root1=\"FORCE_HIGHLIGHTING\" root2=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Shared/_Layout.cshtml\" root0=\"FORCE_HIGHLIGHTING\" root1=\"FORCE_HIGHLIGHTING\" root2=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Create.cshtml\" root0=\"FORCE_HIGHLIGHTING\" root1=\"FORCE_HIGHLIGHTING\" root2=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Create.cshtml\" root0=\"FORCE_HIGHLIGHTING\" root1=\"FORCE_HIGHLIGHTING\" root2=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Delete.cshtml\" root0=\"FORCE_HIGHLIGHTING\" root1=\"FORCE_HIGHLIGHTING\" root2=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Details.cshtml\" root0=\"FORCE_HIGHLIGHTING\" root1=\"FORCE_HIGHLIGHTING\" root2=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Details.cshtml\" root0=\"FORCE_HIGHLIGHTING\" root1=\"FORCE_HIGHLIGHTING\" root2=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Edit.cshtml\" root0=\"FORCE_HIGHLIGHTING\" root1=\"FORCE_HIGHLIGHTING\" root2=\"SKIP_HIGHLIGHTING\" />\n    <setting file=\"mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Index.cshtml\" root0=\"FORCE_HIGHLIGHTING\" root1=\"FORCE_HIGHLIGHTING\" root2=\"SKIP_HIGHLIGHTING\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2QP6KipRoe3qrPMaCE03cbO5V9g\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"autoscrollFromSource\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,\n    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\n    &quot;git-widget-placeholder&quot;: &quot;ann&quot;,\n    &quot;settings.editor.selected.configurable&quot;: &quot;database.sql.templating&quot;\n  },\n  &quot;keyToStringList&quot;: {\n    &quot;DatabaseDriversLRU&quot;: [\n      &quot;sqlserver&quot;\n    ],\n    &quot;rider.external.source.directories&quot;: [\n      &quot;/home/annguyen/.config/JetBrains/Rider2023.1/resharper-host/DecompilerCache&quot;,\n      &quot;/home/annguyen/.config/JetBrains/Rider2023.1/resharper-host/SourcesCache&quot;,\n      &quot;/home/annguyen/.local/share/Symbols/src&quot;\n    ]\n  }\n}</component>\n  <component name=\"RunManager\">\n    <configuration name=\"BudHillFMS\" type=\"LaunchSettings\" factoryName=\".NET Launch Settings Profile\" temporary=\"true\">\n      <option name=\"LAUNCH_PROFILE_PROJECT_FILE_PATH\" value=\"$PROJECT_DIR$/BudHillFMS/BudHillFMS.csproj\" />\n      <option name=\"LAUNCH_PROFILE_TFM\" value=\"net6.0\" />\n      <option name=\"LAUNCH_PROFILE_NAME\" value=\"BudHillFMS\" />\n      <option name=\"USE_EXTERNAL_CONSOLE\" value=\"0\" />\n      <option name=\"USE_MONO\" value=\"0\" />\n      <option name=\"RUNTIME_ARGUMENTS\" value=\"\" />\n      <option name=\"GENERATE_APPLICATIONHOST_CONFIG\" value=\"1\" />\n      <option name=\"SHOW_IIS_EXPRESS_OUTPUT\" value=\"0\" />\n      <option name=\"SEND_DEBUG_REQUEST\" value=\"1\" />\n      <option name=\"ADDITIONAL_IIS_EXPRESS_ARGUMENTS\" value=\"\" />\n      <method v=\"2\">\n        <option name=\"Build\" />\n      </method>\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\".NET Launch Settings Profile.BudHillFMS\" />\n        <item itemvalue=\".NET Launch Settings Profile.BudHillFMS\" />\n        <item itemvalue=\".NET Launch Settings Profile.BudHillFMS\" />\n        <item itemvalue=\".NET Launch Settings Profile.BudHillFMS\" />\n        <item itemvalue=\".NET Launch Settings Profile.BudHillFMS\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task id=\"LOCAL-00001\" summary=\"add migrations\">\n      <created>1685213476186</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1685213476186</updated>\n    </task>\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"9b53ec41-b11a-42bd-a35a-bafae6b11479\" name=\"Changes\" comment=\"add migrations\" />\n      <created>1685242814128</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1685242814128</updated>\n      <workItem from=\"1685242816062\" duration=\"13237000\" />\n      <workItem from=\"1685372873597\" duration=\"669000\" />\n      <workItem from=\"1685454477292\" duration=\"3615000\" />\n      <workItem from=\"1685461477055\" duration=\"1707000\" />\n      <workItem from=\"1685503525183\" duration=\"1647000\" />\n      <workItem from=\"1685505314171\" duration=\"9302000\" />\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"update dashboard\">\n      <created>1685306478238</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1685306478238</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"3\" />\n    <servers />\n  </component>\n  <component name=\"TerminalProjectNonSharedOptionsProvider\">\n    <option name=\"startingDirectory\" value=\"$PROJECT_DIR$/BudHillFMS\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\n    <MESSAGE value=\"commit\" />\n    <MESSAGE value=\"add login\" />\n    <MESSAGE value=\"add migrations\" />\n    <MESSAGE value=\"update dashboard\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"update dashboard\" />\n  </component>\n  <component name=\"XDebuggerManager\">\n    <breakpoint-manager>\n      <breakpoints>\n        <line-breakpoint enabled=\"true\" type=\"DotNet Breakpoints\">\n          <url>file://$PROJECT_DIR$/BudHillFMS/Controllers/RolesController.cs</url>\n          <line>93</line>\n          <properties documentPath=\"$PROJECT_DIR$/BudHillFMS/Controllers/RolesController.cs\" initialLine=\"91\" containingFunctionPresentation=\"Method 'Edit'\">\n            <startOffsets>\n              <option value=\"2692\" />\n            </startOffsets>\n            <endOffsets>\n              <option value=\"2716\" />\n            </endOffsets>\n          </properties>\n          <option name=\"timeStamp\" value=\"2\" />\n        </line-breakpoint>\n      </breakpoints>\n    </breakpoint-manager>\n    <watches-manager>\n      <configuration name=\"LaunchSettings\">\n        <watch expression=\"$exception\" />\n      </configuration>\n    </watches-manager>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.idea.BudHillFMS/.idea/workspace.xml b/.idea/.idea.BudHillFMS/.idea/workspace.xml
+--- a/.idea/.idea.BudHillFMS/.idea/workspace.xml	(revision 53fd221fe61ed4434bd1ba58899138eb2eb51b31)
++++ b/.idea/.idea.BudHillFMS/.idea/workspace.xml	(date 1685522350785)
+@@ -8,30 +8,10 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="9b53ec41-b11a-42bd-a35a-bafae6b11479" name="Changes" comment="add describer">
+-      <change afterPath="$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_05_2023,_22_21_[Changes]/shelved.patch" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_05_2023,_22_21_[Changes]1/shelved.patch" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_05_2023__22_21__Changes_.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_05_2023__22_21__Changes_1.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/BudHillFMS/Migrations/20230531062741_UserCanHaveMultipleRole.Designer.cs" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/BudHillFMS/Migrations/20230531062741_UserCanHaveMultipleRole.cs" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/dataSources/0ff12c57-6fe0-4f1a-a509-6ed024e66d0f.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/dataSources/0ff12c57-6fe0-4f1a-a509-6ed024e66d0f.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/BudHillFMS.sln.DotSettings" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS.sln.DotSettings" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Areas/Identity/Data/FarmManagementSystemContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Areas/Identity/Data/FarmManagementSystemContext.cs" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Areas/Identity/Data/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Areas/Identity/Data/User.cs" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Areas/Identity/Pages/Account/AccessDenied.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Areas/Identity/Pages/Account/AccessDenied.cshtml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Controllers/RolesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Controllers/RolesController.cs" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/BudHillFMS/Controllers/UsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Controllers/UsersController.cs" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Migrations/FarmManagementSystemContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Migrations/FarmManagementSystemContextModelSnapshot.cs" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Models/Role.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Models/Role.cs" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Roles/Edit.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Roles/Edit.cshtml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Shared/_Layout.cshtml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Users/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Users/Create.cshtml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Users/Delete.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Users/Delete.cshtml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Users/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Users/Details.cshtml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Users/Edit.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Users/Edit.cshtml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Users/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Users/Index.cshtml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/BudHillFMS/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/appsettings.json" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -46,7 +26,7 @@
+   <component name="Git.Settings">
+     <option name="RECENT_BRANCH_BY_REPOSITORY">
+       <map>
+-        <entry key="$PROJECT_DIR$" value="master" />
++        <entry key="$PROJECT_DIR$" value="ann" />
+       </map>
+     </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+@@ -60,6 +40,8 @@
+     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63ab9752a43e42cb8e459cc319d4b5195800/b3/f9a310c2/MvcServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/67893c6c188a4329b4e44796e0329a2a2fa00/9c/0fbaae0b/ModelStateDictionary.cs" root0="SKIP_HIGHLIGHTING" />
+     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/99889e6c797c42438df30c26fe1cecae2be00/8d/48fd3381/CallSiteFactory.cs" root0="SKIP_HIGHLIGHTING" />
++    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9acd228ec5bf4bc2ab79c61452021ebf950400/35/b82dd9f5/IList`1.cs" root0="SKIP_HIGHLIGHTING" />
++    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9acd228ec5bf4bc2ab79c61452021ebf950400/65/4c00f8a6/Task.cs" root0="SKIP_HIGHLIGHTING" />
+     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9acd228ec5bf4bc2ab79c61452021ebf950400/a3/0a767b63/Task`1.cs" root0="SKIP_HIGHLIGHTING" />
+     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9b881f420fdf41a6a9915112ffe0efe538a00/54/b0adfc08/RazorPage`1.cs" root0="SKIP_HIGHLIGHTING" />
+     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9b881f420fdf41a6a9915112ffe0efe538a00/5b/545829ed/RazorPageBase.cs" root0="SKIP_HIGHLIGHTING" />
+@@ -82,6 +64,13 @@
+     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Areas/Identity/Pages/Account/AccessDenied.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+     <setting file="file://$PROJECT_DIR$/BudHillFMS/Areas/Identity/Pages/Account/Login.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Areas/Identity/Pages/Account/Login.cshtml.cs" root0="SKIP_HIGHLIGHTING" />
++    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Areas/Identity/Pages/Account/Login.cshtml.cs" root0="SKIP_HIGHLIGHTING" />
++    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Areas/Identity/Pages/Account/Login.cshtml.cs" root0="SKIP_HIGHLIGHTING" />
++    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Areas/Identity/Pages/Account/Login.cshtml.cs" root0="SKIP_HIGHLIGHTING" />
++    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Areas/Identity/Pages/Account/Login.cshtml.cs" root0="SKIP_HIGHLIGHTING" />
++    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/UsersController.cs" root0="SKIP_HIGHLIGHTING" />
++    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/UsersController.cs" root0="SKIP_HIGHLIGHTING" />
++    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/UsersController.cs" root0="SKIP_HIGHLIGHTING" />
+     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/UsersController.cs" root0="SKIP_HIGHLIGHTING" />
+     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Migrations/FarmManagementSystemContextModelSnapshot.cs" root0="SKIP_HIGHLIGHTING" />
+     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Models/Role.cs" root0="SKIP_HIGHLIGHTING" />
+@@ -89,12 +78,15 @@
+     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Shared/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Shared/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Shared/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
++    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Shared/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Create.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Create.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Delete.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Details.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Details.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Edit.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
++    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Edit.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
++    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Index.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Index.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+   </component>
+   <component name="ProjectId" id="2QP6KipRoe3qrPMaCE03cbO5V9g" />
+@@ -104,27 +96,27 @@
+   <component name="ProjectViewState">
+     <option name="autoscrollFromSource" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+-    &quot;git-widget-placeholder&quot;: &quot;ann&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;database.sql.templating&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "ASKED_ADD_EXTERNAL_FILES": "true",
++    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "WebServerToolWindowFactoryState": "false",
++    "git-widget-placeholder": "master",
++    "settings.editor.selected.configurable": "database.sql.templating"
+   },
+-  &quot;keyToStringList&quot;: {
+-    &quot;DatabaseDriversLRU&quot;: [
+-      &quot;sqlserver&quot;
++  "keyToStringList": {
++    "DatabaseDriversLRU": [
++      "sqlserver"
+     ],
+-    &quot;rider.external.source.directories&quot;: [
+-      &quot;/home/annguyen/.config/JetBrains/Rider2023.1/resharper-host/DecompilerCache&quot;,
+-      &quot;/home/annguyen/.config/JetBrains/Rider2023.1/resharper-host/SourcesCache&quot;,
+-      &quot;/home/annguyen/.local/share/Symbols/src&quot;
++    "rider.external.source.directories": [
++      "/home/annguyen/.config/JetBrains/Rider2023.1/resharper-host/DecompilerCache",
++      "/home/annguyen/.config/JetBrains/Rider2023.1/resharper-host/SourcesCache",
++      "/home/annguyen/.local/share/Symbols/src"
+     ]
+   }
+-}</component>
++}]]></component>
+   <component name="RunManager">
+     <configuration name="BudHillFMS" type="LaunchSettings" factoryName=".NET Launch Settings Profile" temporary="true">
+       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/BudHillFMS/BudHillFMS.csproj" />
+@@ -187,6 +179,21 @@
+     <option name="startingDirectory" value="$PROJECT_DIR$/BudHillFMS" />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
++    <option name="RECENT_FILTERS">
++      <map>
++        <entry key="Branch">
++          <value>
++            <list>
++              <RecentGroup>
++                <option name="FILTER_VALUES">
++                  <option value="master" />
++                </option>
++              </RecentGroup>
++            </list>
++          </value>
++        </entry>
++      </map>
++    </option>
+     <option name="TAB_STATES">
+       <map>
+         <entry key="MAIN">
+@@ -203,7 +210,8 @@
+     <MESSAGE value="add login" />
+     <MESSAGE value="add migrations" />
+     <MESSAGE value="update dashboard" />
+-    <option name="LAST_COMMIT_MESSAGE" value="update dashboard" />
++    <MESSAGE value="edit role" />
++    <option name="LAST_COMMIT_MESSAGE" value="edit role" />
+   </component>
+   <component name="XDebuggerManager">
+     <breakpoint-manager>
+@@ -220,6 +228,19 @@
+             </endOffsets>
+           </properties>
+           <option name="timeStamp" value="2" />
++        </line-breakpoint>
++        <line-breakpoint enabled="true" type="DotNet Breakpoints">
++          <url>file://$PROJECT_DIR$/BudHillFMS/Controllers/UsersController.cs</url>
++          <line>122</line>
++          <properties documentPath="$PROJECT_DIR$/BudHillFMS/Controllers/UsersController.cs" initialLine="122" containingFunctionPresentation="Method 'Edit'">
++            <startOffsets>
++              <option value="3877" />
++            </startOffsets>
++            <endOffsets>
++              <option value="3898" />
++            </endOffsets>
++          </properties>
++          <option name="timeStamp" value="5" />
+         </line-breakpoint>
+       </breakpoints>
+     </breakpoint-manager>
+Index: BudHillFMS/Views/Shared/_Layout.cshtml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>@using Microsoft.AspNetCore.Identity\n@using BudHillFMS.Areas.Identity.Data\n\n@inject SignInManager<User> SignInManager\n@inject UserManager<User> UserManager\n@inject RoleManager<Role> RoleManager\n\n<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <title>Farm Management System</title>\n\n    <!-- Favicon -->\n    <link rel=\"shortcut icon\" href=\"~/assets/images/logo/LogoBudHillFarm-01.jpg\">\n\n    <!-- page css -->\n    <link href=\"~/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css\" rel=\"stylesheet\">\n    <link href=\"\"/>\n    <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>\n\n\n    <!-- Core css -->\n    <link href=\"~/assets/css/app.min.css\" rel=\"stylesheet\">\n\n</head>\n\n<body>\n<div class=\"app\">\n<div class=\"layout\">\n<!-- Header START -->\n<div class=\"header\">\n    <div class=\"logo logo-dark\">\n        <a href=\"/\">\n            <img src=\"~/assets/images/logo/logo-budhillfarm-web.png\" alt=\"Logo\">\n            <img class=\"logo-fold\" src=\"~/assets/images/logo/logobudhillfarm-fold.png\" alt=\"Logo\">\n        </a>\n    </div>\n    <div class=\"logo logo-white\">\n        <a href=\"/\">\n            <img src=\"~/assets/images/logo/logo-white.png\" alt=\"Logo\">\n            <img class=\"logo-fold\" src=\"~/assets/images/logo/logo-fold-white.png\" alt=\"Logo\">\n        </a>\n    </div>\n    <div class=\"nav-wrap\">\n        <ul class=\"nav-left\">\n            <li class=\"desktop-toggle\">\n                <a href=\"javascript:void(0);\">\n                    <i class=\"anticon\"></i>\n                </a>\n            </li>\n            <li class=\"mobile-toggle\">\n                <a href=\"javascript:void(0);\">\n                    <i class=\"anticon\"></i>\n                </a>\n            </li>\n\n        </ul>\n        <ul class=\"nav-right\">\n            <!--\n            <li class=\"dropdown dropdown-animated scale-left\">\n                <a href=\"javascript:void(0);\" data-toggle=\"dropdown\">\n                    <i class=\"anticon anticon-bell notification-badge\"></i>\n                </a>\n                <div class=\"dropdown-menu pop-notification\">\n                    <div\n                        class=\"p-v-15 p-h-25 border-bottom d-flex justify-content-between align-items-center\">\n                        <p class=\"text-dark font-weight-semibold m-b-0\">\n                            <i class=\"anticon anticon-bell\"></i>\n                            <span class=\"m-l-10\">Notification</span>\n                        </p>\n                        <a class=\"btn-sm btn-default btn\" href=\"javascript:void(0);\">\n                            <small>Xem tất cả</small>\n                        </a>\n                    </div>\n                    <div class=\"relative\">\n                        <div class=\"overflow-y-auto relative scrollable\" style=\"max-height: 300px\">\n                            <a href=\"javascript:void(0);\" class=\"dropdown-item d-block p-15 border-bottom\">\n                                <div class=\"d-flex\">\n                                    <div class=\"avatar avatar-blue avatar-icon\">\n                                        <i class=\"anticon anticon-mail\"></i>\n                                    </div>\n                                    <div class=\"m-l-15\">\n                                        <p class=\"m-b-0 text-dark\">You received a new message</p>\n                                        <p class=\"m-b-0\">\n                                            <small>8 min ago</small>\n                                        </p>\n                                    </div>\n                                </div>\n                            </a>\n                            <a href=\"javascript:void(0);\" class=\"dropdown-item d-block p-15 border-bottom\">\n                                <div class=\"d-flex\">\n                                    <div class=\"avatar avatar-cyan avatar-icon\">\n                                        <i class=\"anticon anticon-user-add\"></i>\n                                    </div>\n                                    <div class=\"m-l-15\">\n                                        <p class=\"m-b-0 text-dark\">New user registered</p>\n                                        <p class=\"m-b-0\">\n                                            <small>7 hours ago</small>\n                                        </p>\n                                    </div>\n                                </div>\n                            </a>\n                            <a href=\"javascript:void(0);\" class=\"dropdown-item d-block p-15 border-bottom\">\n                                <div class=\"d-flex\">\n                                    <div class=\"avatar avatar-red avatar-icon\">\n                                        <i class=\"anticon anticon-user-add\"></i>\n                                    </div>\n                                    <div class=\"m-l-15\">\n                                        <p class=\"m-b-0 text-dark\">System Alert</p>\n                                        <p class=\"m-b-0\">\n                                            <small>8 hours ago</small>\n                                        </p>\n                                    </div>\n                                </div>\n                            </a>\n                            <a href=\"javascript:void(0);\" class=\"dropdown-item d-block p-15 \">\n                                <div class=\"d-flex\">\n                                    <div class=\"avatar avatar-gold avatar-icon\">\n                                        <i class=\"anticon anticon-user-add\"></i>\n                                    </div>\n                                    <div class=\"m-l-15\">\n                                        <p class=\"m-b-0 text-dark\">You have a new update</p>\n                                        <p class=\"m-b-0\">\n                                            <small>2 days ago</small>\n                                        </p>\n                                    </div>\n                                </div>\n                            </a>\n                        </div>\n                    </div>\n                </div>\n            </li>\n            -->\n            @if (SignInManager.IsSignedIn(User))\n            {\n                var user = await UserManager.FindByNameAsync(User.Identity?.Name);\n\n                <li class=\"dropdown dropdown-animated scale-left\">\n                    <div class=\"pointer\" data-toggle=\"dropdown\">\n                        <div class=\"avatar avatar-image  m-h-10 m-r-15\">\n                            <img src=\"~/assets/images/avatars/thumb-3.jpg\" alt=\"\">\n                        </div>\n                    </div>\n                    <div class=\"p-b-15 p-t-20 dropdown-menu pop-profile\">\n                        <div class=\"p-h-20 p-b-15 m-b-10 border-bottom\">\n                            <div class=\"d-flex m-r-50\">\n                                <div class=\"avatar avatar-lg avatar-image\">\n                                    <img src=\"~/assets/images/avatars/thumb-3.jpg\" alt=\"\">\n                                </div>\n                                <div class=\"m-l-10\">\n                                    <p class=\"m-b-0 text-dark font-weight-semibold\">@user.FirstName @user.LastName</p>\n                                    @{\n                                        var roleName = (await UserManager.GetRolesAsync(user))[0];\n                                        var role = await RoleManager.FindByNameAsync(roleName);\n\n                                        <p class=\"m-b-0 opacity-07\">@role.RoleDescription</p>\n                                    }\n                                </div>\n                            </div>\n                        </div>\n                        <!--\n                        <a href=\"javascript:void(0);\" class=\"dropdown-item d-block p-h-15 p-v-10\">\n                            <div class=\"d-flex align-items-center justify-content-between\">\n                                <div>\n                                    <i class=\"anticon opacity-04 font-size-16 anticon-user\"></i>\n                                    <span class=\"m-l-10\">Edit Profile</span>\n                                </div>\n                                <i class=\"anticon font-size-10 anticon-right\"></i>\n                            </div>\n                        </a>\n                        <a href=\"javascript:void(0);\" class=\"dropdown-item d-block p-h-15 p-v-10\">\n                            <div class=\"d-flex align-items-center justify-content-between\">\n                                <div>\n                                    <i class=\"anticon opacity-04 font-size-16 anticon-lock\"></i>\n                                    <span class=\"m-l-10\">Account Setting</span>\n                                </div>\n                                <i class=\"anticon font-size-10 anticon-right\"></i>\n                            </div>\n                        </a>\n                        -->\n                        <a asp-area=\"Identity\" asp-page=\"/Account/manage/ChangePassword\" class=\"dropdown-item d-block p-h-15 p-v-10\">\n                            <div class=\"d-flex align-items-center justify-content-between\">\n                                <div>\n                                    <i class=\"anticon opacity-04 font-size-16 anticon-project\"></i>\n                                    <span class=\"m-l-10\">Đổi mật khẩu</span>\n                                </div>\n                                <i class=\"anticon font-size-10 anticon-right\"></i>\n                            </div>\n                        </a>\n\n                        <form asp-area=\"Identity\" asp-page=\"/Account/Logout\"\n                              asp-route-returnUrl=\"@Url.Page(\"/\", new { area = \"\" })\" method=\"post\"\n                              class=\"dropdown-item p-0\">\n                            <a href=\"#\" onclick=\"this.parentNode.submit(); return false;\" class=\"d-block p-h-15 p-v-10\">\n                                <div class=\"d-flex align-items-center justify-content-between\">\n                                    <div>\n                                        <i class=\"anticon opacity-04 font-size-16 anticon-logout\"></i>\n                                        <span class=\"m-l-10\">Đăng xuất</span>\n                                    </div>\n                                    <i class=\"anticon font-size-10 anticon-right\"></i>\n                                </div>\n                            </a>\n                        </form>\n                    </div>\n                </li>\n            }\n        </ul>\n    </div>\n</div>\n<!-- Header END -->\n<!-- Side Nav START -->\n@await Html.PartialAsync(\"_SideNavPartialView.cshtml\")\n<!-- Side Nav END -->\n<!-- Page Container START -->\n<div class=\"page-container\">\n\n    <!-- Content Wrapper START -->\n    <div class=\"main-content\">\n        @RenderBody()\n    </div>\n    <!-- Content Wrapper END -->\n    <!-- Footer START -->\n    <footer class=\"footer\">\n        <div class=\"footer-content\">\n            <p class=\"m-b-0\">Copyright © 2023 Bud Hill Farm. All rights reserved.</p>\n            <span>\n                <a href=\"\" class=\"text-gray m-r-15\">Term &amp; Conditions</a>\n                <a href=\"\" class=\"text-gray\">Privacy &amp; Policy</a>\n            </span>\n        </div>\n    </footer>\n    <!-- Footer END -->\n\n</div>\n<!-- Page Container END -->\n\n</div>\n</div>\n\n\n<!-- Core Vendors JS -->\n<script src=\"~/assets/js/vendors.min.js\"></script>\n\n<!-- page js -->\n<script src=\"~/assets/vendors/chartjs/Chart.min.js\"></script>\n<script src=\"~/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js\"></script>\n<script src=\"~/assets/js/pages/dashboard-project.js\"></script>\n\n<!-- Core JS -->\n<script src=\"~/assets/js/app.min.js\"></script>\n\n@await Component.InvokeAsync(\"Notyf\")\n@await RenderSectionAsync(\"Scripts\", required: false)\n\n</body>\n\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/BudHillFMS/Views/Shared/_Layout.cshtml b/BudHillFMS/Views/Shared/_Layout.cshtml
+--- a/BudHillFMS/Views/Shared/_Layout.cshtml	(revision 53fd221fe61ed4434bd1ba58899138eb2eb51b31)
++++ b/BudHillFMS/Views/Shared/_Layout.cshtml	(date 1685522084680)
+@@ -153,8 +153,8 @@
+                                 <div class="m-l-10">
+                                     <p class="m-b-0 text-dark font-weight-semibold">@user.FirstName @user.LastName</p>
+                                     @{
+-                                        var roleName = (await UserManager.GetRolesAsync(user))[0];
+-                                        var role = await RoleManager.FindByNameAsync(roleName);
++                                        var rolesName = (await UserManager.GetRolesAsync(user)).FirstOrDefault();
++                                        var role = await RoleManager.FindByNameAsync(rolesName);
+ 
+                                         <p class="m-b-0 opacity-07">@role.RoleDescription</p>
+                                     }

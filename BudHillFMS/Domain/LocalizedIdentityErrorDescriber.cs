@@ -51,31 +51,31 @@ public class LocalizedIdentityErrorDescriber : IdentityErrorDescriber
     public override IdentityError InvalidEmail(string email) => new()
     {
         Code = nameof(InvalidEmail),
-        Description = $" '{email}' không hợp lệ"
+        Description = $"Email '{email}' không hợp lệ"
     };
 
     public override IdentityError DuplicateUserName(string userName) => new()
     {
         Code = nameof(DuplicateUserName),
-        Description = $" '{userName}' đã tồn tại"
+        Description = $"Tên người dùng '{userName}' đã tồn tại"
     };
 
     public override IdentityError DuplicateEmail(string email) => new()
     {
         Code = nameof(DuplicateEmail),
-        Description = $" '{email}' đã tồn tại"
+        Description = $"Email '{email}' đã tồn tại"
     };
 
     public override IdentityError InvalidRoleName(string role) => new()
     {
         Code = nameof(InvalidRoleName),
-        Description = $" '{role}' không hợp lệ"
+        Description = $"Quyền truy cập '{role}' không hợp lệ"
     };
 
     public override IdentityError DuplicateRoleName(string role) => new()
     {
         Code = nameof(DuplicateRoleName),
-        Description = $" '{role}' đã tồn tại"
+        Description = $"Quyền truy cập '{role}' đã tồn tại"
     };
 
     public override IdentityError UserAlreadyHasPassword() => new()

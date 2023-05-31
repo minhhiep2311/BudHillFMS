@@ -9,7 +9,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-controller="Users" asp-action="Create" method="Post">
+        <form asp-action="Create" method="Post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="UserName" class="control-label"></label>
@@ -35,6 +35,10 @@
                 <label asp-for="Email" class="control-label"></label>
                 <input type="email" asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="roleId" class="control-label">Quyền truy cập</label>
+                <select name="roleId" id="roleId" class="form-control" asp-items="ViewBag.RoleId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="FarmId" class="control-label">Trang trại</label>

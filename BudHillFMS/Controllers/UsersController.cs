@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BudHillFMS.Areas.Identity.Data;
+using BudHillFMS.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace BudHillFMS.Controllers;
 
@@ -10,10 +12,16 @@ namespace BudHillFMS.Controllers;
 public class UsersController : Controller
 {
     private readonly FarmManagementSystemContext _context;
+    private readonly UserManager<User> _userManager;
+    private readonly RoleManager<Role> _roleManager;
 
-    public UsersController(FarmManagementSystemContext context)
+    public UsersController(FarmManagementSystemContext context,
+        UserManager<User> userManager,
+        RoleManager<Role> roleManager)
     {
         _context = context;
+        _userManager = userManager;
+        _roleManager = roleManager;
     }
 
     // GET: Users
@@ -49,7 +57,8 @@ public class UsersController : Controller
     public IActionResult Create()
     {
         ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName");
-        ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "Name");
+        ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "RoleDescription");
+
         return View();
     }
 
@@ -58,26 +67,44 @@ public class UsersController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(
-        [Bind("UserId,Username,Password,FirstName,LastName,Email,RoleId,FarmId")] User user)
+    public async Task<IActionResult> Create(int roleId,
+        [Bind("UserName,FirstName,LastName,Email,RoleId,FarmId")]
+        User user)
     {
-        try
+        if (ModelState.IsValid)
         {
-            if (ModelState.IsValid)
+            var result = await _userManager.CreateAsync(user);
+
+            if (result.Succeeded)
             {
-                _context.Add(user);
-                await _context.SaveChangesAsync();
+                var createdUser = await _userManager.FindByNameAsync(user.UserName);
+                var role = await _roleManager.FindByIdAsync(roleId.ToString());
+
+                var addRoleResult = await _userManager.AddToRoleAsync(createdUser, role.Name);
+                if (!addRoleResult.Succeeded)
+                {
+                    await _userManager.DeleteAsync(createdUser);
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, addRoleResult.Errors.FirstOrDefault()!.Description);
+                    
+                    ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName", user.FarmId);
+                    ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "RoleDescription");
+
+                    return View(user);
+                }
+
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName", user.FarmId);
-            // ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "Name", user.Role);
-            return View(user);
+            ModelState.AddModelError(string.Empty, result.Errors.FirstOrDefault()!.Description);
         }
-        catch (Exception)
-        {
-            return RedirectToAction("Error", "Home");
-        }
+
+        ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName", user.FarmId);
+        ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "RoleDescription");
+
+        return View(user);
     }
 
     // GET: Users/Edit/5
@@ -94,8 +121,11 @@ public class UsersController : Controller
             return NotFound();
         }
 
+        var rolesName = await _userManager.GetRolesAsync(user);
+        var role = await _roleManager.FindByNameAsync(rolesName.Count > 0 ? rolesName[0] : null);
+
         ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName", user.FarmId);
-        // ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "Name", user.RoleId);
+        ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "RoleDescription", role.Id);
         return View(user);
     }
 
@@ -105,39 +135,55 @@ public class UsersController : Controller
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id,
-        [Bind("UserId,Username,Password,FirstName,LastName,Email,RoleId,FarmId")]
-        User user)
+        int role,
+        [Bind("Id,UserName,FirstName,LastName,Email,FarmId")]
+        User request)
     {
-        if (id != user.Id)
+        if (id != request.Id)
         {
             return NotFound();
         }
 
-        if (ModelState.IsValid)
+        var user = await _userManager.FindByIdAsync(id.ToString());
+        var oldRolesName = await _userManager.GetRolesAsync(user);
+        var oldRole = await _roleManager.FindByNameAsync(oldRolesName.Count > 0 ? oldRolesName[0] : null);
+
+        if (ModelState.IsValid && user != null)
         {
             try
             {
-                _context.Update(user);
+                _context.Update(request);
+
+                var roleId = role.ToString();
+
+                if (!oldRolesName.Contains(roleId))
+                {
+                    await _userManager.AddToRoleAsync(user, roleId);
+                    if (oldRolesName.Count > 0)
+                    {
+                        await _userManager.RemoveFromRoleAsync(user, oldRolesName[0]);
+                    }
+                }
+
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(user.Id))
+                if (!UserExists(request.Id))
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+
+                throw;
             }
 
             return RedirectToAction(nameof(Index));
         }
 
-        ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName", user.FarmId);
-        // ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "Name", user.RoleId);
-        return View(user);
+        ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName", request.FarmId);
+        ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "RoleDescription", oldRole.Id);
+
+        return View(request);
     }
 
     // GET: Users/Delete/5

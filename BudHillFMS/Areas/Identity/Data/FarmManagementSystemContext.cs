@@ -263,8 +263,7 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
             entity.Property(e => e.SubTaskId).ValueGeneratedNever();
 
             entity.Property(e => e.SubtaskName)
-               .HasMaxLength(255)
-               .IsUnicode(false);
+               .HasMaxLength(255);
 
             entity.Property(e => e.Subtaskstatus).HasColumnName("subtaskstatus");
 
@@ -387,8 +386,7 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
             entity.Property(e => e.ProductId).HasColumnName("ProductID");
 
             entity.Property(e => e.Unit)
-               .HasMaxLength(50)
-               .IsUnicode(false);
+               .HasMaxLength(50);
 
             entity.HasOne(d => d.Product)
                .WithMany(p => p.WarehouseProducts)

@@ -41,10 +41,10 @@
                     <td>Quyền truy cập:</td>
                     <td>
                         @{
-                            var roleName = (await UserManager.GetRolesAsync(Model))[0];
+                            var roleName = (await UserManager.GetRolesAsync(Model)).FirstOrDefault() ?? "";
                             var role = await RoleManager.FindByNameAsync(roleName);
 
-                            <p class="m-b-0 opacity-07">@role.RoleDescription</p>
+                            <p class="m-b-0 opacity-07">@role?.RoleDescription</p>
                         }
                     </td>
                 </tr>

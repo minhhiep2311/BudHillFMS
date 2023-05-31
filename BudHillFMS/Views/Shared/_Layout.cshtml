@@ -153,10 +153,8 @@
                                 <div class="m-l-10">
                                     <p class="m-b-0 text-dark font-weight-semibold">@user.FirstName @user.LastName</p>
                                     @{
-
-                                        var roleName = (await UserManager.GetRolesAsync(user)).FirstOrDefault() ?? "";
-
-                                        var role = await RoleManager.FindByNameAsync(roleName);
+                                        var rolesName = (await UserManager.GetRolesAsync(user)).FirstOrDefault();
+                                        var role = await RoleManager.FindByNameAsync(rolesName);
 
                                         <p class="m-b-0 opacity-07">@role.RoleDescription</p>
                                     }

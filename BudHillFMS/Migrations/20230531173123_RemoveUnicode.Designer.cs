@@ -4,6 +4,7 @@ using BudHillFMS.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BudHillFMS.Migrations
 {
     [DbContext(typeof(FarmManagementSystemContext))]
-    partial class FarmManagementSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20230531173123_RemoveUnicode")]
+    partial class RemoveUnicode
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
