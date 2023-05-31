@@ -12,7 +12,7 @@ using System.Data;
 
 namespace BudHillFMS.Controllers
 {
-    [Authorize(Roles = "ADMIN")]
+    [Authorize(Roles = "Admin")]
     public class CostCategoriesController : Controller
     {
         private readonly FarmManagementSystemContext _context;

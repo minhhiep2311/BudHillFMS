@@ -13,6 +13,6 @@ namespace BudHillFMS.Models
         public int? QuantityUsed { get; set; }
         public DateTime? FertilizerImport { get; set; }
 
-        public virtual Warehouse Warehouse { get; set; } = null!;
+        public virtual Warehouse? Warehouse { get; set; }
     }
 }
