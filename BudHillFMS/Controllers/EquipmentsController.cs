@@ -7,22 +7,28 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BudHillFMS.Models;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace BudHillFMS.Controllers
 {
     public class EquipmentsController : Controller
     {
         private readonly FarmManagementSystemContext _context;
+        public INotyfService _notyfService;
 
-        public EquipmentsController(FarmManagementSystemContext context)
+        public EquipmentsController(FarmManagementSystemContext context, INotyfService notyfService)
         {
             _context = context;
+            _notyfService = notyfService;
         }
 
         // GET: Equipments
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? farmId)
         {
-            var farmManagementSystemContext = _context.Equipment.Include(e => e.Farm);
+            ViewData["TrangTrai"] = new SelectList(_context.Farms, "FarmId", "FarmName");
+            var farmManagementSystemContext = _context.Equipment
+                .Include(e => e.Farm)
+                 .Where(p => farmId == null || p.FarmId == farmId);
             return View(await farmManagementSystemContext.ToListAsync());
         }
 
@@ -63,6 +69,7 @@ namespace BudHillFMS.Controllers
             {
                 _context.Add(equipment);
                 await _context.SaveChangesAsync();
+                _notyfService.Success("Tạo mới thành công!");
                 return RedirectToAction(nameof(Index));
             }
             ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName", equipment.FarmId);
@@ -104,11 +111,13 @@ namespace BudHillFMS.Controllers
                 {
                     _context.Update(equipment);
                     await _context.SaveChangesAsync();
+                    _notyfService.Success("Cập nhật thành công!");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!EquipmentExists(equipment.EquipmentId))
                     {
+                        _notyfService.Success("Có lỗi xảy ra!");
                         return NotFound();
                     }
                     else
@@ -157,6 +166,7 @@ namespace BudHillFMS.Controllers
             }
             
             await _context.SaveChangesAsync();
+            _notyfService.Success("Xóa thành công!");
             return RedirectToAction(nameof(Index));
         }
 

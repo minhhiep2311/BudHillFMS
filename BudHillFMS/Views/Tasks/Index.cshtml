@@ -41,7 +41,7 @@
                                         </div>
                                         <div class="m-l-10">
                                             <h5 class="m-b-0">@item.TaskName</h5>
-                                            <span class="text-muted font-size-13">@item.TaskDate</span>
+                                            <span class="text-muted font-size-13">@item.DuaDate.Value.Date.ToString("dd/MM/yyyy")</span>
                                         </div>
                                     </div>
                                     <div class="dropdown dropdown-animated scale-left">
@@ -70,7 +70,7 @@
                                     {
                                         <div class="d-flex justify-content-between">
                                             <span class="font-weight-semibold">Trạng thái</span>
-                                            <span class="font-weight-semibold"></span>
+                                            <span Class="font-weight-light">Hoàn thành</span>
                                         </div>
                                         <div class="progress progress-sm m-t-10">
                                             <div class="progress-bar bg-success" role="progressbar" style="width: 100%"></div>
@@ -81,7 +81,7 @@
                                     {
                                         <div class="d-flex justify-content-between">
                                             <span class="font-weight-semibold">Trạng thái</span>
-                                            <span class="font-weight-semibold"></span>
+                                            <span Class="font-weight-light">Chưa hoàn thành</span>
                                         </div>
                                         <div class="progress progress-sm m-t-10">
                                             <div class="progress-bar bg-danger" role="progressbar" style="width: 28%"></div>

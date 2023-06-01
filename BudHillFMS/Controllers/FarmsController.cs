@@ -9,9 +9,12 @@ using Microsoft.EntityFrameworkCore;
 using BudHillFMS.Models;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using AspNetCoreHero.ToastNotification.Notyf;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace BudHillFMS.Controllers
 {
+    
     public class FarmsController : Controller
     {
         private readonly FarmManagementSystemContext _context;
@@ -49,6 +52,7 @@ namespace BudHillFMS.Controllers
         }
 
         // GET: Farms/Create
+        [Authorize(Roles = "Admin,Manager")]
         public IActionResult Create()
         {
             return View();
@@ -59,6 +63,7 @@ namespace BudHillFMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Create([Bind("FarmId,FarmName,FarmLocation,FarmArea,AreaUsed")] Farm farm)
         {
             if (ModelState.IsValid)
@@ -72,6 +77,7 @@ namespace BudHillFMS.Controllers
         }
 
         // GET: Farms/Edit/5
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Farms == null)
@@ -92,6 +98,7 @@ namespace BudHillFMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Edit(int id, [Bind("FarmId,FarmName,FarmLocation,FarmArea,AreaUsed")] Farm farm)
         {
             if (id != farm.FarmId)
@@ -125,6 +132,7 @@ namespace BudHillFMS.Controllers
         }
 
         // GET: Farms/Delete/5
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Farms == null)
@@ -145,6 +153,7 @@ namespace BudHillFMS.Controllers
         // POST: Farms/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Farms == null)

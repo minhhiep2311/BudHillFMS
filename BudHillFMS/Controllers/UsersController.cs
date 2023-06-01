@@ -5,6 +5,7 @@ using BudHillFMS.Areas.Identity.Data;
 using BudHillFMS.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace BudHillFMS.Controllers;
 
@@ -14,14 +15,17 @@ public class UsersController : Controller
     private readonly FarmManagementSystemContext _context;
     private readonly UserManager<User> _userManager;
     private readonly RoleManager<Role> _roleManager;
+    public INotyfService _notyfService;
 
     public UsersController(FarmManagementSystemContext context,
         UserManager<User> userManager,
-        RoleManager<Role> roleManager)
+        RoleManager<Role> roleManager,
+        INotyfService notyfService)
     {
         _context = context;
         _userManager = userManager;
         _roleManager = roleManager;
+        _notyfService = notyfService;
     }
 
     // GET: Users
@@ -166,6 +170,7 @@ public class UsersController : Controller
                 }
 
                 await _context.SaveChangesAsync();
+                _notyfService.Success("Cập nhật thành công!");
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -217,6 +222,7 @@ public class UsersController : Controller
         }
 
         await _context.SaveChangesAsync();
+        _notyfService.Success("Xóa thành công!");
         return RedirectToAction(nameof(Index));
     }
 

@@ -12,6 +12,6 @@ namespace BudHillFMS.Models
         public int EquipmentQuantity { get; set; }
         public int? EquipmentUsed { get; set; }
 
-        public virtual Farm Farm { get; set; } = null!;
+        public virtual Farm? Farm { get; set; } 
     }
 }

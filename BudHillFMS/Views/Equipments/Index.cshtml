@@ -9,14 +9,27 @@
 <div class="card">
     <div class="card-body">
         <div class="row m-b-30">
-            <div class="col-lg-8">
+            <div class="col-lg-6">
+                @using (Html.BeginForm("Index", "Equipments", FormMethod.Get))
+                {
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.DropDownList("farmId", ViewData["TrangTrai"] as SelectList, "Tất cả trang trại", new { @class = "form-control", onchange = "this.form.submit();" })
+                        </div>
+
+
+                    </div>
+
+                }
             </div>
-            <div class="col-lg-4 text-right">
+            <div class="col-lg-6 text-right">
                 <button class="btn btn-tone btn-primary" onclick="location.href='@Url.Action("Create", "Equipments")'">
                     <i class="anticon anticon-plus-circle m-r-5"></i>
                     <span>Thiết bị mới</span>
                 </button>
+                
             </div>
+
         </div>
         <div class="table-responsive">
             <table class="table table-hover e-commerce-table">

@@ -20,8 +20,8 @@ namespace BudHillFMS.Models
         public string? TaskStatus { get; set; }
         public bool TaskCheck { get; set; }
 
-        public virtual Farm Farm { get; set; } = null!;
-        public virtual Field Field { get; set; } = null!;
+        public virtual Farm? Farm { get; set; } 
+        public virtual Field? Field { get; set; } 
         public virtual ICollection<Subtask> Subtasks { get; set; }
     }
 }

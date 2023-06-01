@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using BudHillFMS.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace BudHillFMS.Controllers
 {
@@ -16,10 +17,12 @@ namespace BudHillFMS.Controllers
     public class CostCategoriesController : Controller
     {
         private readonly FarmManagementSystemContext _context;
+        public INotyfService _notyfService;
 
-        public CostCategoriesController(FarmManagementSystemContext context)
+        public CostCategoriesController(FarmManagementSystemContext context, INotyfService notyfService)
         {
             _context = context;
+            _notyfService = notyfService;
         }
 
         // GET: CostCategories
@@ -65,6 +68,7 @@ namespace BudHillFMS.Controllers
             {
                 _context.Add(costCategory);
                 await _context.SaveChangesAsync();
+                _notyfService.Success("Tạo mới thành công!");
                 return RedirectToAction(nameof(Index));
             }
             return View(costCategory);
@@ -103,12 +107,14 @@ namespace BudHillFMS.Controllers
                 try
                 {
                     _context.Update(costCategory);
+                    _notyfService.Success("Cập nhật thành công!");
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!CostCategoryExists(costCategory.CategoryId))
                     {
+                        _notyfService.Success("Có lỗi xảy ra!");
                         return NotFound();
                     }
                     else
@@ -155,6 +161,7 @@ namespace BudHillFMS.Controllers
             }
             
             await _context.SaveChangesAsync();
+            _notyfService.Success("Xóa thành công!");
             return RedirectToAction(nameof(Index));
         }
 

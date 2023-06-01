@@ -20,9 +20,12 @@ namespace BudHillFMS.Controllers
         }
 
         // GET: Fertilizers
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? warhouseId)
         {
-            var farmManagementSystemContext = _context.Fertilizers.Include(f => f.Warehouse);
+            ViewData["DanhSachKho"] = new SelectList(_context.Warehouses, "WarehouseId", "WarehouseName");
+            var farmManagementSystemContext = _context.Fertilizers
+                .Include(f => f.Warehouse)
+                .Where(p => warhouseId == null || p.WarehouseId == warhouseId); ;
             return View(await farmManagementSystemContext.ToListAsync());
         }
 

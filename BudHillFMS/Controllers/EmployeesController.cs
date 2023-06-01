@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BudHillFMS.Models;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace BudHillFMS.Controllers
 {
@@ -23,9 +25,12 @@ namespace BudHillFMS.Controllers
         }
 
         // GET: Employees
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? farmId)
         {
-            var farmManagementSystemContext = _context.Employees.Include(e => e.Farm);
+            ViewData["DanhSachFarm"] = new SelectList(_context.Farms, "FarmId", "FarmName");
+            var farmManagementSystemContext = _context.Employees
+                .Include(e => e.Farm)
+                .Where(p => farmId == null || p.FarmId == farmId);
             return View(await farmManagementSystemContext.ToListAsync());
         }
 
@@ -49,6 +54,7 @@ namespace BudHillFMS.Controllers
         }
 
         // GET: Employees/Create
+        [Authorize(Roles = "Admin,Manager")]
         public IActionResult Create()
         {
             ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName");
@@ -60,6 +66,7 @@ namespace BudHillFMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Create([Bind("EmployeeId,EmployeeName,EmployeeAddress,EmployeePhone,EmployeeEmail,FarmId,Position")] Employee employee)
         {
             if (ModelState.IsValid)
@@ -74,6 +81,7 @@ namespace BudHillFMS.Controllers
         }
 
         // GET: Employees/Edit/5
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Employees == null)
@@ -95,6 +103,7 @@ namespace BudHillFMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Edit(int id, [Bind("EmployeeId,EmployeeName,EmployeeAddress,EmployeePhone,EmployeeEmail,FarmId,Position")] Employee employee)
         {
             if (id != employee.EmployeeId)
@@ -129,6 +138,7 @@ namespace BudHillFMS.Controllers
         }
 
         // GET: Employees/Delete/5
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Employees == null)
@@ -150,6 +160,7 @@ namespace BudHillFMS.Controllers
         // POST: Employees/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Employees == null)

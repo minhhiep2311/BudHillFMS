@@ -9,6 +9,7 @@ namespace BudHillFMS.Controllers
 {
     public class HomeController : Controller
     {
+           
         private readonly FarmManagementSystemContext _context;
 
         public HomeController(FarmManagementSystemContext context)

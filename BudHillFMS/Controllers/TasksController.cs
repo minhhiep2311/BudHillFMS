@@ -8,23 +8,39 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BudHillFMS.Models;
 using MyTask = BudHillFMS.Models.Task;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace BudHillFMS.Controllers
 {
     public class TasksController : Controller
     {
         private readonly FarmManagementSystemContext _context;
+        public INotyfService _notyfService;
 
-        public TasksController(FarmManagementSystemContext context)
+        public TasksController(FarmManagementSystemContext context, INotyfService notyfService)
         {
             _context = context;
+            _notyfService = notyfService;
         }
 
         // GET: Tasks
         public async Task<IActionResult> Index()
         {
-            var farmManagementSystemContext = _context.Tasks.Include(t => t.Farm).Include(t => t.Field).Include(t => t.Subtasks).OrderBy(t => t.TaskCheck); 
+            var farmManagementSystemContext = _context.Tasks
+                .Include(t => t.Farm)
+                .Include(t => t.Field)
+                .Include(t => t.Subtasks)
+                .OrderBy(t => t.TaskCheck)
+                .ThenByDescending(t => t.TaskDate); 
             return View(await farmManagementSystemContext.ToListAsync());
+        }
+
+        // Get Field in Farm
+        [HttpGet]
+        public IActionResult GetFieldsByFarmId(int farmId)
+        {
+            var fields = _context.Fields.Where(f => f.FarmId == farmId).Select(f => new { fieldId = f.FieldId, fieldName = f.FieldName }).ToList();
+            return Json(fields);
         }
 
         // GET: Tasks/Details/5
@@ -51,10 +67,9 @@ namespace BudHillFMS.Controllers
         // GET: Tasks/Create
         public IActionResult Create()
         {
-            
+
             ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName");
-            ViewData["FieldId"] = new SelectList(_context.Fields, "FieldId", "FieldName");
-            ViewData["SubTaskId"] = new SelectList(_context.Subtasks, "SubTaskId", "SubtaskName");
+            ViewData["FieldId"] = new SelectList(Enumerable.Empty<Field>(), "FieldId", "FieldName"); // Khởi tạo dropdown list rỗng
             return View();
         }
 
@@ -69,11 +84,14 @@ namespace BudHillFMS.Controllers
             {
                 _context.Add(task);
                 await _context.SaveChangesAsync();
+                _notyfService.Success("Tạo mới thành công!");
                 return RedirectToAction(nameof(Index));
             }
-           
+
+            var fields = _context.Fields.Where(f => f.FarmId == task.FarmId);
             ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName", task.FarmId);
-            ViewData["FieldId"] = new SelectList(_context.Fields, "FieldId", "FieldName", task.FieldId);
+            ViewData["FieldId"] = new SelectList(fields, "FieldId", "FieldName", task.FieldId); // Sử dụng danh sách fields đã lấy
+
             return View(task);
         }
 
@@ -114,11 +132,13 @@ namespace BudHillFMS.Controllers
                 {
                     _context.Update(task);
                     await _context.SaveChangesAsync();
+                    _notyfService.Success("Cập nhật thành công!");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!TaskExists(task.TaskId))
                     {
+                        _notyfService.Success("Có lỗi xảy ra!");
                         return NotFound();
                     }
                     else
@@ -170,6 +190,7 @@ namespace BudHillFMS.Controllers
             }
             
             await _context.SaveChangesAsync();
+            _notyfService.Success("Xóa thành công!");
             return RedirectToAction(nameof(Index));
         }
 

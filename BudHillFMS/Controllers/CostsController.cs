@@ -8,31 +8,55 @@ using Microsoft.EntityFrameworkCore;
 using BudHillFMS.Models;
 using System.Globalization;
 using BudHillFMS.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace BudHillFMS.Controllers
 {
+    [Authorize(Roles = "Admin,Manager")]
     public class CostsController : Controller
-    {
+    {   
         private readonly FarmManagementSystemContext _context;
+        public INotyfService _notyfService;
 
-        public CostsController(FarmManagementSystemContext context)
+        public CostsController(FarmManagementSystemContext context, INotyfService notyfService)
         {
             _context = context;
+            _notyfService = notyfService;
         }
       
 
         // GET: Costs
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? farmId, int? categoryId)
         {
-            var farmManagementSystemContext = _context.Costs
-                .Include(c => c.Category)
-                .Include(c => c.Farm)
-                .OrderBy(t => t.Coststatus)
-                .ThenByDescending(t => t.CostDate); 
+            ViewData["LoaiChiPhi"] = new SelectList(_context.CostCategories, "CategoryId", "CategoryName");
+            ViewData["TrangTrai"] = new SelectList(_context.Farms, "FarmId", "FarmName");
 
-            return View(await farmManagementSystemContext.ToListAsync());
+            var query = from cost in _context.Costs
+                        .Include(c => c.Category)
+                        .Include(c => c.Farm)
+                        select cost;
+
+            if (farmId != null)
+            {
+                query = query.Where(c => c.FarmId == farmId);
+            }
+
+            if (categoryId != null)
+            {
+                query = query.Where(c => c.CategoryId == categoryId);
+            }
+
+            var farmManagementSystemContext = await query.OrderBy(t => t.Coststatus)
+                                                        .ThenByDescending(t => t.CostDate)
+                                                        .ToListAsync();
+
+            return View(farmManagementSystemContext);
+
         }
 
+       
         // GET: Costs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -74,6 +98,7 @@ namespace BudHillFMS.Controllers
             {
                 _context.Add(cost);
                 await _context.SaveChangesAsync();
+                _notyfService.Success("Tạo mới thành công!");
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CategoryId"] = new SelectList(_context.CostCategories, "CategoryId", "CategoryName", cost.CategoryId);
@@ -117,11 +142,13 @@ namespace BudHillFMS.Controllers
                 {
                     _context.Update(cost);
                     await _context.SaveChangesAsync();
+                    _notyfService.Success("Cập nhật thành công!");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!CostExists(cost.CostId))
                     {
+                        _notyfService.Success("Có lỗi xảy ra!");
                         return NotFound();
                     }
                     else
@@ -172,6 +199,7 @@ namespace BudHillFMS.Controllers
             }
             
             await _context.SaveChangesAsync();
+            _notyfService.Success("Xóa thành công!");
             return RedirectToAction(nameof(Index));
         }
 

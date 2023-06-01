@@ -6,10 +6,23 @@
 }
 
 <h1>Danh sách nhân viên</h1>
-<div class="text-right">
-    <a class="btn btn-tone btn-primary m-r-5" asp-controller="Employees" asp-action="Create"> <i class="anticon anticon-plus-circle m-r-5"></i><span>Nhân viên mới</span></a>
+<hr />
+<div class ="row m-b-30">
+    <div class="col-lg-8">
+        <div class="d-md-flex">
+        <div class="m-b-10">
+            @using (Html.BeginForm("Index", "Employees", FormMethod.Get))
+            {
+                @Html.DropDownList("farmId", ViewData["DanhSachFarm"] as SelectList, "Tất cả trang trại", new { @class = "form-control", onchange = "this.form.submit();" })
+            }
+        </div>
+        </div>
+    </div>
+    <div class="col-lg-4 text-right">
+        <a class="btn btn-tone btn-primary m-r-5" asp-controller="Employees" asp-action="Create"> <i class="anticon anticon-plus-circle m-r-5"></i><span>Nhân viên mới</span></a>
+    </div>
 </div>
-<br />
+
 <div class="row" id="card-view">
     @if (Model != null)
     {

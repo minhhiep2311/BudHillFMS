@@ -43,11 +43,11 @@
                     </tr>
                     <tr>
                         <td>Ngày giao:</td>
-                        <td>@Model.TaskDate</td>
+                        <td>@Model.TaskDate.ToString("dd/MM/yyyy")</td>
                     </tr>
                     <tr>
                         <td>Hạn cuối:</td>
-                        <td>@Model.DuaDate</td>
+                        <td>@Model.DuaDate.Value.Date.ToString("dd/MM/yyyy")</td>
                     </tr>
                     <tr>
                         <td>Tình trạng:</td>
@@ -77,7 +77,7 @@
 </div>
 
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.TaskId" class="btn btn-primary m-r-5">Sửa</a>|
-    <a asp-action="Delete" asp-route-id="@Model.TaskId" class="btn btn-danger m-r-5">Xóa</a> |
-    <a asp-action="Index" class="btn btn-primary m-r-5">Trở về</a>
+    <a asp-action="Edit" asp-route-id="@Model.TaskId" class="btn btn-tone btn-primary m-r-5">Sửa</a>|
+    <a asp-action="Delete" asp-route-id="@Model.TaskId" class="btn btn-tone btn-danger m-r-5">Xóa</a> |
+    <a asp-action="Index" class="btn btn-tone btn-primary m-r-5">Trở về</a>
 </div>

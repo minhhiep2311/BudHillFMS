@@ -3,22 +3,29 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BudHillFMS.Areas.Identity.Data;
 using BudHillFMS.Models;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace BudHillFMS.Controllers;
 
 public class WarehouseProductsController : Controller
 {
     private readonly FarmManagementSystemContext _context;
+    public INotyfService _notyfService;
 
-    public WarehouseProductsController(FarmManagementSystemContext context)
+    public WarehouseProductsController(FarmManagementSystemContext context, INotyfService notyfService)
     {
         _context = context;
+        _notyfService = notyfService;
     }
 
     // GET: WarehouseProducts
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int? warhouseId)
     {
-        var farmManagementSystemContext = _context.WarehouseProducts.Include(w => w.Product).Include(w => w.Warehouse);
+        ViewData["DanhSachKho"] = new SelectList(_context.Warehouses, "WarehouseId", "WarehouseName");
+        var farmManagementSystemContext = _context.WarehouseProducts
+            .Include(w => w.Product)
+            .Include(w => w.Warehouse)
+            .Where(p => warhouseId == null || p.WarehouseId == warhouseId);
         return View(await farmManagementSystemContext.ToListAsync());
     }
 
@@ -82,6 +89,7 @@ public class WarehouseProductsController : Controller
 
                 _context.Add(warehouseProduct);
                 await _context.SaveChangesAsync();
+                _notyfService.Success("Tạo mới thành công!");
                 return RedirectToAction(nameof(Index));
             }
         }
@@ -156,6 +164,7 @@ public class WarehouseProductsController : Controller
 
                 _context.WarehouseProducts.Update(newWarehouseProduct);
                 await _context.SaveChangesAsync();
+                _notyfService.Success("Cập nhật thành công!");
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -218,6 +227,7 @@ public class WarehouseProductsController : Controller
         }
 
         await _context.SaveChangesAsync();
+        _notyfService.Success("Xóa thành công!");
         return RedirectToAction(nameof(Index));
     }
 

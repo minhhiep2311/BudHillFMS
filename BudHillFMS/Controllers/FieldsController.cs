@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BudHillFMS.Models;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace BudHillFMS.Controllers
 {
@@ -22,12 +24,13 @@ namespace BudHillFMS.Controllers
         }
 
         // GET: Fields
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? farmId)
         {
             ViewData["DanhSachFarm"] = new SelectList(_context.Farms, "FarmId", "FarmName");
 
             var farmManagementSystemContext = _context.Fields
                 .Include(e => e.Farm)
+                 .Where(p => farmId == null || p.FarmId == farmId)
                 .OrderBy(t => t.FieldStatus == true);
             return View(await farmManagementSystemContext.ToListAsync());
         }
@@ -52,6 +55,7 @@ namespace BudHillFMS.Controllers
         }
 
         // GET: Fields/Create
+        [Authorize(Roles = "Admin,Manager")]
         public IActionResult Create()
         {
             ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName");
@@ -63,6 +67,7 @@ namespace BudHillFMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Create([Bind("FieldId,FieldName,FarmId,FieldArea,FieldStatus")] Field @field)
         {
             if (ModelState.IsValid)
@@ -77,6 +82,7 @@ namespace BudHillFMS.Controllers
         }
 
         // GET: Fields/Edit/5
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Fields == null)
@@ -98,6 +104,7 @@ namespace BudHillFMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Edit(int id, [Bind("FieldId,FieldName,FarmId,FieldArea,FieldStatus")] Field @field)
         {
             if (id != @field.FieldId)
@@ -132,6 +139,7 @@ namespace BudHillFMS.Controllers
         }
 
         // GET: Fields/Delete/5
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Fields == null)
@@ -153,6 +161,7 @@ namespace BudHillFMS.Controllers
         // POST: Fields/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Fields == null)

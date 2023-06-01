@@ -1,7 +1,7 @@
 ﻿<div class="side-nav">
     <div class="side-nav-inner">
         <ul class="side-nav-menu scrollable">
-            <li class="nav-item dropdown open ">
+            <li class="nav-item dropdown open " data-key="Dashboard">
                 <a class="dropdown-toggle" asp-controller="Home" asp-action="index">
                     <span class="icon-holder">
                         <i class="anticon anticon-dashboard"></i>
@@ -22,10 +22,10 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li >
+                    <li data-key="Costs">
                         <a asp-controller="Costs" asp-action="index">Chi phí</a>
                     </li>
-                    <li >
+                    <li data-key="CostCategories">
                         <a asp-controller="CostCategories" asp-action="index">Loại chi phí</a>
                     </li>
                    
@@ -43,16 +43,16 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li>
+                    <li data-key="Products">
                         <a asp-controller="Products" asp-action="Index">Hoa quả</a>
                     </li>
                    
-                    <li>
+                    <li data-key="Seedlings">
                         <a asp-controller="Seedlings" asp-action="Index">Cây giống</a>
                     </li>
                 </ul>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" data-key="Dashboard">
                 <a class="dropdown-toggle" asp-controller="Equipments" asp-action="Index">
                     <span class="icon-holder">
                         <i class="anticon anticon-hdd"></i>
@@ -73,10 +73,10 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li>
+                    <li data-key="Timekeepings">
                         <a asp-controller="Timekeepings" asp-action="Index">Chấm công</a>
                     </li>
-                    <li>
+                    <li data-key="Tasks">
                         <a asp-controller="Tasks" asp-action="Index">Danh sách công việc</a>
                     </li>
                 </ul>
@@ -92,18 +92,19 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li>
-                        <a asp-controller="Warehouses" asp-action="index">nhà kho</a>
+                    <li data-key="Warehouses">
+                        <a asp-controller="Warehouses" asp-action="index">Nhà kho</a>
                     </li>
-                    <li>
+                    <li data-key="WarehouseProducts">
                         <a asp-controller="WarehouseProducts" asp-action="index">Kho hàng</a>
                     </li>
-                    <li>
+                    <li data-key="Fertilizers">
                         <a asp-controller="Fertilizers" asp-action="index">Phân bón</a>
                     </li>
                 </ul>
             </li>
-            <li class="nav-item dropdown">
+
+            <li class="nav-item dropdown" data-key="Dashboard">
                 <a asp-controller="Diaries" asp-action="Index" class="dropdown-toggle" >
                     <span class="icon-holder">
                         <i class="anticon anticon-pie-chart"></i>
@@ -124,15 +125,15 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li>
+                    <li data-key="Farms">
                         <a asp-controller="Farms" asp-action="index">Danh sách farm</a>
                     </li>
 
-                    <li>
+                    <li data-key="Employees">
                         <a asp-controller="Employees" asp-action="index">Danh sách nhân viên</a>
                     </li>
 
-                    <li>
+                    <li data-key="Fields">
                         <a asp-controller="Fields" asp-action="index">Danh sách nhà kính</a>
                     </li>
 
@@ -149,10 +150,10 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li>
+                    <li data-key="Users">
                         <a asp-controller="Users" asp-action="Index">Quản lý tài khoản</a>
                     </li>
-                    <li>
+                    <li data-key="Roles">
                         <a asp-controller="Roles" asp-action="Index">Quản lý quyền truy cập</a>
                     </li>
                 </ul>
@@ -163,3 +164,46 @@
        
     </div>
 </div>
+
+<script>
+    var dropdownItems = document.querySelectorAll('.dropdown-menu li');
+    var navItems = document.querySelectorAll('.side-nav-menu .nav-item.dropdown');
+
+
+    // Kiểm tra trạng thái đã lưu trong sessionStorage cho dropdown-items
+    dropdownItems.forEach(function (item) {
+        var isActive = sessionStorage.getItem(item.getAttribute('data-key'));
+        if (isActive === 'true') {
+            item.classList.add('active');
+        }
+    });
+
+    
+
+    // Thêm sự kiện click cho mỗi dropdown-item
+    dropdownItems.forEach(function (item) {
+        item.addEventListener('click', function () {
+            // Lưu trạng thái vào sessionStorage
+            var isActive = item.classList.contains('active');
+
+            // Xóa trạng thái lưu trữ của tất cả các phần tử li khác
+            dropdownItems.forEach(function (dropdownItem) {
+                if (dropdownItem !== item) {
+                    sessionStorage.removeItem(dropdownItem.getAttribute('data-key'));
+                    dropdownItem.classList.remove('active');
+                }
+            });
+
+            // Thêm hoặc xóa trạng thái lưu trữ và class "active" cho phần tử li hiện tại
+            if (!isActive) {
+                sessionStorage.setItem(item.getAttribute('data-key'), 'true');
+                item.classList.add('active');
+            } else {
+                sessionStorage.removeItem(item.getAttribute('data-key'));
+                item.classList.remove('active');
+            }
+        });
+    });
+
+
+</script>

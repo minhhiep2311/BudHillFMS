@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BudHillFMS.Models;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace BudHillFMS.Controllers
 {
@@ -22,10 +24,13 @@ namespace BudHillFMS.Controllers
         }
 
         // GET: Warehouses
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? farmId)
         {
             ViewData["DanhSachFarm"] = new SelectList(_context.Farms, "FarmId", "FarmName");
-            var farmManagementSystemContext = _context.Warehouses.Include(w => w.Farm).OrderBy(w => w.Farm.FarmName); 
+            var farmManagementSystemContext = _context.Warehouses
+                .Include(w => w.Farm)
+                .Where(p => farmId == null || p.FarmId == farmId)
+                .OrderBy(w => w.Farm.FarmName); 
             return View(await farmManagementSystemContext.ToListAsync());
         }
 
@@ -49,6 +54,7 @@ namespace BudHillFMS.Controllers
         }
 
         // GET: Warehouses/Create
+        [Authorize(Roles = "Admin,Manager")]
         public IActionResult Create()
         {
             ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName");
@@ -60,6 +66,7 @@ namespace BudHillFMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Create([Bind("WarehouseId,WarehouseName,WarehouseLocation,FarmId")] Warehouse warehouse)
         {
             if (ModelState.IsValid)
@@ -74,6 +81,7 @@ namespace BudHillFMS.Controllers
         }
 
         // GET: Warehouses/Edit/5
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Warehouses == null)
@@ -95,6 +103,7 @@ namespace BudHillFMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Edit(int id, [Bind("WarehouseId,WarehouseName,WarehouseLocation,FarmId")] Warehouse warehouse)
         {
             if (id != warehouse.WarehouseId)
@@ -129,6 +138,7 @@ namespace BudHillFMS.Controllers
         }
 
         // GET: Warehouses/Delete/5
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Warehouses == null)
@@ -148,6 +158,7 @@ namespace BudHillFMS.Controllers
         }
 
         // POST: Warehouses/Delete/5
+        [Authorize(Roles = "Admin,Manager")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
