@@ -5,9 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
-
-<h4>Fertilizer</h4>
+<h1>Chỉnh sửa phân bón</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -15,43 +13,40 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="FertilizerId" />
             <div class="form-group">
-                <label asp-for="FertilizerName" class="control-label"></label>
+                <label asp-for="FertilizerName" class="control-label">Tên phân bón</label>
                 <input asp-for="FertilizerName" class="form-control" />
                 <span asp-validation-for="FertilizerName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FertilizerType" class="control-label"></label>
+                <label asp-for="FertilizerType" class="control-label">Loại</label>
                 <input asp-for="FertilizerType" class="form-control" />
                 <span asp-validation-for="FertilizerType" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FertilizerQuantity" class="control-label"></label>
+                <label asp-for="FertilizerQuantity" class="control-label">Số lượng (Kg)</label>
                 <input asp-for="FertilizerQuantity" class="form-control" />
                 <span asp-validation-for="FertilizerQuantity" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="WarehouseId" class="control-label"></label>
-                <select asp-for="WarehouseId" class="form-control" asp-items="ViewBag.WarehouseId"></select>
-                <span asp-validation-for="WarehouseId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="QuantityUsed" class="control-label"></label>
+                <label asp-for="QuantityUsed" class="control-label">Đã dùng (Kg)</label>
                 <input asp-for="QuantityUsed" class="form-control" />
                 <span asp-validation-for="QuantityUsed" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FertilizerImport" class="control-label"></label>
+                <label asp-for="WarehouseId" class="control-label">Nhà kho</label>
+                <select asp-for="WarehouseId" class="form-control" asp-items="ViewBag.WarehouseId"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FertilizerImport" class="control-label">Ngày nhập</label>
                 <input asp-for="FertilizerImport" class="form-control" />
                 <span asp-validation-for="FertilizerImport" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Lưu" class="btn btn-primary" /> |
+                <a asp-action="Index" class="btn btn-tone btn-primary">Trở về</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
