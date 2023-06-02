@@ -377,7 +377,10 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
 
         builder.Entity<WarehouseProduct>(entity =>
         {
-            entity.HasKey(e => new { e.WarehouseId, e.ProductId });
+            entity.HasKey(e => e.Id);
+
+            entity.HasIndex(e => new { e.ProductId, e.WarehouseId }, "UC_WarehouseProduct_ProductId_WarehouseId")
+               .IsUnique();
 
             entity.ToTable("WarehouseProduct");
 

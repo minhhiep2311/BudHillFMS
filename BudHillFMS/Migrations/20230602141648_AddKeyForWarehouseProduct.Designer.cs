@@ -4,6 +4,7 @@ using BudHillFMS.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BudHillFMS.Migrations
 {
     [DbContext(typeof(FarmManagementSystemContext))]
-    partial class FarmManagementSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20230602141648_AddKeyForWarehouseProduct")]
+    partial class AddKeyForWarehouseProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -388,7 +390,7 @@ namespace BudHillFMS.Migrations
 
                     b.HasIndex("FarmId");
 
-                    b.ToTable("Equipment", (string)null);
+                    b.ToTable("Equipment");
                 });
 
             modelBuilder.Entity("BudHillFMS.Models.Farm", b =>
@@ -655,7 +657,7 @@ namespace BudHillFMS.Migrations
 
                     b.HasIndex("TaskId");
 
-                    b.ToTable("Subtasks", (string)null);
+                    b.ToTable("Subtasks");
                 });
 
             modelBuilder.Entity("BudHillFMS.Models.Task", b =>
