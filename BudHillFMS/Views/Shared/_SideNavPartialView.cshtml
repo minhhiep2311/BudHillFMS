@@ -52,7 +52,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item dropdown" data-key="Dashboard">
+            <li class="nav-item dropdown" data-key="Equipment">
                 <a class="dropdown-toggle" asp-controller="Equipments" asp-action="Index">
                     <span class="icon-holder">
                         <i class="anticon anticon-hdd"></i>
@@ -104,7 +104,7 @@
                 </ul>
             </li>
 
-            <li class="nav-item dropdown" data-key="Dashboard">
+            <li class="nav-item dropdown" data-key="Diaries">
                 <a asp-controller="Diaries" asp-action="Index" class="dropdown-toggle" >
                     <span class="icon-holder">
                         <i class="anticon anticon-pie-chart"></i>
@@ -166,28 +166,27 @@
 </div>
 
 <script>
-    var dropdownItems = document.querySelectorAll('.dropdown-menu li');
-    var navItems = document.querySelectorAll('.side-nav-menu .nav-item.dropdown');
-
+    const dropdownItems = document.querySelectorAll('.dropdown-menu li');
+    const navItems = document.querySelectorAll('.side-nav-menu .nav-item.dropdown[data-key]');
+    const linkItems = [...dropdownItems, ...navItems]
 
     // Kiểm tra trạng thái đã lưu trong sessionStorage cho dropdown-items
-    dropdownItems.forEach(function (item) {
-        var isActive = sessionStorage.getItem(item.getAttribute('data-key'));
+    linkItems.forEach(function (item) {
+        const isActive = sessionStorage.getItem(item.getAttribute('data-key'));
         if (isActive === 'true') {
             item.classList.add('active');
         }
     });
 
-    
-
     // Thêm sự kiện click cho mỗi dropdown-item
-    dropdownItems.forEach(function (item) {
+    linkItems.forEach(function (item) {
         item.addEventListener('click', function () {
+            // debugger
             // Lưu trạng thái vào sessionStorage
-            var isActive = item.classList.contains('active');
+            const isActive = item.classList.contains('active');
 
             // Xóa trạng thái lưu trữ của tất cả các phần tử li khác
-            dropdownItems.forEach(function (dropdownItem) {
+            linkItems.forEach(function (dropdownItem) {
                 if (dropdownItem !== item) {
                     sessionStorage.removeItem(dropdownItem.getAttribute('data-key'));
                     dropdownItem.classList.remove('active');
