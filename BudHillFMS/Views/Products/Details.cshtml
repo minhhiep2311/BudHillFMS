@@ -44,19 +44,19 @@
                     </tr>
                     <tr>
                         <td>Ngày gieo trồng:</td>
-                        <td>@Model.SowingDate.Value.ToString("dd/MM/yyyy")</td>
+                        <td>@Model.SowingDate?.ToString("dd/MM/yyyy")</td>
                     </tr>
                     <tr>
                         <td>Ngày thu hoạch:</td>
-                        <td>@Model.HarvestDate.Value.ToString("dd/MM/yyyy")</td>
+                        <td>@Model.HarvestDate?.ToString("dd/MM/yyyy")</td>
                     </tr>
                     <tr>
                         <td>Nhà kính:</td>
-                        <td>@Model.Field.FieldName</td>
+                        <td>@Model.Field?.FieldName</td>
                     </tr>
                     <tr>
                         <td>Trang trại:</td>
-                        <td>@Model.Field.Farm.FarmName</td>
+                        <td>@Model.Field?.Farm.FarmName</td>
                     </tr>
                     
                     

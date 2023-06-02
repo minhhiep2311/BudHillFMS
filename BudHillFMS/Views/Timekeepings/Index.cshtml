@@ -78,23 +78,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model != null)
-                    {
-                        @foreach (var item in Model)
-                        {
-                            <tr onclick="location.href='@Url.Action("Details", "Timekeepings", new { id = item.TimekeepingId })'">
+                @foreach (var item in Model)
+                {
+                    <tr onclick="location.href='@Url.Action("Details", "Timekeepings", new { id = item.TimekeepingId })'">
 
 
-                                <td>
-                                    <h6 class="m-b-0 m-l-10">@item.Employee.EmployeeName</h6>
-                                </td>
-                                <td>@item.CheckIn.Value.ToString("hh:mm:ss tt") </td>
-                                <td>@item.CheckOut.Value.ToString("hh:mm:ss tt")</td>
-                                <td>@item.TimekeepingDate.Value.Date.ToString("dd/MM/yyyy")</td>
-                            </tr>
-
-                        }
-                    }
+                        <td>
+                            <h6 class="m-b-0 m-l-10">@item.Employee?.EmployeeName</h6>
+                        </td>
+                        <td>@item.CheckIn?.ToString("hh:mm:ss tt") </td>
+                        <td>@item.CheckOut?.ToString("hh:mm:ss tt")</td>
+                        <td>@item.TimekeepingDate?.Date.ToString("dd/MM/yyyy")</td>
+                    </tr>
+                }
 
                 </tbody>
             </table>

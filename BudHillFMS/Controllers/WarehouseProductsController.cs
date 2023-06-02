@@ -10,7 +10,7 @@ namespace BudHillFMS.Controllers;
 public class WarehouseProductsController : Controller
 {
     private readonly FarmManagementSystemContext _context;
-    public INotyfService _notyfService;
+    private readonly INotyfService _notyfService;
 
     public WarehouseProductsController(FarmManagementSystemContext context, INotyfService notyfService)
     {
@@ -32,7 +32,7 @@ public class WarehouseProductsController : Controller
     // GET: WarehouseProducts/Details/5
     public async Task<IActionResult> Details(int? id)
     {
-        if (id == null || _context.WarehouseProducts == null)
+        if (id == null)
         {
             return NotFound();
         }
@@ -93,7 +93,7 @@ public class WarehouseProductsController : Controller
                 return RedirectToAction(nameof(Index));
             }
         }
-        catch (DbUpdateException ex)
+        catch (DbUpdateException)
         {
             // Log the exception or handle it as needed
             ModelState.AddModelError("", "Đã xảy ra lỗi khi lưu các thay đổi của thực thể.");
@@ -193,7 +193,7 @@ public class WarehouseProductsController : Controller
     // GET: WarehouseProducts/Delete/5
     public async Task<IActionResult> Delete(int? id)
     {
-        if (id == null || _context.WarehouseProducts == null)
+        if (id == null)
         {
             return NotFound();
         }
@@ -215,11 +215,6 @@ public class WarehouseProductsController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
-        if (_context.WarehouseProducts == null)
-        {
-            return Problem("Entity set 'FarmManagementSystemContext.WarehouseProducts'  is null.");
-        }
-
         var warehouseProduct = await _context.WarehouseProducts.FindAsync(id);
         if (warehouseProduct != null)
         {
@@ -233,6 +228,6 @@ public class WarehouseProductsController : Controller
 
     private bool WarehouseProductExists(int id)
     {
-        return (_context.WarehouseProducts?.Any(e => e.WarehouseId == id)).GetValueOrDefault();
+        return _context.WarehouseProducts.Any(e => e.WarehouseId == id);
     }
 }

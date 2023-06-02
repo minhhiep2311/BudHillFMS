@@ -35,11 +35,11 @@
                     </tr>
                     <tr>
                         <td>Trang trại:</td>
-                        <td>@Model.Farm.FarmName</td>
+                        <td>@Model.Farm?.FarmName</td>
                     </tr>
                     <tr>
                         <td>Nhà kính:</td>
-                        <td>@Model.Field.FieldName</td>
+                        <td>@Model.Field?.FieldName</td>
                     </tr>
                     <tr>
                         <td>Ngày giao:</td>
@@ -47,7 +47,7 @@
                     </tr>
                     <tr>
                         <td>Hạn cuối:</td>
-                        <td>@Model.DuaDate.Value.Date.ToString("dd/MM/yyyy")</td>
+                        <td>@Model.DuaDate?.Date.ToString("dd/MM/yyyy")</td>
                     </tr>
                     <tr>
                         <td>Tình trạng:</td>

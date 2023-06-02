@@ -10,7 +10,7 @@ namespace BudHillFMS.Models
         public DateTime EntryDate { get; set; }
         public int FieldId { get; set; }
         public int ProductId { get; set; }
-        public string Description { get; set; }
+        public string Description { get; set; } = null!;
         public string? DiarySubject { get; set; }
         public string? DiaryCategory { get; set; }
 

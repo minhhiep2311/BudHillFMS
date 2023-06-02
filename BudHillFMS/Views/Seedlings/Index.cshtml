@@ -31,29 +31,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model != null)
-                    {
-                        @foreach (var item in Model)
-                        {
-                            <tr onclick="location.href='@Url.Action("Details", "Seedlings", new { id = item.SeedlingId })'">
+                @foreach (var item in Model)
+                {
+                    <tr onclick="location.href='@Url.Action("Details", "Seedlings", new { id = item.SeedlingId })'">
 
 
-                                <td>
-                                    <h6 class="m-b-0 m-l-10">@item.SeedlingName</h6>
-                                </td>
-                                <td>@item.SeedlingDescription</td>
-                                <td>@item.SeedlingStart.Value.ToString("dd/MM/yyyy")</td>
-                               
-
-                                <td>
-
-                                    <a class="btn btn-tone btn-primary m-r-5" asp-controller="Seedlings" asp-action="Edit" asp-route-id="@item.SeedlingId">Sửa</a>
-                                    <a class="btn btn-tone btn-danger m-r-5" asp-controller="Seedlings" asp-action="Delete" asp-route-id="@item.SeedlingId">Xóa</a>
-                                </td>
-                            </tr>
-
-                        }
-                    }
+                        <td>
+                            <h6 class="m-b-0 m-l-10">@item.SeedlingName</h6>
+                        </td>
+                        <td>@item.SeedlingDescription</td>
+                        <td>@item.SeedlingStart?.ToString("dd/MM/yyyy")</td>
+                        <td>
+                            <a class="btn btn-tone btn-primary m-r-5" asp-controller="Seedlings" asp-action="Edit" asp-route-id="@item.SeedlingId">Sửa</a>
+                            <a class="btn btn-tone btn-danger m-r-5" asp-controller="Seedlings" asp-action="Delete" asp-route-id="@item.SeedlingId">Xóa</a>
+                        </td>
+                    </tr>
+                }
 
                 </tbody>
             </table>

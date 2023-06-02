@@ -16,7 +16,7 @@
                     </tr>
                     <tr>
                         <td>Sản phẩm:</td>
-                        <td> @Model.Product.ProductName</td>
+                        <td>@Model.Product?.ProductName</td>
                     </tr>
                     <tr>
                         <td>Chủ đề:</td>
@@ -24,11 +24,11 @@
                     </tr>
                     <tr>
                         <td>Phân loại:</td>
-                        <td> @Model.DiaryCategory</td>
+                        <td>@Model.DiaryCategory</td>
                     </tr>
                     <tr>
                         <td>Nhà kính:</td>
-                        <td>@Model.Field.FieldName</td>
+                        <td>@Model.Field?.FieldName</td>
                     </tr>
                     <tr>
                         <td>Ngày viết:</td>

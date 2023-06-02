@@ -7,10 +7,45 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9b53ec41-b11a-42bd-a35a-bafae6b11479" name="Changes" comment="add describer">
+    <list default="true" id="9b53ec41-b11a-42bd-a35a-bafae6b11479" name="Changes" comment="fix create user">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Controllers/UsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Controllers/UsersController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BudHillFMS/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS.sln.DotSettings" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS.sln.DotSettings" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Areas/Identity/Data/FarmManagementSystemContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Areas/Identity/Data/FarmManagementSystemContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Controllers/CostsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Controllers/CostsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Controllers/FertilizersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Controllers/FertilizersController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Controllers/FieldsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Controllers/FieldsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Controllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Controllers/HomeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Controllers/ProductsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Controllers/ProductsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Controllers/SeedlingsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Controllers/SeedlingsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Controllers/TimekeepingsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Controllers/TimekeepingsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Controllers/WarehouseProductsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Controllers/WarehouseProductsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Controllers/WarehousesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Controllers/WarehousesController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Models/Diary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Models/Diary.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Models/WarehouseProduct.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Models/WarehouseProduct.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Costs/Delete.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Costs/Delete.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Costs/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Costs/Details.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Costs/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Costs/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Diaries/Delete.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Diaries/Delete.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Diaries/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Diaries/Details.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Employees/Delete.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Employees/Delete.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Employees/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Employees/Details.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Equipments/Delete.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Equipments/Delete.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Equipments/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Equipments/Details.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Equipments/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Equipments/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Fertilizers/Delete.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Fertilizers/Delete.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Fertilizers/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Fertilizers/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Fields/Delete.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Fields/Delete.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Fields/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Fields/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Products/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Products/Details.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Products/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Products/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Seedlings/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Seedlings/Details.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Timekeepings/Delete.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Timekeepings/Delete.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Timekeepings/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Timekeepings/Details.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Timekeepings/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Timekeepings/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/WarehouseProducts/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/WarehouseProducts/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Warehouses/Delete.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Warehouses/Delete.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Warehouses/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Warehouses/Details.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Warehouses/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Warehouses/Index.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +103,7 @@
     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/CostsController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/DiariesController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/DiariesController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/UsersController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/UsersController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/UsersController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/UsersController.cs" root0="SKIP_HIGHLIGHTING" />
@@ -159,7 +195,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685306478238</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="fix create user">
+      <created>1685710876699</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1685710876699</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TerminalProjectNonSharedOptionsProvider">
@@ -198,7 +241,8 @@
     <MESSAGE value="add migrations" />
     <MESSAGE value="update dashboard" />
     <MESSAGE value="edit role" />
-    <option name="LAST_COMMIT_MESSAGE" value="edit role" />
+    <MESSAGE value="fix create user" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix create user" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

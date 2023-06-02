@@ -22,16 +22,16 @@
                     </tr>
                     <tr>
                         <td>Loại chi phí:</td>
-                        <td>@Model.Category.CategoryName</td>
+                        <td>@Model.Category?.CategoryName</td>
 
                     </tr>
                     <tr>
                         <td>Tổng tiền:</td>
-                        <td>@string.Format("{0:#,#}", @Model.CostAmount)</td>
+                        <td>@($"{Model.CostAmount:#,#}")</td>
                     </tr>
                     <tr>
                         <td>Trang trại:</td>
-                        <td>@Model.Farm.FarmName</td>
+                        <td>@Model.Farm?.FarmName</td>
                     </tr>
                     <tr>
                         <td>Mô tả:</td>

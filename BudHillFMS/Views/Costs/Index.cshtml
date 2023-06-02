@@ -9,23 +9,22 @@
         <div class="row m-b-30">
             <div class="col-lg-8">
                 <div class="d-md-flex">
-                    
+
                     @using (Html.BeginForm("Index", "Costs", FormMethod.Get))
                     {
                         <div class="row">
                             <div class="col-md-6">
-                                
+
                                 @Html.DropDownList("farmId", ViewData["TrangTrai"] as SelectList, "Tất cả trang trại", new { @class = "form-control", onchange = "this.form.submit();" })
                             </div>
 
                             <div class="col-md-6">
-                                
+
                                 @Html.DropDownList("categoryId", ViewData["LoaiChiPhi"] as SelectList, "Tất cả loại chi phí", new { @class = "form-control", onchange = "this.form.submit();" })
                             </div>
                         </div>
-                        
                     }
-                    
+
                 </div>
             </div>
             <div class="col-lg-4 text-right">
@@ -38,51 +37,46 @@
         <div class="table-responsive">
             <table class="table table-hover e-commerce-table">
                 <thead>
-                    <tr>
-                       
-                        <th>Chi phí</th>
-                        <th>Loại chi phí</th>
-                        <th>Tổng tiền</th>
-                        <th>Trang trại</th>
-                        <th>Ngày ghi chi phí</th>
-                        <th>Tình trạng</th>
-                    </tr>
+                <tr>
+
+                    <th>Chi phí</th>
+                    <th>Loại chi phí</th>
+                    <th>Tổng tiền</th>
+                    <th>Trang trại</th>
+                    <th>Ngày ghi chi phí</th>
+                    <th>Tình trạng</th>
+                </tr>
                 </thead>
                 <tbody>
-                    @if (Model != null)
-                    {
-                        @foreach (var item in Model)
-                        {
-                            <tr onclick="location.href='@Url.Action("Details", "Costs", new { id = item.CostId })'">
+                @foreach (var item in Model)
+                {
+                    <tr onclick="location.href='@Url.Action("Details", "Costs", new { id = item.CostId })'">
 
-                               
-                                <td>
-                                    <h6 class="m-b-0 m-l-10">@item.CostName</h6>
-                                </td>
-                                <td>@item.Category.CategoryName </td>
-                                <td>@string.Format("{0:#,#}", @item.CostAmount)</td>
-                                <td>@item.Farm.FarmName</td>
-                                <td>@item.CostDate.Value.Date.ToString("dd/MM/yyyy")</td>
-                                <td>
-                                    @if (@item.Coststatus)
-                                    {
-                                        <span class="badge badge-pill badge-cyan">
-                                            Đã thanh toán
-                                        </span>
 
-                                    }
-                                    else
-                                    {
-                                        <span class="badge badge-pill badge-red">
-                                            Chưa thanh toán
-                                        </span>
-                                    }
-                                </td>
+                        <td>
+                            <h6 class="m-b-0 m-l-10">@item.CostName</h6>
+                        </td>
+                        <td>@item.Category?.CategoryName </td>
+                        <td>@($"{item.CostAmount:#,#}")</td>
+                        <td>@item.Farm?.FarmName</td>
+                        <td>@item.CostDate?.Date.ToString("dd/MM/yyyy")</td>
+                        <td>
+                            @if (@item.Coststatus)
+                            {
+                                <span class="badge badge-pill badge-cyan">
+                                    Đã thanh toán
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-pill badge-red">
+                                    Chưa thanh toán
+                                </span>
+                            }
+                        </td>
 
-                            </tr>
-
-                        }
-                    }
+                    </tr>
+                }
 
                 </tbody>
             </table>

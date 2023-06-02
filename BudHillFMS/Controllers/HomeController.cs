@@ -17,11 +17,11 @@ namespace BudHillFMS.Controllers
             _context = context;
         }
 
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
             var outcome = _context.Costs.Sum(c => c.CostAmount) ?? 0;
             var farmsNumber = _context.Farms.Count();
-            var seedsNumber = _context.Tasks.Where(t => t.TaskCheck == false).Count();
+            var seedsNumber = _context.Tasks.Count(t => t.TaskCheck == false);
             var employeeNumber = _context.Employees.Count();
             var productCheck = _context.Products.Include(p => p.Field)
                 .ThenInclude(f => f.Farm)

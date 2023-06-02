@@ -10,24 +10,22 @@
         <div class="table-responsive">
             <table class="product-info-table m-t-20">
                 <tbody>
-                    <tr>
-                        <td>Id:</td>
-                        <td class="text-dark font-weight-semibold">@Model.WarehouseId</td>
-                    </tr>
-                    <tr>
-                        <td>Tên nhà kho:</td>
-                        <td>	@Model.WarehouseName</td>
-                    </tr>
-                    <tr>
-                        <td>Trang trại:</td>
-                        <td>	@Model.Farm.FarmName </td>
-                    </tr>
-                    <tr>
-                        <td>Địa điểm:</td>
-                        <td>	@Model.WarehouseLocation</td>
-                    </tr>
-                  
-
+                <tr>
+                    <td>Id:</td>
+                    <td class="text-dark font-weight-semibold">@Model.WarehouseId</td>
+                </tr>
+                <tr>
+                    <td>Tên nhà kho:</td>
+                    <td>@Model.WarehouseName</td>
+                </tr>
+                <tr>
+                    <td>Trang trại:</td>
+                    <td>@Model.Farm?.FarmName </td>
+                </tr>
+                <tr>
+                    <td>Địa điểm:</td>
+                    <td>@Model.WarehouseLocation</td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -54,13 +52,12 @@
             </div>
             <div class="modal-footer">
                 <form asp-action="Delete" asp-route-id="@Model.WarehouseId">
-                    <input type="hidden" asp-for="WarehouseId" />
+                    <input type="hidden" asp-for="WarehouseId"/>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                    <input type="submit" value="Xác nhận xóa" class="btn btn-tone btn-danger" />
+                    <input type="submit" value="Xác nhận xóa" class="btn btn-tone btn-danger"/>
                 </form>
 
             </div>
         </div>
     </div>
 </div>
-

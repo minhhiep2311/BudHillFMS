@@ -18,21 +18,19 @@
                     </tr>
                     <tr>
                         <td>Nhân viên:</td>
-                        <td>@Model.Employee.EmployeeName</td>
+                        <td>@Model.Employee?.EmployeeName</td>
                     </tr>
                     <tr>
                         <td>Checkin:</td>
-                        <td>@Model.CheckIn.Value.ToString("hh:mm:ss tt")</td>
+                        <td>@Model.CheckIn?.ToString("hh:mm:ss tt")</td>
                     </tr>
                     <tr>
                         <td>Checkout:</td>
-                        <td>@Model.CheckOut.Value.ToString("hh:mm:ss tt")</td>
-
+                        <td>@Model.CheckOut?.ToString("hh:mm:ss tt")</td>
                     </tr>
-
                     <tr>
                         <td>Ngày:</td>
-                        <td>@Model.TimekeepingDate.Value.Date.ToString("dd/MM/yyyy")</td>
+                        <td>@Model.TimekeepingDate?.Date.ToString("dd/MM/yyyy")</td>
                     </tr>
 
                 </tbody>

@@ -43,36 +43,32 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model != null)
-                    {
-                        @foreach (var item in Model)
-                        {
-                            <tr onclick="location.href='@Url.Action("Details", "Fertilizers", new { id = item.FertilizerId })'">
+                @foreach (var item in Model)
+                {
+                    <tr onclick="location.href='@Url.Action("Details", "Fertilizers", new { id = item.FertilizerId })'">
 
 
-                                <td>
-                                    <h6 class="m-b-0 m-l-10">@item.FertilizerName</h6>
-                                </td>
-                                <td>
-                                    @item.FertilizerType
-                                </td>
-                                <td>
-                                    @item.FertilizerQuantity
-                                </td>
-                                <td>
-                                    @item.QuantityUsed
-                                </td> 
-                                <td>
-                                    @item.Warehouse.WarehouseName
-                                </td> 
+                        <td>
+                            <h6 class="m-b-0 m-l-10">@item.FertilizerName</h6>
+                        </td>
+                        <td>
+                            @item.FertilizerType
+                        </td>
+                        <td>
+                            @item.FertilizerQuantity
+                        </td>
+                        <td>
+                            @item.QuantityUsed
+                        </td> 
+                        <td>
+                            @item.Warehouse?.WarehouseName
+                        </td> 
 
-                                <td>
-                                    @item.FertilizerImport.Value.Date.ToString("dd/MM/yyyy")
-                                </td>
-                            </tr>
-
-                        }
-                    }
+                        <td>
+                            @item.FertilizerImport?.Date.ToString("dd/MM/yyyy")
+                        </td>
+                    </tr>
+                }
 
                 </tbody>
             </table>

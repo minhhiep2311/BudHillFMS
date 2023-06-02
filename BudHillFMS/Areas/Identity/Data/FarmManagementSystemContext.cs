@@ -20,12 +20,12 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
     public virtual DbSet<Fertilizer> Fertilizers { get; set; } = null!;
     public virtual DbSet<Field> Fields { get; set; } = null!;
     public virtual DbSet<Product> Products { get; set; } = null!;
-    public virtual DbSet<Role> Roles { get; set; } = null!;
+    public new virtual DbSet<Role> Roles { get; set; } = null!;
     public virtual DbSet<Seedling> Seedlings { get; set; } = null!;
     public virtual DbSet<Subtask> Subtasks { get; set; } = null!;
     public virtual DbSet<Task> Tasks { get; set; } = null!;
     public virtual DbSet<Timekeeping> Timekeepings { get; set; } = null!;
-    public virtual DbSet<User> Users { get; set; } = null!;
+    public new virtual DbSet<User> Users { get; set; } = null!;
     public virtual DbSet<Warehouse> Warehouses { get; set; } = null!;
     public virtual DbSet<WarehouseProduct> WarehouseProducts { get; set; } = null!;
 

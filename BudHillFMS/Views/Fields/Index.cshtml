@@ -40,43 +40,40 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model != null)
-                    {
-                        @foreach (var item in Model)
-                        {
-                            <tr onclick="location.href='@Url.Action("Details", "Fields", new { id = item.FieldId })'">
+                @foreach (var item in Model)
+                {
+                    <tr onclick="location.href='@Url.Action("Details", "Fields", new { id = item.FieldId })'">
 
                                
-                                <td>
-                                    <h6 class="m-b-0 m-l-10">@item.FieldName</h6>
-                                </td>
-                                <td>
-                                    @item.FieldArea
-                                </td>
+                        <td>
+                            <h6 class="m-b-0 m-l-10">@item.FieldName</h6>
+                        </td>
+                        <td>
+                            @item.FieldArea
+                        </td>
                                 
-                                <td>
-                                    @item.Farm.FarmName
-                                </td>
-                                <td>
-                                    @if (@item.FieldStatus)
-                                    {
-                                        <span class="badge badge-pill badge-cyan">
-                                            Đang trồng trọt
-                                        </span>
+                        <td>
+                            @item.Farm?.FarmName
+                        </td>
+                        <td>
+                            @if (@item.FieldStatus)
+                            {
+                                <span class="badge badge-pill badge-cyan">
+                                    Đang trồng trọt
+                                </span>
 
-                                    }
-                                    else
-                                    {
-                                        <span class="badge badge-pill badge-red">
-                                            Đang trống
-                                        </span>
-                                    }
-                                </td>
+                            }
+                            else
+                            {
+                                <span class="badge badge-pill badge-red">
+                                    Đang trống
+                                </span>
+                            }
+                        </td>
                                 
-                            </tr>
+                    </tr>
 
-                        }
-                    }
+                }
 
                 </tbody>
             </table>

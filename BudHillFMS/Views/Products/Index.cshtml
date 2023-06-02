@@ -50,41 +50,38 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model != null)
-                    {
-                        @foreach (var item in Model)
-                        {
-                            <tr onclick="location.href='@Url.Action("Details", "Products", new { id = item.ProductId })'">
+                @foreach (var item in Model)
+                {
+                    <tr onclick="location.href='@Url.Action("Details", "Products", new { id = item.ProductId })'">
 
                                
-                                <td>
-                                    <h6 class="m-b-0 m-l-10">@item.ProductName</h6>
-                                </td>
-                                <td>@string.Format("{0:#,#}", @item.Price) </td>
-                                <td>@item.Class</td>
-                                <td>@item.SowingDate.Value.ToString("dd/MM/yyyy")</td>
-                                <td>@item.HarvestDate.Value.ToString("dd/MM/yyyy")</td>
+                        <td>
+                            <h6 class="m-b-0 m-l-10">@item.ProductName</h6>
+                        </td>
+                        <td>@($"{item.Price:#,#}") </td>
+                        <td>@item.Class</td>
+                        <td>@item.SowingDate?.ToString("dd/MM/yyyy")</td>
+                        <td>@item.HarvestDate?.ToString("dd/MM/yyyy")</td>
                                 
-                                <td>
-                                    @if (@item.ProductStatus)
-                                    {
-                                        <span class="badge badge-pill badge-cyan">
-                                            Đang thu hoạch
-                                        </span>
+                        <td>
+                            @if (item.ProductStatus)
+                            {
+                                <span class="badge badge-pill badge-cyan">
+                                    Đang thu hoạch
+                                </span>
 
-                                    }
-                                    else
-                                    {
-                                        <span class="badge badge-pill badge-red">
-                                            Đã thu hoạch
-                                        </span>
-                                    }
-                                </td>
+                            }
+                            else
+                            {
+                                <span class="badge badge-pill badge-red">
+                                    Đã thu hoạch
+                                </span>
+                            }
+                        </td>
                                 
-                            </tr>
+                    </tr>
 
-                        }
-                    }
+                }
 
                 </tbody>
             </table>
