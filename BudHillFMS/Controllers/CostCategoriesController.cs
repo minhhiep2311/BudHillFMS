@@ -13,7 +13,8 @@ using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace BudHillFMS.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,Manager")]
+    
     public class CostCategoriesController : Controller
     {
         private readonly FarmManagementSystemContext _context;
@@ -52,6 +53,7 @@ namespace BudHillFMS.Controllers
         }
 
         // GET: CostCategories/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -62,6 +64,7 @@ namespace BudHillFMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("CategoryId,CategoryName,CategoryDescription")] CostCategory costCategory)
         {
             if (ModelState.IsValid)
@@ -75,6 +78,7 @@ namespace BudHillFMS.Controllers
         }
 
         // GET: CostCategories/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.CostCategories == null)
@@ -95,6 +99,7 @@ namespace BudHillFMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("CategoryId,CategoryName,CategoryDescription")] CostCategory costCategory)
         {
             if (id != costCategory.CategoryId)
@@ -128,6 +133,7 @@ namespace BudHillFMS.Controllers
         }
 
         // GET: CostCategories/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.CostCategories == null)
@@ -148,6 +154,7 @@ namespace BudHillFMS.Controllers
         // POST: CostCategories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.CostCategories == null)

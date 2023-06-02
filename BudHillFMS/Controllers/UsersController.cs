@@ -9,7 +9,7 @@ using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace BudHillFMS.Controllers;
 
-[Authorize(Roles = "Admin")]
+[Authorize(Roles = "Admin,Manager")]
 public class UsersController : Controller
 {
     private readonly FarmManagementSystemContext _context;
@@ -29,12 +29,13 @@ public class UsersController : Controller
     }
 
     // GET: Users
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int? farmId)
     {
-        ViewData["QuyenTruyCap"] = new SelectList(_context.Roles, "Id", "Name");
         ViewData["DanhSachFarm"] = new SelectList(_context.Farms, "FarmId", "FarmName");
 
-        var farmManagementSystemContext = _context.Users.Include(u => u.Farm);
+        var farmManagementSystemContext = _context.Users
+            .Include(u => u.Farm)
+            .Where(p => farmId == null || p.FarmId == farmId);
         return View(await farmManagementSystemContext.ToListAsync());
     }
 
@@ -58,6 +59,7 @@ public class UsersController : Controller
     }
 
     // GET: Users/Create
+    [Authorize(Roles = "Admin")]
     public IActionResult Create()
     {
         ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName");
@@ -71,6 +73,7 @@ public class UsersController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Create(int roleId,
         [Bind("UserName,FirstName,LastName,Email,RoleId,FarmId")]
         User user)
@@ -107,6 +110,7 @@ public class UsersController : Controller
     }
 
     // GET: Users/Edit/5
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Edit(int? id)
     {
         if (id == null)
@@ -133,6 +137,7 @@ public class UsersController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Edit(int id,
         int roleId,
         [Bind("Id,UserName,FirstName,LastName,Email,FarmId")]
@@ -203,6 +208,7 @@ public class UsersController : Controller
     }
 
     // GET: Users/Delete/5
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null)
@@ -222,6 +228,7 @@ public class UsersController : Controller
     }
 
     // POST: Users/Delete/5
+    [Authorize(Roles = "Admin")]
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)

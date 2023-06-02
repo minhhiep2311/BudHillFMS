@@ -18,17 +18,11 @@
         <div class="row m-b-30">
             <div class="col-lg-8">
                 <div class="d-md-flex">
-                    <div class="m-b-10 m-r-15">
-                        <select class="custom-select" id="idrole" name="idrole" style="min-width: 220px;" asp-items="ViewBag.QuyenTruyCap">
-                            <option disabled selected>Quyền truy cập</option>
-                        </select>
-                    </div>
-
                     <div class="m-b-10">
-                        <select class="custom-select" id="idfarm" name="idfarm" style="min-width: 220px;" asp-items="ViewBag.DanhSachFarm">
-                            <option disabled selected>Trang trại</option>
-
-                        </select>
+                        @using (Html.BeginForm("Index", "Users", FormMethod.Get))
+                        {
+                            @Html.DropDownList("farmId", ViewData["DanhSachFarm"] as SelectList, "Tất cả trang trại", new { @class = "form-control", onchange = "this.form.submit();" })
+                        }
                     </div>
                 </div>
             </div>
