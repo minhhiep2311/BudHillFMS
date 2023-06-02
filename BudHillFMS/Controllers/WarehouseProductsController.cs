@@ -24,9 +24,9 @@ public class WarehouseProductsController : Controller
         ViewData["DanhSachKho"] = new SelectList(_context.Warehouses, "WarehouseId", "WarehouseName");
 
         var farmManagementSystemContext = _context.WarehouseProducts
-            .Include(w => w.Product)
-            .Include(w => w.Warehouse)
-            .Where(p => warhouseId == null || p.WarehouseId == warhouseId);
+           .Include(w => w.Product)
+           .Include(w => w.Warehouse)
+           .Where(p => warhouseId == null || p.WarehouseId == warhouseId);
 
         return View(await farmManagementSystemContext.ToListAsync());
     }
@@ -139,46 +139,36 @@ public class WarehouseProductsController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id,
-        [Bind("WarehouseId,ProductId,Quantity,Unit")]
-        WarehouseProduct warehouseProduct)
+    public async Task<IActionResult> Edit(
+        [Bind("Id,WarehouseId,ProductId,Quantity,Unit")] WarehouseProduct warehouseProduct)
     {
-        if (id != warehouseProduct.WarehouseId)
+        if (!ModelState.IsValid)
         {
+            ViewData["ProductId"] =
+                new SelectList(_context.Products, "ProductId", "ProductName", warehouseProduct.ProductId);
+            ViewData["WarehouseId"] = new SelectList(_context.Warehouses,
+                "WarehouseId",
+                "WarehouseName",
+                warehouseProduct.WarehouseId);
+            return View(warehouseProduct);
+        }
+
+        try
+        {
+            _context.WarehouseProducts.Update(warehouseProduct);
+            await _context.SaveChangesAsync();
+            _notyfService.Success("Cập nhật thành công!");
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (WarehouseProductExists(warehouseProduct.WarehouseId))
+                throw;
+
+            _notyfService.Success("Có lỗi xảy ra!");
             return NotFound();
         }
 
-        if (ModelState.IsValid)
-        {
-            try
-            {
-                _context.WarehouseProducts.Update(warehouseProduct);
-                await _context.SaveChangesAsync();
-                _notyfService.Success("Cập nhật thành công!");
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!WarehouseProductExists(warehouseProduct.WarehouseId))
-                {
-                    _notyfService.Success("Có lỗi xảy ra!");
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToAction(nameof(Index));
-        }
-
-        ViewData["ProductId"] =
-            new SelectList(_context.Products, "ProductId", "ProductName", warehouseProduct.ProductId);
-        ViewData["WarehouseId"] = new SelectList(_context.Warehouses,
-            "WarehouseId",
-            "WarehouseName",
-            warehouseProduct.WarehouseId);
-        return View(warehouseProduct);
+        return RedirectToAction(nameof(Index));
     }
 
     // GET: WarehouseProducts/Delete/5

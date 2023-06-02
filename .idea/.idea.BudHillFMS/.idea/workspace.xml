@@ -8,10 +8,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b53ec41-b11a-42bd-a35a-bafae6b11479" name="Changes" comment="refactor">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Controllers/UsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Controllers/UsersController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Users/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Users/Details.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Users/Edit.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Users/Edit.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Controllers/WarehouseProductsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Controllers/WarehouseProductsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/WarehouseProducts/Edit.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/WarehouseProducts/Edit.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BudHillFMS/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +59,8 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/93bf8ca51564b3532dce6442f8ec6d3856e11622b484427b6e965ca60aba4b1/IdentityDbContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Areas/Identity/Data/FarmManagementSystemContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Areas/Identity/Data/FarmManagementSystemContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Areas/Identity/Data/FarmManagementSystemContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Areas/Identity/Data/FarmManagementSystemContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BudHillFMS/Areas/Identity/Pages/Account/Login.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/CostCategoriesController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/CostCategoriesController.cs" root0="SKIP_HIGHLIGHTING" />
@@ -74,9 +75,21 @@
     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/UsersController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/UsersController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/UsersController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/UsersController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/WarehouseProductsController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/WarehouseProductsController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/WarehouseProductsController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/WarehouseProductsController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Migrations/20230602080447_diary.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Models/Diary.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Models/Diary.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Models/WarehouseProduct.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Details.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Edit.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/WarehouseProducts/Details.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/WarehouseProducts/Details.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/WarehouseProducts/Index.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/WarehouseProducts/Index.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2QP6KipRoe3qrPMaCE03cbO5V9g" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -175,7 +188,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685714838436</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fix update user">
+      <created>1685719665300</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1685719665300</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TerminalProjectNonSharedOptionsProvider">
@@ -216,7 +236,8 @@
     <MESSAGE value="edit role" />
     <MESSAGE value="fix create user" />
     <MESSAGE value="refactor" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor" />
+    <MESSAGE value="fix update user" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix update user" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
