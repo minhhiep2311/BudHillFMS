@@ -7,25 +7,30 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BudHillFMS.Models;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace BudHillFMS.Controllers
 {
     public class SeedlingsController : Controller
     {
         private readonly FarmManagementSystemContext _context;
+        private readonly INotyfService _notyfService;
 
-        public SeedlingsController(FarmManagementSystemContext context)
+        public SeedlingsController(FarmManagementSystemContext context, INotyfService notyfService)
         {
             _context = context;
+            _notyfService = notyfService;
         }
 
-        // GET: Seedlings
-        public async Task<IActionResult> Index()
-        {
-              return _context.Seedlings != null ? 
-                          View(await _context.Seedlings.ToListAsync()) :
-                          Problem("Entity set 'FarmManagementSystemContext.Seedlings'  is null.");
-        }
+            // GET: Seedlings
+            public async Task<IActionResult> Index()
+            {
+                var seedlings = _context.Seedlings.OrderByDescending(s => s.SeedlingStart);
+
+                return seedlings != null ? 
+                              View(await seedlings.ToListAsync()) :
+                              Problem("Entity set 'FarmManagementSystemContext.Seedlings'  is null.");
+            }
 
         // GET: Seedlings/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -62,6 +67,7 @@ namespace BudHillFMS.Controllers
             {
                 _context.Add(seedling);
                 await _context.SaveChangesAsync();
+                _notyfService.Success("Tạo mới thành công!");
                 return RedirectToAction(nameof(Index));
             }
             return View(seedling);
@@ -101,11 +107,13 @@ namespace BudHillFMS.Controllers
                 {
                     _context.Update(seedling);
                     await _context.SaveChangesAsync();
+                    _notyfService.Success("Cập nhật thành công!");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!SeedlingExists(seedling.SeedlingId))
                     {
+                        _notyfService.Success("Có lỗi xảy ra!");
                         return NotFound();
                     }
                     else
@@ -152,6 +160,7 @@ namespace BudHillFMS.Controllers
             }
             
             await _context.SaveChangesAsync();
+            _notyfService.Success("Xóa thành công!");
             return RedirectToAction(nameof(Index));
         }
 

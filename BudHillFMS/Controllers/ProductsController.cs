@@ -35,7 +35,8 @@ namespace BudHillFMS.Controllers
                 .ThenInclude(f => f.Farm)
                 .Where(p => farmId == null || p.Field.FarmId == farmId)
                 .Where(p => fieldId == null || p.FieldId == fieldId)
-                .OrderByDescending(t => t.ProductStatus);
+                .OrderByDescending(t => t.ProductStatus)
+                .ThenByDescending(p => p.HarvestDate);
 
 
             return View(await farmManagementSystemContext.ToListAsync());

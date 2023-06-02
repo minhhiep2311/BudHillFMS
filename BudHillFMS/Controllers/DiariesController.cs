@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BudHillFMS.Models;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using System.Web;
 
 namespace BudHillFMS.Controllers
 {
@@ -22,13 +23,19 @@ namespace BudHillFMS.Controllers
         }
 
         // GET: Diaries
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? diaryCategory)
         {
-            ViewData["LoaiNhatKy"] = new SelectList(_context.Diaries, "DiaryId", "DiaryCategory");
+            ViewData["LoaiNhatKy"] = new SelectList(_context.Diaries, "DiaryCategory", "DiaryCategory");
 
-            var farmManagementSystemContext = _context.Diaries.Include(d => d.Field).Include(d => d.Product).OrderByDescending(t => t.EntryDate);
+            var farmManagementSystemContext = _context.Diaries
+                .Include(d => d.Field)
+                .Include(d => d.Product)
+                .Where(d => string.IsNullOrEmpty(diaryCategory) || d.DiaryCategory == diaryCategory)
+                .OrderByDescending(t => t.EntryDate);
+
             return View(await farmManagementSystemContext.ToListAsync());
         }
+
 
         // GET: Diaries/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -46,6 +53,9 @@ namespace BudHillFMS.Controllers
             {
                 return NotFound();
             }
+
+            // Giải mã HTML để hiển thị nội dung đúng định dạng
+            diary.Description = HttpUtility.HtmlDecode(diary.Description);
 
             return View(diary);
         }
@@ -67,6 +77,11 @@ namespace BudHillFMS.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Gán giá trị từ hidden input cho trường Description
+                diary.Description = Request.Form["Description"].ToString();
+                // Giải mã HTML từ trình soạn thảo Quill
+                diary.Description = HttpUtility.HtmlDecode(diary.Description);
+
                 _context.Add(diary);
                 await _context.SaveChangesAsync();
                 _notyfService.Success("Tạo mới thành công!");
@@ -111,6 +126,9 @@ namespace BudHillFMS.Controllers
             {
                 try
                 {
+                    // Giải mã HTML từ trình soạn thảo Quill
+                    diary.Description = HttpUtility.HtmlDecode(diary.Description);
+
                     _context.Update(diary);
                     await _context.SaveChangesAsync();
                     _notyfService.Success("Cập nhật thành công!");

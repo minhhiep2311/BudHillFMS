@@ -7,12 +7,16 @@
 <div class="card">
     <div class="card-body">
         <h4 class="card-title">Thông tin nhật ký</h4>
-        <div class="table-responsive">
+        <div class="table">
             <table class="product-info-table m-t-20">
                 <tbody>
                     <tr>
                         <td>ID:</td>
                         <td class="text-dark font-weight-semibold">@Model.DiaryId</td>
+                    </tr>
+                    <tr>
+                        <td>Sản phẩm:</td>
+                        <td> @Model.Product.ProductName</td>
                     </tr>
                     <tr>
                         <td>Chủ đề:</td>
@@ -23,23 +27,31 @@
                         <td> @Model.DiaryCategory</td>
                     </tr>
                     <tr>
-                        <td>Ngày viết:</td>
-                        <td>@Model.EntryDate.Date.ToString("dd/MM/yyyy")</td>
-                    </tr>
-                    <tr>
                         <td>Nhà kính:</td>
                         <td>@Model.Field.FieldName</td>
                     </tr>
                     <tr>
-                        <td>Sản phẩm:</td>
-                        <td> @Model.Product.ProductName</td>
+                        <td>Ngày viết:</td>
+                        <td>@Model.EntryDate.Date.ToString("dd/MM/yyyy")</td>
                     </tr>
                     <tr>
-                        <td>Nội dung:</td>
-                        <td> @Model.Description</td>
+                        <td colspan="2">Nội dung:</td>
+
                     </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div id="descriptionContent" style="min-height: 20px;overflow: hidden;overflow-y: scroll;">
+                                            @Html.Raw(Model.Description)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
 
-
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -76,3 +88,17 @@
         </div>
     </div>
 </div>
+
+@section scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var quill = new Quill('#descriptionContent', {
+                readOnly: true,
+                theme: 'snow',
+                modules: {
+                    toolbar: false // Ẩn thanh công cụ
+                }
+            });
+        });
+    </script>
+}
