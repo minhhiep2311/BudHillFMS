@@ -22,10 +22,12 @@ public class WarehouseProductsController : Controller
     public async Task<IActionResult> Index(int? warhouseId)
     {
         ViewData["DanhSachKho"] = new SelectList(_context.Warehouses, "WarehouseId", "WarehouseName");
+
         var farmManagementSystemContext = _context.WarehouseProducts
             .Include(w => w.Product)
             .Include(w => w.Warehouse)
             .Where(p => warhouseId == null || p.WarehouseId == warhouseId);
+
         return View(await farmManagementSystemContext.ToListAsync());
     }
 
@@ -40,7 +42,7 @@ public class WarehouseProductsController : Controller
         var warehouseProduct = await _context.WarehouseProducts
            .Include(w => w.Product)
            .Include(w => w.Warehouse)
-           .FirstOrDefaultAsync(m => m.WarehouseId == id);
+           .FirstOrDefaultAsync(m => m.Id == id);
         if (warehouseProduct == null)
         {
             return NotFound();
@@ -117,7 +119,7 @@ public class WarehouseProductsController : Controller
         }
 
         var warehouseProduct =
-            await _context.WarehouseProducts.FirstOrDefaultAsync(wp => wp.WarehouseId == id || wp.ProductId == id);
+            await _context.WarehouseProducts.FindAsync(id);
         if (warehouseProduct == null)
         {
             return NotFound();
@@ -150,19 +152,7 @@ public class WarehouseProductsController : Controller
         {
             try
             {
-                var newWarehouseProduct = _context.WarehouseProducts.FirstOrDefault(wp =>
-                    wp.WarehouseId == warehouseProduct.WarehouseId &&
-                    wp.ProductId == warehouseProduct.ProductId);
-
-                if (newWarehouseProduct != null)
-                {
-                    newWarehouseProduct.WarehouseId = warehouseProduct.WarehouseId;
-                    newWarehouseProduct.ProductId = warehouseProduct.ProductId;
-                    newWarehouseProduct.Quantity = warehouseProduct.Quantity;
-                    newWarehouseProduct.Unit = warehouseProduct.Unit;
-                }
-
-                _context.WarehouseProducts.Update(newWarehouseProduct);
+                _context.WarehouseProducts.Update(warehouseProduct);
                 await _context.SaveChangesAsync();
                 _notyfService.Success("Cập nhật thành công!");
             }
@@ -170,6 +160,7 @@ public class WarehouseProductsController : Controller
             {
                 if (!WarehouseProductExists(warehouseProduct.WarehouseId))
                 {
+                    _notyfService.Success("Có lỗi xảy ra!");
                     return NotFound();
                 }
                 else

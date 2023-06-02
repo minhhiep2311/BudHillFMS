@@ -424,7 +424,7 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
         // Seeding Roles
         var roles = new[]
         {
-            (name: "Admin", desc: "Quản lý toàn bộ Farm", normalize: "Admin"),
+            (name: "Admin", desc: "Admin", normalize: "Admin"),
             (name: "Manager", desc: "Quản lý Farm ", normalize: "Manager"),
             (name: "Engineer", desc: "Kỹ thuật viên ", normalize: "Engineer")
         };

@@ -12,7 +12,7 @@
                 <tbody>
                     <tr>
                         <td>Id:</td>
-                        <td class="text-dark font-weight-semibold">@Model.WarehouseId</td>
+                        <td class="text-dark font-weight-semibold">@Model.Id</td>
                     </tr>
                     <tr>
                         <td>Tên sản phẩm:</td>
@@ -38,7 +38,7 @@
     </div>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.WarehouseId" class="btn btn-tone btn-primary m-r-5">Sửa</a>|
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-tone btn-primary m-r-5">Sửa</a>|
     <a data-toggle="modal" data-target="#DeleteModal" class="btn btn-tone btn-danger m-r-5">Xóa</a>|
     <a asp-action="Index" class="btn btn-tone btn-primary m-r-5">Trở về</a>
 </div>
@@ -57,8 +57,8 @@
                 Xác nhận xóa thông tin này!
             </div>
             <div class="modal-footer">
-                <form asp-action="Delete" asp-route-id="@Model.WarehouseId">
-                    <input type="hidden" asp-for="WarehouseId" />
+                <form asp-action="Delete" asp-route-id="@Model.Id">
+                    <input type="hidden" asp-for="Id" />
                     <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
                     <input type="submit" value="Xác nhận xóa" class="btn btn-tone btn-danger" />
                 </form>

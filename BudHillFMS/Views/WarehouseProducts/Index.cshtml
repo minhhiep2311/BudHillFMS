@@ -39,7 +39,7 @@
                 <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr onclick="location.href='@Url.Action("Details", "WarehouseProducts", new { id = item.WarehouseId })'">
+                    <tr onclick="location.href='@Url.Action("Details", "WarehouseProducts", new { id = item.Id })'">
 
                         <td>
                             <h6 class="m-b-0 m-l-10">@item.Product?.ProductName</h6>
