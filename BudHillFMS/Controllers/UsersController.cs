@@ -15,7 +15,7 @@ public class UsersController : Controller
     private readonly FarmManagementSystemContext _context;
     private readonly UserManager<User> _userManager;
     private readonly RoleManager<Role> _roleManager;
-    public INotyfService _notyfService;
+    private readonly INotyfService _notyfService;
 
     public UsersController(FarmManagementSystemContext context,
         UserManager<User> userManager,
@@ -77,7 +77,7 @@ public class UsersController : Controller
     {
         if (ModelState.IsValid)
         {
-            var result = await _userManager.CreateAsync(user);
+            var result = await _userManager.CreateAsync(user, "123456");
 
             if (result.Succeeded)
             {
@@ -85,21 +85,16 @@ public class UsersController : Controller
                 var role = await _roleManager.FindByIdAsync(roleId.ToString());
 
                 var addRoleResult = await _userManager.AddToRoleAsync(createdUser, role.Name);
-                if (!addRoleResult.Succeeded)
-                {
-                    await _userManager.DeleteAsync(createdUser);
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, addRoleResult.Errors.FirstOrDefault()!.Description);
+                if (addRoleResult.Succeeded) 
+                    return RedirectToAction(nameof(Index));
+                
+                await _userManager.DeleteAsync(createdUser);
+                ModelState.AddModelError(string.Empty, addRoleResult.Errors.FirstOrDefault()!.Description);
                     
-                    ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName", user.FarmId);
-                    ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "RoleDescription");
+                ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName", user.FarmId);
+                ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "RoleDescription");
 
-                    return View(user);
-                }
-
-                return RedirectToAction(nameof(Index));
+                return View(user);
             }
 
             ModelState.AddModelError(string.Empty, result.Errors.FirstOrDefault()!.Description);

@@ -8,20 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b53ec41-b11a-42bd-a35a-bafae6b11479" name="Changes" comment="add describer">
-      <change afterPath="$PROJECT_DIR$/BudHillFMS/Migrations/20230531173123_RemoveUnicode.Designer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BudHillFMS/Migrations/20230531173123_RemoveUnicode.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BudHillFMS/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Areas/Identity/Data/FarmManagementSystemContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Areas/Identity/Data/FarmManagementSystemContext.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BudHillFMS/Controllers/UsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Controllers/UsersController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Controllers/WarehouseProductsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Controllers/WarehouseProductsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Domain/LocalizedIdentityErrorDescriber.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Domain/LocalizedIdentityErrorDescriber.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Migrations/FarmManagementSystemContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Migrations/FarmManagementSystemContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Shared/_Layout.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Users/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Users/Create.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Users/Delete.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Users/Delete.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Users/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Users/Details.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/Users/Edit.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/Users/Edit.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BudHillFMS/Views/WarehouseProducts/Edit.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/Views/WarehouseProducts/Edit.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BudHillFMS/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/BudHillFMS/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -70,37 +58,23 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3181a4808c72ee2cbdda27566f1334b27264c858b7d2784257513a1a339c9ec/IdentityUserContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/93bf8ca51564b3532dce6442f8ec6d3856e11622b484427b6e965ca60aba4b1/IdentityDbContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Areas/Identity/Data/FarmManagementSystemContext.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Areas/Identity/Data/User.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Areas/Identity/Pages/Account/AccessDenied.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Areas/Identity/Pages/Account/AccessDenied.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Areas/Identity/Data/FarmManagementSystemContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BudHillFMS/Areas/Identity/Pages/Account/Login.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Areas/Identity/Pages/Account/Login.cshtml.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Areas/Identity/Pages/Account/Login.cshtml.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Areas/Identity/Pages/Account/Login.cshtml.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Areas/Identity/Pages/Account/Login.cshtml.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Areas/Identity/Pages/Account/Login.cshtml.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/CostCategoriesController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/CostCategoriesController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/CostCategoriesController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/CostCategoriesController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/CostsController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/CostsController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/DiariesController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/DiariesController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/UsersController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/UsersController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/UsersController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Controllers/UsersController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Migrations/FarmManagementSystemContextModelSnapshot.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Models/Role.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Models/Role.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Shared/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Shared/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Shared/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Shared/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Shared/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Create.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Create.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Delete.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Details.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Details.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Edit.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Edit.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Edit.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Index.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Views/Users/Index.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Migrations/20230602080447_diary.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Models/Diary.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/annguyen/Documents/BudHillFMS/BudHillFMS/Models/Diary.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2QP6KipRoe3qrPMaCE03cbO5V9g" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -116,7 +90,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "ann",
     "settings.editor.selected.configurable": "HotReloadSettingsPage"
   },
   "keyToStringList": {
