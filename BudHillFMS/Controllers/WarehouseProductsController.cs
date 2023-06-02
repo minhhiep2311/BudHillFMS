@@ -72,9 +72,9 @@ public class WarehouseProductsController : Controller
             if (ModelState.IsValid)
             {
                 // Check if a record with the same combination of WarehouseId and ProductId already exists
-                var existingWarehouseProduct =
-                    await _context.WarehouseProducts.FindAsync(warehouseProduct.WarehouseId,
-                        warehouseProduct.ProductId);
+                var existingWarehouseProduct = _context.WarehouseProducts.FirstOrDefault(wp =>
+                    wp.WarehouseId == warehouseProduct.WarehouseId &&
+                    wp.ProductId == warehouseProduct.ProductId);
                 if (existingWarehouseProduct != null)
                 {
                     ModelState.AddModelError("", "Đã tồn tại một kho hàng có cùng kho hàng và sản phẩm.");
