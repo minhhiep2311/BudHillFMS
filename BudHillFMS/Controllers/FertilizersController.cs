@@ -3,25 +3,32 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BudHillFMS.Areas.Identity.Data;
 using BudHillFMS.Models;
+using AspNetCoreHero.ToastNotification.Abstractions;
+using AspNetCoreHero.ToastNotification.Notyf;
 
 namespace BudHillFMS.Controllers;
 
 public class FertilizersController : Controller
 {
     private readonly FarmManagementSystemContext _context;
+    private readonly INotyfService _notyfService;
 
-    public FertilizersController(FarmManagementSystemContext context)
+    public FertilizersController(FarmManagementSystemContext context, INotyfService notyfService)
     {
         _context = context;
+        _notyfService = notyfService;
     }
 
     // GET: Fertilizers
-    public async Task<IActionResult> Index(int? warhouseId)
+    public async Task<IActionResult> Index(int? warhouseId, string? fertilizerType)
     {
         ViewData["DanhSachKho"] = new SelectList(_context.Warehouses, "WarehouseId", "WarehouseName");
+        ViewData["LoaiPhanBon"] = new SelectList(_context.Fertilizers, "FertilizerType", "FertilizerType");
+
         var farmManagementSystemContext = _context.Fertilizers
            .Include(f => f.Warehouse)
-           .Where(p => warhouseId == null || p.WarehouseId == warhouseId); ;
+           .Where(p => warhouseId == null || p.WarehouseId == warhouseId)
+            .Where(d => string.IsNullOrEmpty(fertilizerType) || d.FertilizerType == fertilizerType); 
         return View(await farmManagementSystemContext.ToListAsync());
     }
 
@@ -47,7 +54,7 @@ public class FertilizersController : Controller
     // GET: Fertilizers/Create
     public IActionResult Create()
     {
-        ViewData["WarehouseId"] = new SelectList(_context.Warehouses, "WarehouseId", "WarehouseId");
+        ViewData["WarehouseId"] = new SelectList(_context.Warehouses, "WarehouseId", "WarehouseName");
         return View();
     }
 
@@ -62,9 +69,10 @@ public class FertilizersController : Controller
         {
             _context.Add(fertilizer);
             await _context.SaveChangesAsync();
+            _notyfService.Success("Tạo mới thành công!");
             return RedirectToAction(nameof(Index));
         }
-        ViewData["WarehouseId"] = new SelectList(_context.Warehouses, "WarehouseId", "WarehouseId", fertilizer.WarehouseId);
+        ViewData["WarehouseId"] = new SelectList(_context.Warehouses, "WarehouseId", "WarehouseName", fertilizer.WarehouseId);
         return View(fertilizer);
     }
 
@@ -81,7 +89,7 @@ public class FertilizersController : Controller
         {
             return NotFound();
         }
-        ViewData["WarehouseId"] = new SelectList(_context.Warehouses, "WarehouseId", "WarehouseId", fertilizer.WarehouseId);
+        ViewData["WarehouseId"] = new SelectList(_context.Warehouses, "WarehouseId", "WarehouseName", fertilizer.WarehouseId);
         return View(fertilizer);
     }
 
@@ -103,11 +111,13 @@ public class FertilizersController : Controller
             {
                 _context.Update(fertilizer);
                 await _context.SaveChangesAsync();
+                _notyfService.Success("Cập nhật thành công!");
             }
             catch (DbUpdateConcurrencyException)
             {
                 if (!FertilizerExists(fertilizer.FertilizerId))
                 {
+                    _notyfService.Success("Có lỗi xảy ra!");
                     return NotFound();
                 }
                 else
@@ -117,7 +127,7 @@ public class FertilizersController : Controller
             }
             return RedirectToAction(nameof(Index));
         }
-        ViewData["WarehouseId"] = new SelectList(_context.Warehouses, "WarehouseId", "WarehouseId", fertilizer.WarehouseId);
+        ViewData["WarehouseId"] = new SelectList(_context.Warehouses, "WarehouseId", "WarehouseName", fertilizer.WarehouseId);
         return View(fertilizer);
     }
 
@@ -156,6 +166,7 @@ public class FertilizersController : Controller
         }
             
         await _context.SaveChangesAsync();
+        _notyfService.Success("Xóa thành công!");
         return RedirectToAction(nameof(Index));
     }
 

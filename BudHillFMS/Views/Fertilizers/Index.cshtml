@@ -12,13 +12,19 @@
         <div class="row m-b-30">
             <div class="col-lg-8">
                 <div class="d-md-flex">
-
-                    <div class="m-b-10">
                         @using (Html.BeginForm("Index", "Fertilizers", FormMethod.Get))
                         {
-                            @Html.DropDownList("warhouseId", ViewData["DanhSachKho"] as SelectList, "Tất cả kho", new { @class = "form-control", onchange = "this.form.submit();" })
+                        <div class ="row">
+                            <div class="col-md-6">
+                                @Html.DropDownList("warhouseId", ViewData["DanhSachKho"] as SelectList, "Tất cả kho", new { @class = "form-control", onchange = "this.form.submit();" })
+                            </div> 
+
+                            <div class="col-md-6">
+                                @Html.DropDownList("fertilizerType", ViewData["LoaiPhanBon"] as SelectList, "Tất cả các loại", new { @class = "form-control", onchange = "this.form.submit();" })
+                            </div>
+                        </div>
                         }
-                    </div>
+                    
                 </div>
             </div>
             <div class="col-lg-4 text-right">
@@ -35,9 +41,9 @@
 
                         <th>Tên phân bón</th>
                         <th>Loại</th>
-                        <th>Số lượng</th>
-                        <th>Đã dùng</th>
-                        <th>Kho</th>
+                        <th>Số lượng (Kg)</th>
+                        <th>Đã dùng (Kg)</th>
+                        <th>Nhà kho</th>
                         <th>Ngày nhập</th>
 
                     </tr>
