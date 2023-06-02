@@ -85,12 +85,12 @@ public class UsersController : Controller
                 var role = await _roleManager.FindByIdAsync(roleId.ToString());
 
                 var addRoleResult = await _userManager.AddToRoleAsync(createdUser, role.Name);
-                if (addRoleResult.Succeeded) 
+                if (addRoleResult.Succeeded)
                     return RedirectToAction(nameof(Index));
-                
+
                 await _userManager.DeleteAsync(createdUser);
                 ModelState.AddModelError(string.Empty, addRoleResult.Errors.FirstOrDefault()!.Description);
-                    
+
                 ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName", user.FarmId);
                 ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "RoleDescription");
 
@@ -134,7 +134,7 @@ public class UsersController : Controller
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id,
-        int role,
+        int roleId,
         [Bind("Id,UserName,FirstName,LastName,Email,FarmId")]
         User request)
     {
@@ -147,43 +147,59 @@ public class UsersController : Controller
         var oldRolesName = await _userManager.GetRolesAsync(user);
         var oldRole = await _roleManager.FindByNameAsync(oldRolesName.Count > 0 ? oldRolesName[0] : null);
 
-        if (ModelState.IsValid && user != null)
+        if (!ModelState.IsValid || user == null)
         {
-            try
-            {
-                _context.Update(request);
+            ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName", request.FarmId);
+            ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "RoleDescription", oldRole.Id);
 
-                var roleId = role.ToString();
-
-                if (!oldRolesName.Contains(roleId))
-                {
-                    await _userManager.AddToRoleAsync(user, roleId);
-                    if (oldRolesName.Count > 0)
-                    {
-                        await _userManager.RemoveFromRoleAsync(user, oldRolesName[0]);
-                    }
-                }
-
-                await _context.SaveChangesAsync();
-                _notyfService.Success("Cập nhật thành công!");
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(request.Id))
-                {
-                    return NotFound();
-                }
-
-                throw;
-            }
-
-            return RedirectToAction(nameof(Index));
+            return View(request);
         }
 
-        ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName", request.FarmId);
-        ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "RoleDescription", oldRole.Id);
+        try
+        {
+            // _context.ChangeTracker.Clear();
+            // _context.Entry(user).State = EntityState.Detached;
+            user.FirstName = request.FirstName;
+            user.LastName = request.LastName;
+            user.FarmId = request.FarmId;
 
-        return View(request);
+            var result = await _userManager.UpdateAsync(user);
+
+            if (!result.Succeeded)
+            {
+                ViewData["FarmId"] = new SelectList(_context.Farms, "FarmId", "FarmName", request.FarmId);
+                ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "RoleDescription", oldRole.Id);
+
+                return View(request);
+            }
+
+            user = await _userManager.FindByIdAsync(user.Id.ToString());
+            var newRole = await _roleManager.FindByIdAsync(roleId.ToString());
+
+            if (!oldRolesName.Contains(newRole.Name))
+            {
+                await _userManager.AddToRoleAsync(user, newRole.Name);
+
+                if (oldRolesName.Count > 0)
+                {
+                    await _userManager.RemoveFromRoleAsync(user, oldRolesName[0]);
+                }
+            }
+            
+            await _context.SaveChangesAsync();
+            _notyfService.Success("Cập nhật thành công!");
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!UserExists(request.Id))
+            {
+                return NotFound();
+            }
+
+            throw;
+        }
+
+        return RedirectToAction(nameof(Index));
     }
 
     // GET: Users/Delete/5
