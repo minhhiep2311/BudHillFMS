@@ -34,6 +34,8 @@ namespace BudHillFMS.Controllers
             return View(await farmManagementSystemContext.ToListAsync());
         }
 
+       
+
         // GET: Employees/Details/5
         public async Task<IActionResult> Details(int? id)
         {

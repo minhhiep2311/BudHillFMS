@@ -28,6 +28,8 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
     public new virtual DbSet<User> Users { get; set; } = null!;
     public virtual DbSet<Warehouse> Warehouses { get; set; } = null!;
     public virtual DbSet<WarehouseProduct> WarehouseProducts { get; set; } = null!;
+    public virtual DbSet<EmployeeHistory> EmployeeHistories { get; set; } = null!;
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -131,6 +133,10 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
             entity.Property(e => e.EmployeeAddress).HasMaxLength(100);
 
             entity.Property(e => e.EmployeeEmail).HasMaxLength(100);
+
+            entity.Property(e => e.FarmWorked).HasMaxLength(100);
+
+            entity.Property(e => e.PositionWorked).HasMaxLength(100);
 
             entity.Property(e => e.EmployeeName).HasMaxLength(100);
 
@@ -402,6 +408,20 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
                .HasForeignKey(d => d.WarehouseId)
                .OnDelete(DeleteBehavior.ClientSetNull)
                .HasConstraintName("FK_WarehouseProduct_Warehouse");
+        });
+
+
+        builder.Entity<EmployeeHistory>(entity =>
+        {
+            entity.HasKey(e => e.Id); // Specify the primary key property
+
+            entity.Property(e => e.FarmWorked) .HasColumnType("nvarchar(max)"); 
+
+            entity.Property(e => e.PositionWorked) .HasColumnType("nvarchar(max)"); 
+
+            entity.HasOne(e => e.Employee) // Define a relationship with the Employee entity
+                .WithMany() // Specify the navigation property on the Employee entity, if applicable
+                .HasForeignKey(e => e.EmployeeId); // Specify the foreign key property
         });
 
         // Seeding Fields

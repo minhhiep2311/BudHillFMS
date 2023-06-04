@@ -4,6 +4,7 @@ using BudHillFMS.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BudHillFMS.Migrations
 {
     [DbContext(typeof(FarmManagementSystemContext))]
-    partial class FarmManagementSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20230603004948_add-EmployeeHistory")]
+    partial class addEmployeeHistory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,7 +117,7 @@ namespace BudHillFMS.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c8d6b530-c651-498e-bbc4-a16cae8d91a7",
+                            ConcurrencyStamp = "6fcf3446-83b8-497f-b28b-c6be8c83ec6f",
                             Email = "thaiminhhiep2311@gmail.com",
                             EmailConfirmed = false,
                             FarmId = 1,
@@ -124,9 +126,9 @@ namespace BudHillFMS.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "THAIMINHHIEP2311@GMAIL.COM",
                             NormalizedUserName = "MINHHIEP",
-                            PasswordHash = "AQAAAAEAACcQAAAAEH9RMetG/tRFrQ2yCxcc8azJZq4PmuIr5gfCmlVEPgFDAp3SubS1Z2boSdRS05B+nQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECXI1egxPWBr+iT6v1pnSkBss3tF2WxeKAj8HiANscWlk1owcLsc+95kqwDpeFcxow==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5e3b1249-defb-44d9-9e3e-f26fd67bd491",
+                            SecurityStamp = "d529877d-8adf-425e-95ee-3d222a4b7ea0",
                             TwoFactorEnabled = false,
                             UserName = "minhhiep"
                         },
@@ -134,7 +136,7 @@ namespace BudHillFMS.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "66a29d45-0b81-44e2-b42f-390091bbac4b",
+                            ConcurrencyStamp = "2320cb44-49f3-4d4b-936c-701b6b152d23",
                             Email = "thaiminhhiep2311@gmail.com",
                             EmailConfirmed = false,
                             FarmId = 1,
@@ -143,9 +145,9 @@ namespace BudHillFMS.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "THAIMINHHIEP2311@GMAIL.COM",
                             NormalizedUserName = "MINHNCBK",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBCKEbZbx9ZaEh9kVRMTtjbzmQ6r0goU8lCHOzz98ARxClBmB3Ckp7HPUoyG/VLfmQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIZm88zq1WnzmaAdBS5h8AHcjnUbTTlBNnTRxvxJPFKuaPnit18n01Auc/dn6jb0gA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9aa83d6f-aef7-4207-a149-53ee028cd4b1",
+                            SecurityStamp = "bed1badb-0786-48f5-84a0-d61d3b35aee7",
                             TwoFactorEnabled = false,
                             UserName = "minhncbk"
                         },
@@ -153,7 +155,7 @@ namespace BudHillFMS.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "44c802e4-792a-4a0f-9847-540049532314",
+                            ConcurrencyStamp = "3aa8c617-0f04-49ec-b22b-d3847d0b75ce",
                             Email = "tuanthai@gmail.com",
                             EmailConfirmed = false,
                             FarmId = 2,
@@ -162,9 +164,9 @@ namespace BudHillFMS.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "TUANTHAI@GMAIL.COM",
                             NormalizedUserName = "TUANTHAI",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAmPxZ5phjnb1wnDpreSdFo7jUq2ETd9187GJiajCkvHnJOpTNmkwKOlMMQNDEraEA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENbk8v45MKQ8d6zJ6yJacYnCI0VZX0cfN486lRCKw8Ia89KdYz/NKDs/zTuALdPThQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "735f8044-be88-48c1-b9c2-825947906fb4",
+                            SecurityStamp = "191ceed4-0589-43c3-b5af-ac43c189603d",
                             TwoFactorEnabled = false,
                             UserName = "tuanthai"
                         },
@@ -172,7 +174,7 @@ namespace BudHillFMS.Migrations
                         {
                             Id = 4,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "343673a2-032f-435c-88b2-bdabbb258d55",
+                            ConcurrencyStamp = "1e9c8778-8c04-4d23-b8c1-6c1dd11b84b4",
                             Email = "hoantuan@hacovina.vn",
                             EmailConfirmed = false,
                             FarmId = 1,
@@ -181,9 +183,9 @@ namespace BudHillFMS.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "HOANTUAN@HACOVINA.VN",
                             NormalizedUserName = "HOANGTUAN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGJ9PHQnL9OUfpr1n9Y/WCfDTUjbhUxpUNRwoGUtsK+2GXKmkXNVyv0LY8KJmmWGsg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBHJwiDNRn7d5lkiR5WLhZ3ayZDyyjbZq/bPQDI2hu6eAPjC4LbcR/nnjozkTFKLFg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d7c31209-9270-48cd-ba79-92dced4e3afc",
+                            SecurityStamp = "cbf1ade4-488a-452a-a691-aed7076d652c",
                             TwoFactorEnabled = false,
                             UserName = "hoangtuan"
                         },
@@ -191,7 +193,7 @@ namespace BudHillFMS.Migrations
                         {
                             Id = 5,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bdb352e2-c589-4c46-814f-cbd337e64a69",
+                            ConcurrencyStamp = "e64dd945-3d92-4420-addd-ccd292258d53",
                             Email = "conghaice@gmail.com",
                             EmailConfirmed = false,
                             FarmId = 1,
@@ -200,9 +202,9 @@ namespace BudHillFMS.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "CONGHAICE@GMAIL.COM",
                             NormalizedUserName = "CONGHAI",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBwFrH9GVYYb403woly3ijnN56Nc1TGnmCeVTeDTHql+ze5K+uOlFvPKeSznqW/wPA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGXMKn6UbFVcug1VYPdrgSEXLwlTCOR3ISc0Wi58TVXwVR2Wdezo9Sm89QhClGi1JA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "eb2f2aef-d8c8-444f-8b0d-276ce2f73590",
+                            SecurityStamp = "c946c831-61c6-42af-bdb6-6854f45930d7",
                             TwoFactorEnabled = false,
                             UserName = "conghai"
                         });
@@ -345,18 +347,10 @@ namespace BudHillFMS.Migrations
                         .HasColumnType("int")
                         .HasColumnName("FarmID");
 
-                    b.Property<string>("FarmWorked")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
                     b.Property<string>("Position")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("position");
-
-                    b.Property<string>("PositionWorked")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("EmployeeId");
 
@@ -620,7 +614,7 @@ namespace BudHillFMS.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "38176a8d-bf7d-436d-8ea1-50c0d5303f41",
+                            ConcurrencyStamp = "29f35689-231c-4663-a842-df302f3280a8",
                             Name = "Admin",
                             NormalizedName = "Admin",
                             RoleDescription = "Admin"
@@ -628,7 +622,7 @@ namespace BudHillFMS.Migrations
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "020eae44-c078-48d5-931f-04441cfb876d",
+                            ConcurrencyStamp = "fcada385-818f-4f64-acf6-a5ea70e65622",
                             Name = "Manager",
                             NormalizedName = "Manager",
                             RoleDescription = "Quản lý Farm "
@@ -636,7 +630,7 @@ namespace BudHillFMS.Migrations
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "84fad961-2f1c-4411-b167-b48fc530398c",
+                            ConcurrencyStamp = "433c6d2e-f867-4050-96db-a549f9adceb6",
                             Name = "Engineer",
                             NormalizedName = "Engineer",
                             RoleDescription = "Kỹ thuật viên "
