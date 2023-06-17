@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<BudHillFMS.Models.Diary>
-
+@using System.Text.RegularExpressions
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -68,7 +68,8 @@
                                         <div class="list-msg">
                                             <span class="list-title">@item.DiarySubject</span>
                                             <span class="m-h-5 d-none d-lg-inline-block"> - </span>
-                                            <span class="list-text text-gray">@item.Description </span>
+                                            <span class="list-text text-gray" id="descriptionText">@Html.Raw(Regex.Replace(item.Description, "<.*?>", "    "))</span>
+
                                         </div>
                                     </td>
                                     <td class="list-date">
@@ -80,17 +81,6 @@
                 }
             }
         </div>
-        <!--
-        <div class="m-t-20 text-right">
-            <ul class="pagination justify-content-end">
-                <li class="page-item"><a class="page-link" href="#">Về trước</a></li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Tiếp theo</a></li>
-            </ul>
-        </div>
-        -->
     </div>
 </div>
 

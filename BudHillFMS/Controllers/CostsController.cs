@@ -20,6 +20,8 @@ public class CostsController : Controller
         _notyfService = notyfService;
     }
 
+ 
+
     // GET: Costs
     public async Task<IActionResult> Index(int? farmId, int? categoryId)
     {

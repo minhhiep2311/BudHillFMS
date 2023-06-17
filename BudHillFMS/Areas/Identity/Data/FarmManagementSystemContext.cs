@@ -235,6 +235,8 @@ public partial class FarmManagementSystemContext : IdentityDbContext<User, Role,
 
             entity.Property(e => e.ProductName).HasMaxLength(100);
 
+            entity.Property(e => e.ProductProcess).HasColumnType("nvarchar(MAX)"); ;
+
             entity.Property(e => e.SowingDate).HasColumnType("date");
 
             entity.HasOne(d => d.Field)

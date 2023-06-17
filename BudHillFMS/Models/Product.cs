@@ -20,6 +20,8 @@ namespace BudHillFMS.Models
         public DateTime? HarvestDate { get; set; }
         public bool ProductStatus { get; set; }
 
+        public string? ProductProcess { get; set; }
+
         public virtual Field? Field { get; set; } 
         public virtual ICollection<Diary> Diaries { get; set; }
         public virtual ICollection<WarehouseProduct> WarehouseProducts { get; set; }
